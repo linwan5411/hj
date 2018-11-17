@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
 
 @Configuration
-@MapperScan(basePackages = {"cn.jeefast.*.dao"})
+@MapperScan(basePackages = {"cn.jeefast.*.dao","cn.jeefast.dao"})
 public class MybatisPlusConfig {
 
     /**
