@@ -935,3 +935,122 @@ CREATE TABLE `tb_user` (
 -- Records of tb_user
 -- ----------------------------
 INSERT INTO `tb_user` VALUES ('1', 'apiadmin', '13812345678', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '2017-03-23 22:37:41');
+
+
+
+-- ----------------------------
+-- Table structure for customer
+-- ----------------------------
+DROP TABLE IF EXISTS `customer`;
+CREATE TABLE `customer` (
+  `id` int(11) unsigned NOT NULL auto_increment COMMENT '自增主键',
+  `name` varchar(50) NOT NULL COMMENT '名称',
+  `lon` double(9,6) NOT NULL COMMENT '经度',
+  `lat` double(8,6) NOT NULL COMMENT '纬度',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='商户表';
+ 
+-- ----------------------------
+-- Records of customer
+-- ----------------------------
+INSERT INTO `customer` VALUES ('1', '天津市区', '117.315575', '39.133462');
+INSERT INTO `customer` VALUES ('2', '北京市区', '116.407999', '39.894073');
+INSERT INTO `customer` VALUES ('3', '保定', '115.557124', '38.853490');
+INSERT INTO `customer` VALUES ('4', '石家庄', '114.646458', '38.072369');
+INSERT INTO `customer` VALUES ('5', '昌平区1', '116.367180', '40.009561');
+INSERT INTO `customer` VALUES ('6', '海淀区2', '116.313425', '39.973078');
+INSERT INTO `customer` VALUES ('7', '海淀区1', '116.329236', '39.987231');
+
+-- ----------------------------
+-- Table structure for customer
+-- ----------------------------
+DROP TABLE IF EXISTS `customer`;
+CREATE TABLE `customer` (
+  `id` int(11) unsigned NOT NULL auto_increment COMMENT '自增主键',
+  `name` varchar(50) NOT NULL COMMENT '名称',
+  `lon` double(9,6) NOT NULL COMMENT '经度',
+  `lat` double(8,6) NOT NULL COMMENT '纬度',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='商户表';
+ 
+-- ----------------------------
+-- Records of customer
+-- ----------------------------
+INSERT INTO `customer` VALUES ('1', '天津市区', '117.315575', '39.133462');
+INSERT INTO `customer` VALUES ('2', '北京市区', '116.407999', '39.894073');
+INSERT INTO `customer` VALUES ('3', '保定', '115.557124', '38.853490');
+INSERT INTO `customer` VALUES ('4', '石家庄', '114.646458', '38.072369');
+INSERT INTO `customer` VALUES ('5', '昌平区1', '116.367180', '40.009561');
+INSERT INTO `customer` VALUES ('6', '海淀区2', '116.313425', '39.973078');
+INSERT INTO `customer` VALUES ('7', '海淀区1', '116.329236', '39.987231');
+
+
+-- ----------------------------
+-- 创建一个根据经纬度获取距离的函数
+-- ----------------------------
+DROP FUNCTION IF EXISTS point_map;
+CREATE FUNCTION point_map(s_lat DOUBLE,s_lon DOUBLE,e_lat DOUBLE,e_lon DOUBLE) 
+RETURNS DOUBLE
+BEGIN
+	RETURN( ROUND(
+        6378.138 * 2 * ASIN(
+            SQRT(
+                POW(
+                    SIN(
+                        (
+                            s_lat * PI() / 180 - e_lat * PI() / 180
+                        ) / 2
+                    ),
+                    2
+                ) + COS(s_lat * PI() / 180) * COS(e_lat * PI() / 180) * POW(
+                    SIN(
+                        (
+                            s_lon * PI() / 180 - e_lon * PI() / 180
+                        ) / 2
+                    ),
+                    2
+                )
+            )
+        ) * 1000
+    ));
+
+END;
+
+
+/*
+#测试的脚本
+SELECT a.id,a.name,a.lon,a.lat,point_map(40.0497810000,116.3424590000,a.lat,a.lon) as t from customer a ORDER BY t ASC;
+SELECT
+    *,
+    ROUND(
+        6378.138 * 2 * ASIN(
+            SQRT(
+                POW(
+                    SIN(
+                        (
+                            40.0497810000 * PI() / 180 - lat * PI() / 180
+                        ) / 2
+                    ),
+                    2
+                ) + COS(40.0497810000 * PI() / 180) * COS(lat * PI() / 180) * POW(
+                    SIN(
+                        (
+                            116.3424590000 * PI() / 180 - lon * PI() / 180
+                        ) / 2
+                    ),
+                    2
+                )
+            )
+        ) * 1000
+    ) AS juli
+FROM
+    customer
+ORDER BY
+    juli ASC;
+*/
+
+
+
+
+
+
