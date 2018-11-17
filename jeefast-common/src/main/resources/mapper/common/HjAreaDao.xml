@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jeefast.dao.HjAreaDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="cn.jeefast.entity.HjArea">
+	<result column="id" property="id" />
+	<result column="create_time" property="createTime" />
+	<result column="update_time" property="updateTime" />
+	<result column="data_version" property="dataVersion" />
+		<result column="area_id" property="areaId" />
+		<result column="area_code" property="areaCode" />
+		<result column="area_name" property="areaName" />
+		<result column="level" property="level" />
+		<result column="city_code" property="cityCode" />
+		<result column="relation_code" property="relationCode" />
+		<result column="center" property="center" />
+		<result column="parent_id" property="parentId" />
+	</resultMap>
+
+
+</mapper>
