@@ -1,4 +1,4 @@
-package cn.jeefast.common.gentator;
+package cn.jeefast.gentator;
 
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
@@ -10,9 +10,7 @@ import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * mybatis-plus代码生成器
@@ -27,7 +25,8 @@ public class MyBatisPlusGenerator {
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        gc.setOutputDir("E:\\ideaproject\\hj_nong\\hj\\jeefast-common\\src\\main\\java");
+        //gc.setOutputDir("E:\\ideaproject\\hj_nong\\hj\\jeefast-common\\src\\main\\java");
+        gc.setOutputDir("D:\\java\\idea_space\\hj_nong\\hj\\jeefast-common\\src\\main\\java");
 
         gc.setFileOverride(true);//是否覆盖
         gc.setActiveRecord(false);//不需要ActiveRecord特性的请改为false
@@ -50,21 +49,21 @@ public class MyBatisPlusGenerator {
             // 自定义数据库表字段类型转换【可选】
             @Override
             public DbColumnType processTypeConvert(String fieldType) {
-                System.out.println("转换类型：" + fieldType);
                 // 注意！！processTypeConvert 存在默认类型转换，如果不是你要的效果请自定义返回、非如下直接返回。
                 return super.processTypeConvert(fieldType);
             }
         });
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("root");
+        //dsc.setPassword("root");
+        dsc.setPassword("root123456");
         dsc.setUrl("jdbc:mysql://127.0.0.1:3306/hj_nong?characterEncoding=utf8");
         mpg.setDataSource(dsc);
 
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        strategy.setInclude(new String[] { "hj_area" }); // 需要生成的表
+        strategy.setInclude(new String[] { "hj_article" }); // 需要生成的表
         // 自定义实体父类
      	strategy.setSuperEntityClass("cn.jeefast.entity.base.BaseEntity");
      	// 自定义实体，公共字段
@@ -94,8 +93,10 @@ public class MyBatisPlusGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输入文件名称
-                return  "E:/ideaproject/hj_nong/hj/jeefast-common/src/main/resources/mapper/common"
-                        + "/" + tableInfo.getEntityName() + "Dao.xml";
+                //return  "E:/ideaproject/hj_nong/hj/jeefast-common/src/main/resources/mapper/common"
+                //        + "/" + tableInfo.getEntityName() + "Dao.xml";
+                return  "D:/java/idea_space/hj_nong/hj/jeefast-common/src/main/resources/mapper/common"
+                       + "/" + tableInfo.getEntityName() + "Dao.xml";
             }
         });
         cfg.setFileOutConfigList(focList);

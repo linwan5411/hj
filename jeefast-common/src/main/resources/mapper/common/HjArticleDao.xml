@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jeefast.dao.HjArticleDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="cn.jeefast.entity.HjArticle">
+	<result column="id" property="id" />
+	<result column="create_time" property="createTime" />
+	<result column="update_time" property="updateTime" />
+	<result column="data_version" property="dataVersion" />
+		<result column="article_id" property="articleId" />
+		<result column="article_title" property="articleTitle" />
+		<result column="article_catgory_code" property="articleCatgoryCode" />
+		<result column="article_catgory" property="articleCatgory" />
+		<result column="article_image" property="articleImage" />
+		<result column="create_info" property="createInfo" />
+		<result column="article_url" property="articleUrl" />
+		<result column="article_sort" property="articleSort" />
+		<result column="article_ok" property="articleOk" />
+		<result column="article_read_num" property="articleReadNum" />
+		<result column="article_from" property="articleFrom" />
+		<result column="article_show" property="articleShow" />
+	</resultMap>
+	<sql id="base_sql">
+		article_id as articleId,
+		article_title as articleTitle,
+		DATE_FORMAT(create_time,'%Y-%m-%d') as createTime,
+		article_image as articleImage,
+		article_url as articleUrl,
+		article_ok as articleOk,
+		article_from as articleFrom,
+		article_read_num as articleReadNum,
+		1 as articleType
+	</sql>
+    <select id="findNewArticle" resultType="java.util.Map">
+		SELECT <include refid="base_sql"/> from hj_article where article_show = 1
+		<if test="categoryCode != null">
+			and article_catgory_code = #{categoryCode}
+		</if>
+		order by create_time,article_sort desc limit #{page},#{pageSize}
+	</select>
+	<select id="findYourLike" resultType="java.util.Map">
+		SELECT <include refid="base_sql"/> from hj_article where article_catgory_code = #{categoryCode} and article_show = 1
+		<if test="readOk != null">
+			and article_read_num &lt; #{readOk}
+		</if>
+		<if test="currentArticleId != null">
+		 and article_id != #{currentArticleId}
+		</if>
+		order by create_time desc limit #{pageSize}
+	</select>
+
+</mapper>

@@ -4,10 +4,10 @@
 
 	<!-- 通用查询映射结果 -->
 	<resultMap id="BaseResultMap" type="cn.jeefast.entity.HjArea">
-	<result column="id" property="id" />
-	<result column="create_time" property="createTime" />
-	<result column="update_time" property="updateTime" />
-	<result column="data_version" property="dataVersion" />
+		<result column="id" property="id" />
+		<result column="create_time" property="createTime" />
+		<result column="update_time" property="updateTime" />
+		<result column="data_version" property="dataVersion" />
 		<result column="area_id" property="areaId" />
 		<result column="area_code" property="areaCode" />
 		<result column="area_name" property="areaName" />
@@ -18,5 +18,16 @@
 		<result column="parent_id" property="parentId" />
 	</resultMap>
 
+    <select id="findAreaByParentId" resultType="cn.jeefast.vo.AreaVo">
+		SELECT
+			area_id as areaId,
+			area_name as areaName,
+			area_code as areaCode
+		from hj_area where 1 = 1
+		<if test="areaId != null">
+			and parent_id = #{areaId}
+		</if>
+		ORDER by id
+	</select>
 
 </mapper>

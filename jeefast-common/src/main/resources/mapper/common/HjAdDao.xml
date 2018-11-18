@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jeefast.dao.HjAdDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="cn.jeefast.entity.HjAd">
+	<result column="id" property="id" />
+	<result column="create_time" property="createTime" />
+	<result column="update_time" property="updateTime" />
+	<result column="data_version" property="dataVersion" />
+		<result column="ad_site_id" property="adSiteId" />
+		<result column="ad_id" property="adId" />
+		<result column="ad_name" property="adName" />
+		<result column="ad_sort" property="adSort" />
+		<result column="ad_status" property="adStatus" />
+		<result column="ad_url" property="adUrl" />
+		<result column="ad_time" property="adTime" />
+		<result column="ad_image" property="adImage" />
+	</resultMap>
+    <select id="findAdBySite" resultType="java.util.Map">
+		SELECT
+			ad_image as adImage,
+			ad_sort as adSort,
+			ad_url as adUrl
+		from hj_ad where ad_site_id = #{siteId} and ad_status = 1 order by ad_sort desc
+	</select>
+
+</mapper>

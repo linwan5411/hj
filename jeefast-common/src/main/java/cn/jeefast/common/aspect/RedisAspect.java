@@ -17,6 +17,7 @@ import cn.jeefast.common.exception.RRException;
  * @email 36780272@qq.com
  * @date 2017-07-17 23:30
  */
+/*
 @Aspect
 @Configuration
 public class RedisAspect {
@@ -25,7 +26,7 @@ public class RedisAspect {
     @Value("${spring.redis.open: false}")
     private boolean open;
 
-    @Around("execution(* cn.jeefast.common.utils.RedisUtils.*(..))")
+    @Around("execution(* cn.jeefast.config.RedisUtils.*(..))")
     public Object around(ProceedingJoinPoint point) throws Throwable {
         Object result = null;
         if(open){
@@ -39,3 +40,4 @@ public class RedisAspect {
         return result;
     }
 }
+*/
