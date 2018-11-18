@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import cn.jeefast.common.utils.RedisUtils;
+import cn.jeefast.config.RedisUtils;
 import cn.jeefast.system.entity.SysUser;
 
 @RunWith(SpringRunner.class)
