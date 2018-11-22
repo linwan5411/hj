@@ -1,51 +1,84 @@
 package cn.jeefast.rest.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import cn.jeefast.common.enums.MessageTypeEnum;
+import cn.jeefast.common.enums.ResultEnum;
+import cn.jeefast.common.exception.BusinessException;
+import cn.jeefast.common.utils.BaseResponse;
+import cn.jeefast.common.utils.ResultUtils;
+import cn.jeefast.rest.entity.vo.BackPwdVo;
+import cn.jeefast.rest.entity.vo.EnrollVo;
+import cn.jeefast.rest.entity.vo.LoginParamVo;
+import cn.jeefast.rest.entity.vo.TokenVo;
+import cn.jeefast.service.HjMsgRecordService;
+import cn.jeefast.service.HjUserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cn.jeefast.common.utils.R;
-import cn.jeefast.common.validator.Assert;
-import cn.jeefast.rest.annotation.AuthIgnore;
-import cn.jeefast.rest.service.TbTokenService;
-import cn.jeefast.rest.service.TbUserService;
-import io.swagger.annotations.ApiOperation;
-
+import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.Map;
 
 /**
  * API登录授权
- *
- * @author theodo
- * @email 36780272@qq.com
- * @date 2017-10-23 15:31
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class ApiLoginController {
-    @Autowired
-    private TbUserService userService;
-    @Autowired
-    private TbTokenService tokenService;
 
-    /**
-     * 登录
-     */
-    @AuthIgnore
-    @PostMapping("login")
-    @ApiOperation(value="登录", notes="登录")
-    public R login(String mobile, String password){
-        Assert.isBlank(mobile, "手机号不能为空");
-        Assert.isBlank(password, "密码不能为空");
+    @Resource
+    private HjUserService hjUserService;
 
-        //用户登录
-        long userId = userService.login(mobile, password);
+    @Resource
+    private HjMsgRecordService hjMsgRecordService;
 
-        //生成token
-        Map<String, Object> map = tokenService.createToken(userId);
+    @ApiOperation(value = "登陆")
+    @ApiImplicitParams({ @ApiImplicitParam(paramType = "body",
+            dataType = "LoginParamVo", name = "paramVo", value = "登陆参数", required = true) })
+    @PostMapping("/login")
+    public BaseResponse login(@Valid @RequestBody LoginParamVo paramVo){
+        Map<String,Object> map = hjUserService.login(paramVo.getMobile(),paramVo.getMobile());
+        return ResultUtils.successV2(map);
+    }
 
-        return R.ok(map);
+    @ApiOperation(value = "注册")
+    @ApiImplicitParams({ @ApiImplicitParam(paramType = "body",
+            dataType = "EnrollVo", name = "paramVo", value = "注册参数", required = true) })
+    @PostMapping("/enroll")
+    public BaseResponse enroll(@Valid @RequestBody EnrollVo paramVo){
+        hjMsgRecordService.validateMsgCode(paramVo.getCode(),paramVo.getMobile(), MessageTypeEnum.ZHU_CE.getType(),MessageTypeEnum.ZHU_CE.getMaxTime());
+        Map<String,Object> map = hjUserService.enroll(paramVo.getMobile(),paramVo.getMobile());
+        return ResultUtils.successV2(map);
+    }
+
+    @ApiOperation(value = "找回密码")
+    @ApiImplicitParams({ @ApiImplicitParam(paramType = "body",
+            dataType = "EnrollVo", name = "paramVo", value = "找回密码", required = true) })
+    @PostMapping("/backPass")
+    public BaseResponse backPass(@Valid @RequestBody EnrollVo paramVo){
+        hjMsgRecordService.validateMsgCode(paramVo.getCode(),paramVo.getMobile(), MessageTypeEnum.BACK_PWD.getType(),MessageTypeEnum.BACK_PWD.getMaxTime());
+        hjUserService.updatePassWord(paramVo.getMobile(),paramVo.getPass());
+        return ResultUtils.successV2();
+    }
+
+
+    @ApiOperation(value = "修改密码")
+    @ApiImplicitParams({ @ApiImplicitParam(paramType = "body",
+            dataType = "BackPwdVo", name = "backPwdVo", value = "修改密码", required = true) })
+    @PostMapping("/updatePass")
+    public BaseResponse updatePass(@Valid @RequestBody BackPwdVo backPwdVo){
+        if(backPwdVo.equals(backPwdVo.getConfirmPass())){
+            throw new BusinessException("两次密码不一致", ResultEnum.TWO_PWD_EXP.getCode());
+        }
+        hjMsgRecordService.validateMsgCode(backPwdVo.getCode(),backPwdVo.getMobile(), MessageTypeEnum.XIU_GAI_PWD.getType(),MessageTypeEnum.XIU_GAI_PWD.getMaxTime());
+        hjUserService.updatePassWord(backPwdVo.getMobile(),backPwdVo.getNewPass());
+        return ResultUtils.successV2();
     }
 
 }

@@ -2,13 +2,11 @@ package cn.jeefast;
 
 import cn.jeefast.common.utils.JsonUtils;
 import cn.jeefast.config.RedisUtils;
-import cn.jeefast.entity.HjArea;
 import cn.jeefast.entity.HjUser;
 import cn.jeefast.service.HjAreaService;
 import cn.jeefast.service.HjUserService;
 import cn.jeefast.vo.AreaVo;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,7 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @ComponentScan(value = "cn.jeefast")
@@ -31,6 +28,16 @@ public class DynamicDataSourceTest {
 
     @Resource
     private HjUserService hjUserService;
+
+    @Resource
+    private CustomerDao customerDao;
+
+    //@Test
+    public void xx(){
+        Customer c = new Customer();c.setName("heheh");c.setId(1L);
+        customerDao.updateByCustomer(c);
+    }
+
 
     /**
      * 测试Wrapper

@@ -1,6 +1,6 @@
 package cn.jeefast.rest.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+/*import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import cn.jeefast.rest.interceptor.AuthorizationInterceptor;
 import cn.jeefast.rest.resolver.LoginUserHandlerMethodArgumentResolver;
 
-import java.util.List;
+import java.util.List;*/
 
 /**
  * MVC配置
@@ -18,6 +18,7 @@ import java.util.List;
  * @email 36780272@qq.com
  * @date 2017-10-20 21:30
  */
+/*
 @Configuration
 public class WebMvcConfigApi extends WebMvcConfigurerAdapter {
     @Autowired
@@ -34,4 +35,4 @@ public class WebMvcConfigApi extends WebMvcConfigurerAdapter {
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         argumentResolvers.add(loginUserHandlerMethodArgumentResolver);
     }
-}
+}*/
