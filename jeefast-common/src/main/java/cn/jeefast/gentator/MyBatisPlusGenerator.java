@@ -32,7 +32,7 @@ public class MyBatisPlusGenerator {
         gc.setActiveRecord(false);//不需要ActiveRecord特性的请改为false
         gc.setEnableCache(false);// XML 二级缓存
         gc.setBaseResultMap(true);// XML ResultMap
-        gc.setBaseColumnList(false);// XML columList
+        gc.setBaseColumnList(true);// XML columList
         gc.setAuthor("zhihang");
         
         // 自定义文件命名，注意 %s 会自动填充表实体属性！
@@ -63,7 +63,7 @@ public class MyBatisPlusGenerator {
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        strategy.setInclude(new String[] { "hj_article" }); // 需要生成的表
+        strategy.setInclude(new String[] { "hj_hacienda_info" }); // 需要生成的表
         // 自定义实体父类
      	strategy.setSuperEntityClass("cn.jeefast.entity.base.BaseEntity");
      	// 自定义实体，公共字段

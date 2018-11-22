@@ -21,33 +21,87 @@
 		<result column="article_from" property="articleFrom" />
 		<result column="article_show" property="articleShow" />
 	</resultMap>
-	<sql id="base_sql">
-		article_id as articleId,
-		article_title as articleTitle,
-		DATE_FORMAT(create_time,'%Y-%m-%d') as createTime,
-		article_image as articleImage,
-		article_url as articleUrl,
-		article_ok as articleOk,
-		article_from as articleFrom,
-		article_read_num as articleReadNum,
-		1 as articleType
-	</sql>
-    <select id="findNewArticle" resultType="java.util.Map">
-		SELECT <include refid="base_sql"/> from hj_article where article_show = 1
-		<if test="categoryCode != null">
-			and article_catgory_code = #{categoryCode}
-		</if>
-		order by create_time,article_sort desc limit #{page},#{pageSize}
-	</select>
-	<select id="findYourLike" resultType="java.util.Map">
-		SELECT <include refid="base_sql"/> from hj_article where article_catgory_code = #{categoryCode} and article_show = 1
-		<if test="readOk != null">
-			and article_read_num &lt; #{readOk}
-		</if>
-		<if test="currentArticleId != null">
-		 and article_id != #{currentArticleId}
-		</if>
-		order by create_time desc limit #{pageSize}
-	</select>
 
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+		id,
+		create_time as createTime,
+        article_id AS articleId,
+        article_title AS articleTitle,
+        article_catgory AS articleCatgory,
+        article_image AS articleImage,
+        article_url AS articleUrl,
+        article_ok AS articleOk,
+        article_read_num AS articleReadNum,
+        article_from AS articleFrom
+    </sql>
+
+    <update id="updateByHjArticle"  parameterType="cn.jeefast.entity.HjArticle">
+		update hj_article
+		<set>
+                <if test="id != null" >
+					id = #{id},
+                </if>
+                <if test="createTime != null" >
+					create_time = #{createTime},
+                </if>
+                <if test="updateTime != null" >
+					update_time = #{updateTime},
+                </if>
+                <if test="dataVersion != null" >
+					data_version = #{dataVersion},
+                </if>
+                <if test="articleId != null" >
+					article_id = #{articleId},
+                </if>
+                <if test="articleTitle != null" >
+					article_title = #{articleTitle},
+                </if>
+                <if test="articleCatgoryCode != null" >
+					article_catgory_code = #{articleCatgoryCode},
+                </if>
+                <if test="articleCatgory != null" >
+					article_catgory = #{articleCatgory},
+                </if>
+                <if test="articleImage != null" >
+					article_image = #{articleImage},
+                </if>
+                <if test="createInfo != null" >
+					create_info = #{createInfo},
+                </if>
+                <if test="articleUrl != null" >
+					article_url = #{articleUrl},
+                </if>
+                <if test="articleSort != null" >
+					article_sort = #{articleSort},
+                </if>
+                <if test="articleOk != null" >
+					article_ok = #{articleOk},
+                </if>
+                <if test="articleReadNum != null" >
+					article_read_num = #{articleReadNum},
+                </if>
+                <if test="articleFrom != null" >
+					article_from = #{articleFrom},
+                </if>
+                <if test="articleShow != null" >
+					article_show = #{articleShow},
+                </if>
+		</set>
+		where  id = #{id}
+
+    </update>
+    <select id="findAdArticle" resultType="cn.jeefast.entity.HjArticle">
+		SELECT <include refid="Base_Column_List"/>  from hj_article where article_show = 1 ORDER by create_time desc limit #{pageIndex},#{pageSize}
+	</select>
+	<select id="findLikeArticle" resultType="cn.jeefast.entity.HjArticle">
+		SELECT <include refid="Base_Column_List"/>  from hj_article  WHERE  article_show = 1
+		<if test="code != null">
+			and article_catgory_code = #{code}
+		</if>
+		<if test="articleId != null">
+			and article_id != #{articleId}
+		</if>
+		ORDER by create_time desc limit 10
+	</select>
 </mapper>

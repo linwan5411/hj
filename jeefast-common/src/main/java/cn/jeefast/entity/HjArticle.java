@@ -10,7 +10,7 @@ import cn.jeefast.entity.base.BaseEntity;
  * </p>
  *
  * @author zhihang
- * @since 2018-11-18
+ * @since 2018-11-21
  */
 @TableName("hj_article")
 public class HjArticle extends BaseEntity {

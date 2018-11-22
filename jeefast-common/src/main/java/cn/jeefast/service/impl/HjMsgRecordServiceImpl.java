@@ -61,6 +61,7 @@ public class HjMsgRecordServiceImpl extends ServiceImpl<HjMsgRecordDao, HjMsgRec
             saveMessage(mobile,msgType,msgNum);
         }catch (Exception e){
             LOGGER.error("短信发送失败:{}",e);
+            throw new BusinessException("短信发送失败",ResultEnum.MESSAGE_VALIDATE_EXP.getCode());
         }
         return msgNum;
     }

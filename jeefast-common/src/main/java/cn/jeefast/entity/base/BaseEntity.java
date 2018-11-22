@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.FieldStrategy;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -26,6 +27,7 @@ import java.util.Date;
  */
 public class BaseEntity implements Serializable{
 
+    @JsonIgnore
     @TableId(value="id", type= IdType.AUTO)
     private Long id;
 
@@ -33,9 +35,11 @@ public class BaseEntity implements Serializable{
     @TableField(value = "create_time",strategy = FieldStrategy.NOT_EMPTY)
     private Date createTime;
 
+    @JsonIgnore
     @TableField(value = "update_time",strategy = FieldStrategy.NOT_EMPTY)
     private Date updateTime;
 
+    @JsonIgnore
     @TableField(value = "data_version",strategy = FieldStrategy.NOT_EMPTY)
     private Integer dataVersion;
 

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jeefast.dao.HjHaciendaRemarkDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="cn.jeefast.entity.HjHaciendaRemark">
+	<result column="id" property="id" />
+	<result column="create_time" property="createTime" />
+	<result column="update_time" property="updateTime" />
+	<result column="data_version" property="dataVersion" />
+		<result column="hacienda_id" property="haciendaId" />
+		<result column="hacienda_image" property="haciendaImage" />
+		<result column="hacienda_info" property="haciendaInfo" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+	id,
+	create_time,
+	update_time,
+	data_version,
+        hacienda_id AS haciendaId, hacienda_image AS haciendaImage, hacienda_info AS haciendaInfo
+    </sql>
+
+    <update id="updateByHjHaciendaRemark"  parameterType="cn.jeefast.entity.HjHaciendaRemark">
+		update ${table.tableName}
+		<set>
+                <if test="id != null" >
+					id = #{id},
+                </if>
+                <if test="createTime != null" >
+					create_time = #{createTime},
+                </if>
+                <if test="updateTime != null" >
+					update_time = #{updateTime},
+                </if>
+                <if test="dataVersion != null" >
+					data_version = #{dataVersion},
+                </if>
+                <if test="haciendaId != null" >
+					hacienda_id = #{haciendaId},
+                </if>
+                <if test="haciendaImage != null" >
+					hacienda_image = #{haciendaImage},
+                </if>
+                <if test="haciendaInfo != null" >
+					hacienda_info = #{haciendaInfo},
+                </if>
+		</set>
+		where  id = #{id}
+
+    </update>
+</mapper>

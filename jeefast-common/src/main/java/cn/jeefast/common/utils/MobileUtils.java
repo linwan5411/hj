@@ -44,7 +44,7 @@ public class MobileUtils {
         if(StringUtils.isBlank(mobile)){
             return false;
         }
-        String p = "^(\\d{6,13})|(\\d{1,6}-\\d{6,13})";
+        String p = "^(\\d{6,13})";
         if(Pattern.matches(p, mobile)){
             return true;
         }

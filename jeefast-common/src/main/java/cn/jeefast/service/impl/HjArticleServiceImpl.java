@@ -3,12 +3,12 @@ package cn.jeefast.service.impl;
 import cn.jeefast.entity.HjArticle;
 import cn.jeefast.dao.HjArticleDao;
 import cn.jeefast.service.HjArticleService;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -16,7 +16,7 @@ import java.util.Map;
  * </p>
  *
  * @author zhihang
- * @since 2018-11-18
+ * @since 2018-11-21
  */
 @Service
 public class HjArticleServiceImpl extends ServiceImpl<HjArticleDao, HjArticle> implements HjArticleService {
@@ -25,24 +25,18 @@ public class HjArticleServiceImpl extends ServiceImpl<HjArticleDao, HjArticle> i
     private HjArticleDao hjArticleDao;
 
     @Override
-    public List<Map<String, Object>> findNewArticle(Integer page,Integer pageSize,String categoryCode) {
-        return hjArticleDao.findNewArticle(categoryCode,page,pageSize);
+    public List<HjArticle> findAdArticle(Integer pageIndex, Integer pageSzie) {
+        return hjArticleDao.findAdArticle(pageIndex,pageSzie);
     }
 
-    /**
-     *  return articleType=1:表示文章推荐，articleType=2：表示提问的推荐
-     * @param categoryCode
-     * @param currentArticleId
-     * @param readOk
-     * @param pageSize
-     * @return
-     */
     @Override
-    public List<Map<String, Object>> findYourLike(String categoryCode,Long currentArticleId,Integer readOk,Integer pageSize) {
-        List<Map<String, Object>> map =  hjArticleDao.findYourLike(categoryCode,currentArticleId,readOk,pageSize);
-        if(map == null){
-            map =  hjArticleDao.findYourLike(categoryCode,currentArticleId,readOk,1);
+    public List<HjArticle> findLikeArticle(Long articleId) {
+        String code = null;
+        HjArticle article = new HjArticle();article.setArticleId(articleId);
+        article = hjArticleDao.selectOne(article);
+        if(article != null){
+            code = article.getArticleCatgoryCode();
         }
-        return map;
+        return hjArticleDao.findLikeArticle(code,5,article.getArticleId());
     }
 }

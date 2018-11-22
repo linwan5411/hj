@@ -1,0 +1,54 @@
+package cn.jeefast.service.impl;
+
+import cn.jeefast.entity.HjInvitationList;
+import cn.jeefast.dao.HjInvitationListDao;
+import cn.jeefast.entity.HjUser;
+import cn.jeefast.service.HjInvitationListService;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * <p>
+ * 回复列表 服务实现类
+ * </p>
+ *
+ * @author zhihang
+ * @since 2018-11-21
+ */
+@Service
+public class HjInvitationListServiceImpl extends ServiceImpl<HjInvitationListDao, HjInvitationList> implements HjInvitationListService {
+
+    @Resource
+    private HjInvitationListDao hjInvitationListDao;
+
+    @Override
+    public List<HjInvitationList> findNoteInvitation(Long noteId, Integer pageIndex, Integer pageSize) {
+        return hjInvitationListDao.findNoteInvitation(noteId,pageIndex,pageSize);
+    }
+
+    @Transactional(rollbackFor = {Exception.class,RuntimeException.class})
+    @Override
+    public void doComment(HjUser user, Long invitationId, String comment) {
+        HjInvitationList list = new HjInvitationList();
+        list.setInvitationId(invitationId);
+        list.setInvitationInfo(comment);
+        list.setUserId(user.getUserId());
+        list.setUserHeader(user.getUserPortrait());
+        list.setCreateTime(new Date());
+        hjInvitationListDao.insert(list);
+    }
+
+    @Override
+    public void commentIdOk(Long commentId) {
+       try {
+           hjInvitationListDao.commentIdOk(commentId);
+       }catch (Exception e){
+
+       }
+    }
+}

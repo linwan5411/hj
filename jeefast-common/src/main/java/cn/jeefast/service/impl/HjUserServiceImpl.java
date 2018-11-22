@@ -1,5 +1,6 @@
 package cn.jeefast.service.impl;
 
+import cn.jeefast.common.enums.CommonEnum;
 import cn.jeefast.common.enums.ResultEnum;
 import cn.jeefast.common.exception.BusinessException;
 import cn.jeefast.common.utils.*;
@@ -14,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>
@@ -33,7 +36,7 @@ public class HjUserServiceImpl extends ServiceImpl<HjUserDao, HjUser> implements
 
     @Transactional(rollbackFor = {RuntimeException.class,Exception.class})
     @Override
-    public void createNewUser(String mobile, String pwd, Integer userType) {
+    public HjUser createNewUser(String mobile, String pwd, Integer userType) {
         HjUser user = new HjUser();user.setUserMobile(mobile);
         user = hjUserDao.selectOne(user);
         if(user != null){
@@ -44,12 +47,13 @@ public class HjUserServiceImpl extends ServiceImpl<HjUserDao, HjUser> implements
         user.setUserMobile(mobile);
         user.setLoginSalt(RandomUtils.randomString(6));
         user.setLoginPwd(PwdUtils.createPwd(pwd,user.getLoginSalt()));
-        user.setUserName("新农人"+ MobileUtils.subMobile(mobile));
+        user.setUserName("新农人"+ user.getUserId());
         user.setCreateTime(new Date());
         Integer row = hjUserDao.insert(user);
         if(row <= 0){
             throw new BusinessException("注册失败", ResultEnum.MOBILE_REG_EXP.getCode());
         }
+        return user;
     }
 
     @Transactional(rollbackFor = {RuntimeException.class,Exception.class})
@@ -80,4 +84,30 @@ public class HjUserServiceImpl extends ServiceImpl<HjUserDao, HjUser> implements
             logger.error("修改登录时间异常:{}",e);
         }
     }
+
+    @Override
+    public Map<String, Object> login(String mobile, String pass) {
+        HjUser user = new HjUser();user.setUserMobile(mobile);
+        user = hjUserDao.selectOne(user);
+        if(user == null){
+            throw new BusinessException("未注册", ResultEnum.MOBILE_NOT_EXIST.getCode());
+        }
+
+        if(!PwdUtils.verfyPwd(pass,user.getLoginSalt(),user.getLoginPwd())){
+            throw new BusinessException("密码不正确", ResultEnum.MOBILE_PASS_EXP.getCode());
+        }
+
+        if(user.getDataStatus() != null && user.getDataStatus().intValue() != CommonEnum.ONE.getInt_state()){
+            throw new BusinessException("已被冻结", ResultEnum.MOBILE_BLOCK_EXP.getCode());
+        }
+        return TokenUtil.loginRps(user);
+    }
+
+    @Override
+    public Map<String, Object> enroll(String mobile, String pass) {
+        HjUser user = createNewUser(mobile,pass,CommonEnum.ZERO.getInt_state());
+        return TokenUtil.loginRps(user);
+    }
+
+
 }

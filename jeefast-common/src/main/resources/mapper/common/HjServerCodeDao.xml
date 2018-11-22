@@ -19,8 +19,8 @@
 	<sql id="base_sql">
 		server_category as serverCategory,
 		server_icon as serverIcon,
-		parent_id as parentId,
-		category_code as categoryCode
+		category_code as categoryCode,
+		server_remark as serverRemark
 	</sql>
     <select id="findByParenId" resultType="cn.jeefast.vo.CategoryCode">
 		SELECT <include refid="base_sql"/> FROM hj_server_code where parent_id = #{parentId} and data_status = 1 order by server_sort desc
