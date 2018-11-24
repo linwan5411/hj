@@ -47,6 +47,20 @@ public class HjServerCase extends BaseEntity {
 	@TableField("case_image")
 	private String caseImage;
 
+	/**
+	 * 详情
+	 */
+	@TableField(exist = false)
+	private List<HjServerCaseRemark> list;
+
+	public List<HjServerCaseRemark> getList() {
+		return list;
+	}
+
+	public void setList(List<HjServerCaseRemark> list) {
+		this.list = list;
+	}
+
 	public String getCaseImage() {
 		return caseImage;
 	}

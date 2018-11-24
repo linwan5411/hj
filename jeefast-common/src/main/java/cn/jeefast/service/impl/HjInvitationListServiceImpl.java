@@ -1,5 +1,6 @@
 package cn.jeefast.service.impl;
 
+import cn.jeefast.dao.HjInvitationDao;
 import cn.jeefast.entity.HjInvitationList;
 import cn.jeefast.dao.HjInvitationListDao;
 import cn.jeefast.entity.HjUser;
@@ -26,6 +27,9 @@ public class HjInvitationListServiceImpl extends ServiceImpl<HjInvitationListDao
     @Resource
     private HjInvitationListDao hjInvitationListDao;
 
+    @Resource
+    private HjInvitationDao hjInvitationDao;
+
     @Override
     public List<HjInvitationList> findNoteInvitation(Long noteId, Integer pageIndex, Integer pageSize) {
         return hjInvitationListDao.findNoteInvitation(noteId,pageIndex,pageSize);
@@ -38,9 +42,13 @@ public class HjInvitationListServiceImpl extends ServiceImpl<HjInvitationListDao
         list.setInvitationId(invitationId);
         list.setInvitationInfo(comment);
         list.setUserId(user.getUserId());
+        list.setUserName(user.getUserName());
         list.setUserHeader(user.getUserPortrait());
         list.setCreateTime(new Date());
         hjInvitationListDao.insert(list);
+
+        //新增
+        hjInvitationDao.updateAnswerNum(invitationId);
     }
 
     @Override

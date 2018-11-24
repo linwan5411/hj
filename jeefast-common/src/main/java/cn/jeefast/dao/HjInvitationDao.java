@@ -23,4 +23,6 @@ public interface HjInvitationDao extends BaseMapper<HjInvitation> {
     List<HjInvitation> findAdNote(@Param("pageIndex") Integer pageIndex, @Param("pageSize")Integer pageSize);
 
     int noteOk(@Param("noteId")Long noteId);
+
+    int updateAnswerNum(@Param("noteId")Long invitationId);
 }

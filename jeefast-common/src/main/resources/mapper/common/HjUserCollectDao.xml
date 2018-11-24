@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jeefast.dao.HjUserCollectDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="cn.jeefast.entity.HjUserCollect">
+	<result column="id" property="id" />
+	<result column="create_time" property="createTime" />
+	<result column="update_time" property="updateTime" />
+	<result column="data_version" property="dataVersion" />
+		<result column="user_id" property="userId" />
+		<result column="collect_id" property="collectId" />
+		<result column="collect_type" property="collectType" />
+		<result column="object_id" property="objectId" />
+		<result column="object_title" property="objectTitle" />
+		<result column="object_image" property="objectImage" />
+	</resultMap>
+
+	<sql id="base_server_sql">
+		 y.server_id as serverId,
+		 y.company_name as companyName,
+		 y.server_category as serverCategory,
+		 y.server_max as serverMax,
+		 y.detail_addr as detailAddr,
+		 y.server_type as serverType,
+		 y.auth_status as authStatus,
+		 t.collect_id as collectId,
+		point_map(y.latitude,y.longitude,#{lat},#{lng}) as distance
+	</sql>
+	<select id="findServer" resultType="java.util.Map">
+		SELECT
+		<include refid="base_server_sql"/>
+		FROM(
+			SELECT
+				h.object_id,h.collect_id
+			FROM
+				hj_user_collect h where h.user_id = #{userId} and y.collect_type = 1 ORDER BY create_time desc LIMIT #{pageIndex},#{pageSize}
+		) as t LEFT JOIN hj_server_info y on t.object_id = y.server_id
+	</select>
+
+
+	<sql id="base_land_sql">
+		y.hacienda_id as haciendaId,
+		y.hacienda_name as haciendaName,
+		y.hacienda_land as haciendaLand,
+		y.server_max as serverMax,
+		y.detail_addr as detailAddr,
+		y.hacienda_type as haciendaType,
+		y.hacienda_image as haciendaImage,
+		y.hacienda_scope as haciendaScope,
+		y.auth_status as authStatus,
+		t.collect_id as collectId,
+		point_map(y.latitude,y.longitude,#{lat},#{lng}) as distance
+	</sql>
+	<select id="findLand" resultType="java.util.Map">
+		SELECT
+		<include refid="base_land_sql"/>
+		FROM(
+		SELECT
+		h.object_id
+		FROM
+		hj_user_collect h where h.user_id = #{userId} and y.collect_type = 2 ORDER BY create_time desc LIMIT #{pageIndex},#{pageSize}
+		) as t LEFT JOIN hj_hacienda_info y on t.object_id = y.hacienda_id
+	</select>
+</mapper>

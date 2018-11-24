@@ -21,10 +21,16 @@ public class ResultUtils {
 
 
     public static BaseResponse successV2(Object t){
-        return new BaseResponse(ResultEnum.REQ_SUCCESS.getCode(),ResultEnum.REQ_SUCCESS.getReminder(),t);
+        BaseResponse r = new BaseResponse(ResultEnum.REQ_SUCCESS.getCode(),ResultEnum.REQ_SUCCESS.getReminder(),t);
+        r.setStatus(ResultEnum.REQ_SUCCESS.getCode());
+        r.setTimestamp(System.currentTimeMillis());
+        return r;
     }
 
     public static BaseResponse successV2(){
-        return new BaseResponse(ResultEnum.REQ_SUCCESS.getCode(),ResultEnum.REQ_SUCCESS.getReminder());
+        BaseResponse r = new BaseResponse(ResultEnum.REQ_SUCCESS.getCode(),ResultEnum.REQ_SUCCESS.getReminder());
+        r.setStatus(ResultEnum.REQ_SUCCESS.getCode());
+        r.setTimestamp(System.currentTimeMillis());
+        return r;
     }
 }

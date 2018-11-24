@@ -1,6 +1,7 @@
 package cn.jeefast.vo;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
@@ -16,7 +17,7 @@ public class AreaVo implements Serializable {
     /**
      * 地区编码
      */
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonIgnore
     private String areaCode;
     /**
      * 地区名

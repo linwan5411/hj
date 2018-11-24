@@ -7,14 +7,14 @@ import org.springframework.stereotype.Controller;
 
 /**
  * <p>
- * 农场的土地介绍相关 前端控制器
+ * 用户的收藏表 前端控制器
  * </p>
  *
  * @author zhihang
- * @since 2018-11-22
+ * @since 2018-11-24
  */
 @Controller
-@RequestMapping("/hjHaciendaRemark")
-public class HjHaciendaRemarkController {
+@RequestMapping("/hjUserCollect")
+public class HjUserCollectController {
 	
 }

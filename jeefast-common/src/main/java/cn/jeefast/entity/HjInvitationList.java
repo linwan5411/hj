@@ -17,6 +17,9 @@ public class HjInvitationList extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
+	@TableField("comment_id")
+    private Long commentId;
+
 	@TableField("invitation_id")
 	private Long invitationId;
     /**
@@ -56,6 +59,14 @@ public class HjInvitationList extends BaseEntity {
 	@TableField("user_name")
 	private String userName;
 
+
+	public Long getCommentId() {
+		return commentId;
+	}
+
+	public void setCommentId(Long commentId) {
+		this.commentId = commentId;
+	}
 
 	public String getUserName() {
 		return userName;

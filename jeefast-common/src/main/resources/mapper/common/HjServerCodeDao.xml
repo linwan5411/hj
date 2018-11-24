@@ -25,5 +25,11 @@
     <select id="findByParenId" resultType="cn.jeefast.vo.CategoryCode">
 		SELECT <include refid="base_sql"/> FROM hj_server_code where parent_id = #{parentId} and data_status = 1 order by server_sort desc
 	</select>
+	<select id="findCodeList" resultType="cn.jeefast.vo.CategoryCode">
+		SELECT <include refid="base_sql"/> FROM hj_server_code where data_status = 1 and category_code in
+		<foreach collection="codes" index="index" item="item" open="(" separator="," close=")">
+		    #{item}
+		</foreach>
+	</select>
 
 </mapper>

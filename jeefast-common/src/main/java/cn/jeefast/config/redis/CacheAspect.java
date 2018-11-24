@@ -48,14 +48,14 @@ public class CacheAspect {
         Method method = getMethod(pjp);
 
         if(!bu_cache || method == null){
-            proceed(pjp);
+            return proceed(pjp);
         }
 
         Cacheable cacheable = method.getAnnotation(cn.jeefast.config.redis.Cacheable.class);
         String key = parseKey(cacheable.key(), method, pjp.getArgs());
         long expireTime = cacheable.expireTime();
         if(cacheable == null || StringUtils.isBlank(key)) {
-            proceed(pjp);
+            return proceed(pjp);
         }
         String fieldKey = parseKey(cacheable.fieldKey(), method, pjp.getArgs());
 
@@ -159,7 +159,7 @@ public class CacheAspect {
 
     private String parseKey(String key,Method method,Object [] args){
         try {
-            if(StringUtils.isBlank(key)){
+            if(!CheckEplsParam.checkSpel(key)){
                 return key;
             }
             //获取被拦截方法参数名列表(使用Spring支持类库)

@@ -1,6 +1,7 @@
 package cn.jeefast.service;
 
 import cn.jeefast.entity.HjInvitation;
+import cn.jeefast.entity.HjUser;
 import com.baomidou.mybatisplus.service.IService;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface HjInvitationService extends IService<HjInvitation> {
     HjInvitation findAdNoteInfo(Long noteId);
 
     void noteOk(Long noteId);
+
+    void submitNote(String imageList, String notComment, String noteType, HjUser user);
 }

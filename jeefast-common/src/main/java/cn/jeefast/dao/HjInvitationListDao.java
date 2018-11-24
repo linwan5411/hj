@@ -15,10 +15,6 @@ import java.util.List;
  * @since 2018-11-21
  */
 public interface HjInvitationListDao extends BaseMapper<HjInvitationList> {
-    /**
-   * 更新，排除空值
-   */
-    int updateByHjInvitationList(HjInvitationList entity);
 
     List<HjInvitationList> findNoteInvitation(@Param("noteId") Long noteId,@Param("pageIndex") Integer pageIndex,
                                               @Param("pageSize")Integer pageSize);

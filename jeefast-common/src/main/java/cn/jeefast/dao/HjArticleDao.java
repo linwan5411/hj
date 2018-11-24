@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -20,7 +21,7 @@ public interface HjArticleDao extends BaseMapper<HjArticle> {
    */
     int updateByHjArticle(HjArticle entity);
 
-    List<HjArticle> findAdArticle(@Param("pageIndex") Integer pageIndex,@Param("pageSize") Integer pageSize);
+    List<Map<String,Object>> findAdArticle(@Param("pageIndex") Integer pageIndex, @Param("pageSize") Integer pageSize);
 
-    List<HjArticle> findLikeArticle(@Param("code")String code, @Param("pageSize")int pageSize, @Param("articleId")Long  articleId);
+    List<Map<String,Object>> findLikeArticle(@Param("code")Long code, @Param("pageSize")int pageSize, @Param("articleId")Long  articleId);
 }

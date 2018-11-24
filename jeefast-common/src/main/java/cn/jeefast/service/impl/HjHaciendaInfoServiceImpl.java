@@ -10,6 +10,8 @@ import cn.jeefast.dao.HjHaciendaInfoDao;
 import cn.jeefast.service.HjAreaService;
 import cn.jeefast.service.HjArticleService;
 import cn.jeefast.service.HjHaciendaInfoService;
+import cn.jeefast.service.HjServerCodeService;
+import cn.jeefast.vo.CategoryCode;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.apache.commons.lang3.StringUtils;
@@ -40,6 +42,9 @@ public class HjHaciendaInfoServiceImpl extends ServiceImpl<HjHaciendaInfoDao, Hj
     private HjAreaService hjAreaService;
 
     @Resource
+    private HjServerCodeService hjServerCodeService;
+
+    @Resource
     private RedisUtils redisUtils;
 
     @Transactional(rollbackFor = {Exception.class,RuntimeException.class})
@@ -51,18 +56,26 @@ public class HjHaciendaInfoServiceImpl extends ServiceImpl<HjHaciendaInfoDao, Hj
         }else{
             throw new BusinessException("地址参数不正确", ResultEnum.REQ_PARAM_EXP.getCode());
         }
-        if(info.getHaciendaType() != 1 || info.getHaciendaType() != 2){
+        if(info.getHaciendaType() == null || info.getHaciendaType() > 2 || info.getHaciendaType() < 0){
             throw new BusinessException("类型参数不正确", ResultEnum.REQ_PARAM_EXP.getCode());
         }
-        if(info.getHaciendaType() == 2 && StringUtils.isBlank(info.getHaciendaRegImage())){
-            throw new BusinessException("请上传营业执照", ResultEnum.REQ_PARAM_EXP.getCode());
+        //服务的类型
+        if(StringUtils.isNotBlank(info.getServerCategory())){
+            List<CategoryCode> codes = hjServerCodeService.findCodeList(info.getServerCategory());
+            if(codes != null && codes.size() > 0){
+                StringBuffer buffer = new StringBuffer();
+                codes.forEach( e ->{
+                    buffer.append(e.getServerCategory()).append(",");
+                });
+                info.setHaciendaLand(buffer.toString().substring(0,buffer.toString().length() - 1));
+            }
         }
 
         if(info.getHaciendaId() != null){
             //update
             info.setUpdateTime(new Date());
             //删除，然后在添加
-            Map<String,Object> map = new HashMap<>();map.put("server_id",info.getHaciendaId());
+            Map<String,Object> map = new HashMap<>();map.put("hacienda_id",info.getHaciendaId());
             hjHaciendaRemarkDao.deleteByMap(map);
 
             if(list != null && list.size() > 0){

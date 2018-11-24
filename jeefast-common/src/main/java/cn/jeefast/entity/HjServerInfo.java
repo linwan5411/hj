@@ -178,17 +178,20 @@ public class HjServerInfo extends BaseEntity {
 	/**
 	 * 服务的领域
 	 */
+	@TableField(exist = false)
 	private List<String> categoryList;
 
 	/**
 	 * 简介
 	 */
+	@TableField(exist = false)
 	private List<HjServerRemak> remaks;
 
 
 	/**
 	 * 案例
 	 */
+	@TableField(exist = false)
 	private List<HjServerCase> caseList;
 
 	public List<String> getCategoryList() {

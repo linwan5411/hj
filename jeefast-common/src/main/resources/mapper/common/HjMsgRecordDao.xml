@@ -16,7 +16,7 @@
 		SELECT
 		count(*) AS counts
 		FROM
-		system_msg_record a
+		hj_msg_record a
 		WHERE
 		a.mobile = #{mobile}
 		<if test="msgType != null">
@@ -29,7 +29,7 @@
 		SELECT
 		a.msg_num
 		FROM
-		system_msg_record a
+		hj_msg_record a
 		WHERE
 		a.mobile = #{mobile}
 		<if test="msgType != null">

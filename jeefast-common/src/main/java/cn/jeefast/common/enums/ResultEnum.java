@@ -15,8 +15,14 @@ public enum ResultEnum {
     /**********************************************************/
 
     REQ_PARAM_EXP("11001","参数不合法","param bind exception"),
-    LOGIN_EXP("13002","登陆信息不正确","param bind exception"),
+    REQ_MAX_IMAGE_EXP("11002","图片最大为9张","param bind exception"),
 
+
+    LOGIN_EXP("13002","登陆信息不正确","param bind exception"),
+    COLLECT_EXP("13003","收藏失败","param bind exception"),
+    COLLECT_EXIST_EXP("13004","已收藏","param bind exception"),
+    ORDER_EXP("13005","联系对象不明确","param bind exception"),
+    ORDER_USER_EXP("13006","联系对象不存在","param bind exception"),
 
 
     MOBILE_EXIST("12001","手机已注册","param bind exception"),

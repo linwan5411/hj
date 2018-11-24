@@ -47,7 +47,9 @@ public class HjUserServiceImpl extends ServiceImpl<HjUserDao, HjUser> implements
         user.setUserMobile(mobile);
         user.setLoginSalt(RandomUtils.randomString(6));
         user.setLoginPwd(PwdUtils.createPwd(pwd,user.getLoginSalt()));
-        user.setUserName("新农人"+ user.getUserId());
+        user.setUserName("新农人"+ RandomUtils.randomNumber(4));
+        user.setAuthType(0);
+        user.setUserType(0);
         user.setCreateTime(new Date());
         Integer row = hjUserDao.insert(user);
         if(row <= 0){
@@ -100,6 +102,7 @@ public class HjUserServiceImpl extends ServiceImpl<HjUserDao, HjUser> implements
         if(user.getDataStatus() != null && user.getDataStatus().intValue() != CommonEnum.ONE.getInt_state()){
             throw new BusinessException("已被冻结", ResultEnum.MOBILE_BLOCK_EXP.getCode());
         }
+        updateLoginTime(mobile);
         return TokenUtil.loginRps(user);
     }
 

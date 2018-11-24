@@ -37,4 +37,14 @@ public class HjServerCodeServiceImpl extends ServiceImpl<HjServerCodeDao, HjServ
         HjServerCode c = new HjServerCode();c.setCategoryCode(categoryCode);
         return hjServerCodeDao.selectOne(c);
     }
+
+    @Cacheable(key = "serverCodeList",fieldKey = "#serverCodes")
+    @Override
+    public List<CategoryCode> findCodeList(String serverCodes) {
+        String[] codes = serverCodes.split(",");
+        if(codes !=null && codes.length > 0){
+            return hjServerCodeDao.findCodeList(codes);
+        }
+        return null;
+    }
 }

@@ -13,7 +13,9 @@ import cn.jeefast.entity.HjServerInfo;
 import cn.jeefast.dao.HjServerInfoDao;
 import cn.jeefast.entity.HjServerRemak;
 import cn.jeefast.service.HjAreaService;
+import cn.jeefast.service.HjServerCodeService;
 import cn.jeefast.service.HjServerInfoService;
+import cn.jeefast.vo.CategoryCode;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.apache.commons.lang3.StringUtils;
@@ -47,6 +49,9 @@ public class HjServerInfoServiceImpl extends ServiceImpl<HjServerInfoDao, HjServ
     private HjServerCaseDao hjServerCaseDao;
 
     @Resource
+    private HjServerCodeService hjServerCodeService;
+
+    @Resource
     private RedisUtils redisUtils;
 
     @Transactional(rollbackFor = {Exception.class,RuntimeException.class})
@@ -58,11 +63,23 @@ public class HjServerInfoServiceImpl extends ServiceImpl<HjServerInfoDao, HjServ
         }else{
             throw new BusinessException("地址参数不正确", ResultEnum.REQ_PARAM_EXP.getCode());
         }
-        if(info.getServerType() != 1 || info.getServerType() != 2){
+        if(info.getServerType() == null || info.getServerType() > 2 || info.getServerType() < 1){
             throw new BusinessException("类型参数不正确", ResultEnum.REQ_PARAM_EXP.getCode());
         }
         if(info.getServerType() == 2 && StringUtils.isBlank(info.getServerRegImage())){
             throw new BusinessException("请上传营业执照", ResultEnum.REQ_PARAM_EXP.getCode());
+        }
+
+        //服务的类型
+        if(StringUtils.isNotBlank(info.getServerCodes())){
+            List<CategoryCode> codes = hjServerCodeService.findCodeList(info.getServerCodes());
+            if(codes != null && codes.size() > 0){
+                StringBuffer buffer = new StringBuffer();
+                codes.forEach( e ->{
+                    buffer.append(e.getServerCategory()).append(",");
+                });
+                info.setServerCategory(buffer.toString().substring(0,buffer.toString().length() - 1));
+            }
         }
 
         if(info.getServerId() != null){
@@ -76,7 +93,7 @@ public class HjServerInfoServiceImpl extends ServiceImpl<HjServerInfoDao, HjServ
                 for(HjServerRemak re : list){
                     re.setServerId(info.getServerId());
                     re.setCreateTime(new Date());
-                    if(StringUtils.isBlank(info.getCompanyImage()) && StringUtils.isNoneBlank(re.getServerImage())){
+                    if(StringUtils.isBlank(info.getCompanyImage()) && StringUtils.isNotBlank(re.getServerImage())){
                         info.setCompanyImage(re.getServerImage());
                     }
                     hjServerRemakDao.insert(re);
@@ -96,7 +113,7 @@ public class HjServerInfoServiceImpl extends ServiceImpl<HjServerInfoDao, HjServ
                 for(HjServerRemak re : list){
                     re.setServerId(info.getServerId());
                     re.setCreateTime(new Date());
-                    if(StringUtils.isBlank(info.getCompanyImage()) && StringUtils.isNoneBlank(re.getServerImage())){
+                    if(StringUtils.isBlank(info.getCompanyImage()) && StringUtils.isNotBlank(re.getServerImage())){
                         info.setCompanyImage(re.getServerImage());
                     }
                     hjServerRemakDao.insert(re);

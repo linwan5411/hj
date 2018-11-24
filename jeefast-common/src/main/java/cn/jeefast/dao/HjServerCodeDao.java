@@ -18,4 +18,6 @@ import java.util.List;
 public interface HjServerCodeDao extends BaseMapper<HjServerCode> {
 
     List<CategoryCode> findByParenId(@Param("parentId") Long parentId);
+
+    List<CategoryCode> findCodeList(@Param("codes")String[] codes);
 }

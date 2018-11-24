@@ -7,14 +7,14 @@ import org.springframework.stereotype.Controller;
 
 /**
  * <p>
- * 文章 前端控制器
+ * 联系表 前端控制器
  * </p>
  *
  * @author zhihang
- * @since 2018-11-21
+ * @since 2018-11-24
  */
 @Controller
-@RequestMapping("/hjArticle")
-public class HjArticleController {
+@RequestMapping("/hjOrder")
+public class HjOrderController {
 	
 }

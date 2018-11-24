@@ -39,13 +39,13 @@ public class HjInvitation extends BaseEntity {
     /**
      * 类型名称
      */
-	@TableField("article_catgory")
-	private String articleCatgory;
+	@TableField("article_category")
+	private String articleCategory;
     /**
      * 帖子类型
      */
-	@TableField("article_catgory_code")
-	private String articleCatgoryCode;
+	@TableField("article_category_code")
+	private String articleCategoryCode;
     /**
      * 内容
      */
@@ -113,24 +113,24 @@ public class HjInvitation extends BaseEntity {
 		this.userName = userName;
 	}
 
-	public String getArticleCatgory() {
-		return articleCatgory;
-	}
-
-	public void setArticleCatgory(String articleCatgory) {
-		this.articleCatgory = articleCatgory;
-	}
-
-	public String getArticleCatgoryCode() {
-		return articleCatgoryCode;
-	}
-
-	public void setArticleCatgoryCode(String articleCatgoryCode) {
-		this.articleCatgoryCode = articleCatgoryCode;
-	}
-
 	public String getInvitationInfo() {
 		return invitationInfo;
+	}
+
+	public String getArticleCategory() {
+		return articleCategory;
+	}
+
+	public void setArticleCategory(String articleCategory) {
+		this.articleCategory = articleCategory;
+	}
+
+	public String getArticleCategoryCode() {
+		return articleCategoryCode;
+	}
+
+	public void setArticleCategoryCode(String articleCategoryCode) {
+		this.articleCategoryCode = articleCategoryCode;
 	}
 
 	public void setInvitationInfo(String invitationInfo) {
@@ -161,8 +161,8 @@ public class HjInvitation extends BaseEntity {
 			", invitationImages=" + invitationImages +
 			", userHeader=" + userHeader +
 			", userName=" + userName +
-			", articleCatgory=" + articleCatgory +
-			", articleCatgoryCode=" + articleCatgoryCode +
+			", articleCategory=" + articleCategory +
+			", articleCategoryCode=" + articleCategoryCode +
 			", invitationInfo=" + invitationInfo +
 			", answerNum=" + answerNum +
 			", invitationStatus=" + invitationStatus +

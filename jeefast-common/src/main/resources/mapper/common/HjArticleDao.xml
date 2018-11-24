@@ -10,8 +10,8 @@
 	<result column="data_version" property="dataVersion" />
 		<result column="article_id" property="articleId" />
 		<result column="article_title" property="articleTitle" />
-		<result column="article_catgory_code" property="articleCatgoryCode" />
-		<result column="article_catgory" property="articleCatgory" />
+		<result column="article_category_name" property="articleCategoryName" />
+		<result column="article_category" property="articleCategory" />
 		<result column="article_image" property="articleImage" />
 		<result column="create_info" property="createInfo" />
 		<result column="article_url" property="articleUrl" />
@@ -25,10 +25,10 @@
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
 		id,
-		create_time as createTime,
+		DATE_FORMAT(create_time,'%Y-%m-%d') as createTime,
         article_id AS articleId,
         article_title AS articleTitle,
-        article_catgory AS articleCatgory,
+        article_category_name AS articleCategoryName,
         article_image AS articleImage,
         article_url AS articleUrl,
         article_ok AS articleOk,
@@ -91,13 +91,13 @@
 		where  id = #{id}
 
     </update>
-    <select id="findAdArticle" resultType="cn.jeefast.entity.HjArticle">
-		SELECT <include refid="Base_Column_List"/>  from hj_article where article_show = 1 ORDER by create_time desc limit #{pageIndex},#{pageSize}
+    <select id="findAdArticle" resultType="java.util.Map">
+		SELECT <include refid="Base_Column_List"/>  from hj_article where article_show = 1 ORDER by article_sort,create_time desc limit #{pageIndex},#{pageSize}
 	</select>
-	<select id="findLikeArticle" resultType="cn.jeefast.entity.HjArticle">
+	<select id="findLikeArticle" resultType="java.util.Map">
 		SELECT <include refid="Base_Column_List"/>  from hj_article  WHERE  article_show = 1
 		<if test="code != null">
-			and article_catgory_code = #{code}
+			and article_category = #{code}
 		</if>
 		<if test="articleId != null">
 			and article_id != #{articleId}

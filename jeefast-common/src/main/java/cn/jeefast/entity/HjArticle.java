@@ -25,15 +25,15 @@ public class HjArticle extends BaseEntity {
 	@TableField("article_title")
 	private String articleTitle;
     /**
-     * 类别的编码
+     * 文章类型名称
      */
-	@TableField("article_catgory_code")
-	private String articleCatgoryCode;
+	@TableField("article_category_name")
+	private String articleCategoryName;
     /**
      * 文章类型
      */
-	@TableField("article_catgory")
-	private Long articleCatgory;
+	@TableField("article_category")
+	private Long articleCategory;
     /**
      * 图片
      */
@@ -92,20 +92,20 @@ public class HjArticle extends BaseEntity {
 		this.articleTitle = articleTitle;
 	}
 
-	public String getArticleCatgoryCode() {
-		return articleCatgoryCode;
+	public String getArticleCategoryName() {
+		return articleCategoryName;
 	}
 
-	public void setArticleCatgoryCode(String articleCatgoryCode) {
-		this.articleCatgoryCode = articleCatgoryCode;
+	public void setArticleCategoryName(String articleCategoryName) {
+		this.articleCategoryName = articleCategoryName;
 	}
 
-	public Long getArticleCatgory() {
-		return articleCatgory;
+	public Long getArticleCategory() {
+		return articleCategory;
 	}
 
-	public void setArticleCatgory(Long articleCatgory) {
-		this.articleCatgory = articleCatgory;
+	public void setArticleCategory(Long articleCategory) {
+		this.articleCategory = articleCategory;
 	}
 
 	public String getArticleImage() {
@@ -170,23 +170,5 @@ public class HjArticle extends BaseEntity {
 
 	public void setArticleShow(Integer articleShow) {
 		this.articleShow = articleShow;
-	}
-
-	@Override
-	public String toString() {
-		return "HjArticle{" +
-			", articleId=" + articleId +
-			", articleTitle=" + articleTitle +
-			", articleCatgoryCode=" + articleCatgoryCode +
-			", articleCatgory=" + articleCatgory +
-			", articleImage=" + articleImage +
-			", createInfo=" + createInfo +
-			", articleUrl=" + articleUrl +
-			", articleSort=" + articleSort +
-			", articleOk=" + articleOk +
-			", articleReadNum=" + articleReadNum +
-			", articleFrom=" + articleFrom +
-			", articleShow=" + articleShow +
-			"}";
 	}
 }

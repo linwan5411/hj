@@ -62,7 +62,7 @@
 				and area_code like '${areaCode}%'
 			</if>
 			<if test="categoryCode != null">
-				and server_category like '%${categoryCode}%'
+				and server_codes like '%${categoryCode}%'
 			</if>
 		) as t ORDER BY t.distance desc limit #{pageIndex},#{pageSize}
 	</select>

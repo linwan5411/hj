@@ -20,4 +20,6 @@ public interface HjServerCodeService extends IService<HjServerCode> {
     List<CategoryCode> findByParenId(Long parentId);
 
     HjServerCode findByCode(String categoryCode);
+
+    List<CategoryCode> findCodeList(String serverCodes);
 }

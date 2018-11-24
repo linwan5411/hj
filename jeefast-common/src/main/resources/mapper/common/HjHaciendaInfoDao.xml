@@ -59,7 +59,7 @@
 		SELECT t.* FROM (
 		SELECT
 		<include refid="base_sql"/>,point_map(latitude,longitude,#{lat},#{lng}) as distance
-		from hj_server_info where hacienda_show = 1
+		from hj_hacienda_info where hacienda_show = 1
 		<if test="authType != null">
 			and auth_status = #{authType}
 		</if>

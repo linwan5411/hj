@@ -19,4 +19,8 @@ public interface HjServerCaseService extends IService<HjServerCase> {
     Long userCase(HjServerCase hjServerCase, List<HjServerCaseRemark> list, Long userId);
 
     List<HjServerCaseRemark> findCaseDetail(Long serverId);
+
+    HjServerCase findCase(Long caseId);
+
+    List<HjServerCase> myCaseList(Long serverId);
 }

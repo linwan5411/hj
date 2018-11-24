@@ -143,11 +143,13 @@ public class HjHaciendaInfo extends BaseEntity {
 	/**
 	 * 经济范围
 	 */
+	@TableField(exist = false)
 	private List<String> categoryList;
 
 	/**
 	 * 土地图片
 	 */
+	@TableField(exist = false)
 	private List<HjHaciendaRemark> remarks;
 
 	public List<HjHaciendaRemark> getRemarks() {

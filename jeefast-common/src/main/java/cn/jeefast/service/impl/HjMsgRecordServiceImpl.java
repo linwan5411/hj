@@ -41,7 +41,7 @@ public class HjMsgRecordServiceImpl extends ServiceImpl<HjMsgRecordDao, HjMsgRec
     /**
      * 不同类型的短信短信次数
      */
-    @Value("${bu.message.msgTimes:3}")
+    @Value("${bu.message.msgTimes:2}")
     private int msgTimes;
 
     @Resource

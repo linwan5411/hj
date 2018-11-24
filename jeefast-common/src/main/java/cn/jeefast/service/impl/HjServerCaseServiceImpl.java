@@ -74,6 +74,9 @@ public class HjServerCaseServiceImpl extends ServiceImpl<HjServerCaseDao, HjServ
             hjServerCase.setServerId(info.getServerId());
             if(list != null && list.size() > 0){
                 for(HjServerCaseRemark re : list){
+                    if(StringUtils.isNotBlank(hjServerCase.getCaseImage()) && StringUtils.isNotBlank(re.getCaseImage())){
+                        hjServerCase.setCaseImage(re.getCaseImage());
+                    }
                     re.setCaseId(hjServerCase.getCaseId());
                     re.setCreateTime(new Date());
                     hjServerCaseRemarkDao.insert(re);
@@ -91,5 +94,27 @@ public class HjServerCaseServiceImpl extends ServiceImpl<HjServerCaseDao, HjServ
         EntityWrapper entityWrapper = new EntityWrapper();
         entityWrapper.where("case_id={0}",serverId);
         return hjServerCaseRemarkDao.selectList(entityWrapper);
+    }
+
+    @Override
+    public HjServerCase findCase(Long caseId) {
+
+        HjServerCase c = new HjServerCase();c.setCaseId(caseId);
+        c = hjServerCaseDao.selectOne(c);
+        if(c == null){
+            return null;
+        }
+        EntityWrapper entityWrapper = new EntityWrapper();
+        entityWrapper.where("case_id={0}",caseId);
+        List<HjServerCaseRemark> list = hjServerCaseRemarkDao.selectList(entityWrapper);
+        if(list != null){
+            c.setList(list);
+        }
+        return c;
+    }
+
+    @Override
+    public List<HjServerCase> myCaseList(Long serverId) {
+        return hjServerCaseDao.myCaseList(serverId);
     }
 }
