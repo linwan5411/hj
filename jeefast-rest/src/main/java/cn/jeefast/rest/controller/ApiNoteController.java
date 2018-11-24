@@ -6,6 +6,7 @@ import cn.jeefast.common.utils.TokenUtil;
 import cn.jeefast.entity.HjUser;
 import cn.jeefast.rest.entity.BasePage;
 import cn.jeefast.rest.entity.vo.NoteVo;
+import cn.jeefast.rest.entity.vo.SubNoteVo;
 import cn.jeefast.service.HjArticleService;
 import cn.jeefast.service.HjInvitationListService;
 import cn.jeefast.service.HjInvitationService;
@@ -30,10 +31,18 @@ public class ApiNoteController {
     @Resource
     private HjInvitationListService hjInvitationListService;
 
+    @ApiOperation(value = "发表话题")
+    @PostMapping("/submitNote")
+    public BaseResponse submitNote(@Valid @RequestBody SubNoteVo subNoteVo){
+        HjUser user = TokenUtil.parseUser(subNoteVo.getToken());
+        hjInvitationService.submitNote(subNoteVo.getImageList(),subNoteVo.getNotComment(),subNoteVo.getNoteType(),user);
+        return ResultUtils.successV2();
+    }
+
     @ApiOperation(value = "查询话题")
     @PostMapping("/findAdNote")
     public BaseResponse findAdNote(@RequestBody BasePage basePage){
-        return ResultUtils.successV2(hjInvitationService.findAdNote(basePage.getPageIndex(),basePage.getPage()));
+        return ResultUtils.successV2(hjInvitationService.findAdNote(basePage.getPageIndex(),basePage.getPageSize()));
     }
 
     @ApiOperation(value = "查询话题详情")
@@ -55,8 +64,6 @@ public class ApiNoteController {
         return ResultUtils.successV2();
     }
 
-    //TODO 还有2个接口未实现
-
     @ApiOperation(value = "发表评论")
     @PostMapping("/doComment")
     public BaseResponse doComment(@Valid @RequestBody NoteVo noteVo){
@@ -66,7 +73,7 @@ public class ApiNoteController {
     }
 
     @ApiOperation(value = "发表评论顶赞")
-    @PostMapping("/noteOk/{commentId}")
+    @PostMapping("/commentOk/{commentId}")
     public BaseResponse commentIdOk(@PathVariable("commentId")Long commentId){
         hjInvitationListService.commentIdOk(commentId);
         return ResultUtils.successV2();

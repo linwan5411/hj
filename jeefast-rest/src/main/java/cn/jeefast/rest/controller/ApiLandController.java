@@ -56,7 +56,7 @@ public class ApiLandController {
         if(remarkList != null && remarkList.size() > 0){
             remarkList.forEach(e ->{
                 HjHaciendaRemark vo = new HjHaciendaRemark();
-                BeanUtils.copyProperties(vo,e);
+                BeanUtils.copyProperties(e,vo);
                 list.add(vo);
             });
         }
@@ -84,23 +84,8 @@ public class ApiLandController {
     }
 
     @ApiOperation(value = "查询农场的详情")
-    @PostMapping("/userCase/{haciendaId}")
+    @PostMapping("/lndInfo/{haciendaId}")
     public BaseResponse findLandDetail(@PathVariable("haciendaId")Long haciendaId){
         return ResultUtils.successV2(hjHaciendaInfoService.findLandDetail(haciendaId));
-    }
-
-
-    @ApiOperation(value = "查询目前订单量与订阅的服务通知")
-    @PostMapping("/findOrderAndNotify")
-    public BaseResponse findOrderAndNotify(){
-
-        // 此通知，为发布服务，联系订单等一个总体的消息通知
-        /**
-         * 处理方式，采用在添加的时候，自动往mysql写入今天的最新消息，然后存入redis，并进行3小时刷新一次的操作
-         */
-        //TODO 根据经纬度查询对应的农场，服务商的列表,  >>>> notifySize
-
-
-        return ResultUtils.successV2();
     }
 }

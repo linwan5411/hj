@@ -43,7 +43,7 @@ public class ApiLoginController {
             dataType = "LoginParamVo", name = "paramVo", value = "登陆参数", required = true) })
     @PostMapping("/login")
     public BaseResponse login(@Valid @RequestBody LoginParamVo paramVo){
-        Map<String,Object> map = hjUserService.login(paramVo.getMobile(),paramVo.getMobile());
+        Map<String,Object> map = hjUserService.login(paramVo.getMobile(),paramVo.getPass());
         return ResultUtils.successV2(map);
     }
 

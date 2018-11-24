@@ -26,6 +26,7 @@ public class ApiMessageController {
     @ApiOperation(value = "发送注册短信")
     @PostMapping("/message")
     public BaseResponse sendMessage(@Valid @RequestBody MessageVo messageVo){
+        hjMsgRecordService.isMsgTimesOver(messageVo.getMobile(),messageVo.getType());
         hjMsgRecordService.sendMessage(messageVo.getMobile(),messageVo.getType());
         return ResultUtils.successV2();
     }

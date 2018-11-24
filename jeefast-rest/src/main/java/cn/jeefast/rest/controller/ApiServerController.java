@@ -65,18 +65,19 @@ public class ApiServerController {
         if(remarkList != null && remarkList.size() > 0){
             remarkList.forEach(e ->{
                 HjServerRemak vo = new HjServerRemak();
-                BeanUtils.copyProperties(vo,e);
+                BeanUtils.copyProperties(e,vo);
                 list.add(vo);
             });
         }
 
         Long serverId = hjServerInfoService.userApprove(info,list,userId);
         serverAuthVo.setServerId(serverId);
+        serverAuthVo.setRemarkList(remarkList);
         return ResultUtils.successV2(serverAuthVo);
     }
 
     @ApiOperation(value = "添加案例")
-    @PostMapping("/userCase")
+    @PostMapping("/userAddCase")
     public BaseResponse userCase(@Valid @RequestBody CaseVo caseVo){
         //token
         Long userId = TokenUtil.parseUserId(caseVo.getToken());
@@ -91,7 +92,7 @@ public class ApiServerController {
         if(remarkList != null && remarkList.size() > 0){
             remarkList.forEach(e ->{
                 HjServerCaseRemark vo = new HjServerCaseRemark();
-                BeanUtils.copyProperties(vo,e);
+                BeanUtils.copyProperties(e,vo);
                 list.add(vo);
             });
         }
@@ -102,7 +103,7 @@ public class ApiServerController {
     }
 
     @ApiOperation(value = "经纬度查询最近3条的服务商")
-    @PostMapping("/findServerAndLand")
+    @PostMapping("/findServer")
     public BaseResponse findServerAndLand(@RequestBody CordVo cordVo){
         List<Map<String,Object>> list = hjServerInfoService.findServerAndLand(cordVo.getAreaId(),cordVo.getLat(),cordVo.getLng(),homeSize);
         return ResultUtils.successV2(list);
@@ -118,28 +119,21 @@ public class ApiServerController {
     }
 
     @ApiOperation(value = "查询服务商的详情")
-    @PostMapping("/userCase/{serverId}")
+    @PostMapping("/server/{serverId}")
     public BaseResponse findServerDetail(@PathVariable("serverId")Long serverId){
         return ResultUtils.successV2(hjServerInfoService.findServerDetail(serverId));
     }
 
     @ApiOperation(value = "查询案例详情")
-    @PostMapping("/caseInfo/{caseId}")
+    @PostMapping("/case/{caseId}")
     public BaseResponse findCaseDetail(@PathVariable("caseId")Long serverId){
-        return ResultUtils.successV2(hjServerCaseService.findCaseDetail(serverId));
+        return ResultUtils.successV2(hjServerCaseService.findCase(serverId));
     }
 
-    @ApiOperation(value = "查询目前订单量与订阅的服务通知")
-    @PostMapping("/findOrderAndNotify")
-    public BaseResponse findOrderAndNotify(){
-
-        // 此通知，为发布服务，联系订单等一个总体的消息通知
-        /**
-         * 处理方式，采用在添加的时候，自动往mysql写入今天的最新消息，然后存入redis，并进行3小时刷新一次的操作
-         */
-        //TODO 根据经纬度查询对应的农场，服务商的列表,  >>>> notifySize
-
-
-        return ResultUtils.successV2();
+    @ApiOperation(value = "我的案例列表")
+    @PostMapping("/myCaseList/{serverId}")
+    public BaseResponse myCaseList(@PathVariable("serverId")Long serverId){
+        return ResultUtils.successV2(hjServerCaseService.myCaseList(serverId));
     }
+
 }

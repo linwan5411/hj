@@ -32,12 +32,12 @@ import java.util.Map;
  *   1.0   2018/8/30 0030 17:08          zhihang            new file.
  * <pre>
  */
-@RestControllerAdvice(basePackages = "cn.jeefast.rest.controller")
+@RestControllerAdvice(basePackages = "cn.jeefast")
 public class ControllerAdviceConfig {
 
     private static Logger logger = LoggerFactory.getLogger(ControllerAdviceConfig.class);
 
-    @ExceptionHandler({Exception.class})
+    @ExceptionHandler({Exception.class,RuntimeException.class})
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public Object processApplicationCheckedException(NativeWebRequest request, Exception e) throws Exception {

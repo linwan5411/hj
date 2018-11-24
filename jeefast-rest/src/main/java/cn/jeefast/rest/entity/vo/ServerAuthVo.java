@@ -1,5 +1,6 @@
 package cn.jeefast.rest.entity.vo;
 
+import com.baomidou.mybatisplus.annotations.TableField;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
 
@@ -33,9 +34,12 @@ public class ServerAuthVo extends TokenVo {
     @NotNull(message = "联系人不能为空")
     private String linkName;
 
-    @ApiModelProperty(value="服务的领域,选择多个已逗号隔开", hidden=false,  required=true, dataType="String")
-    @NotNull(message = "服务的领域不能为空")
-    private String serverCategory;
+    @ApiModelProperty(value="服务的类型，多个用逗号隔开", hidden=false,  required=true, dataType="String")
+    @NotNull(message = "服务的类型，多个用逗号隔开")
+    private String serverCodes;
+
+    @ApiModelProperty(value="经营范围", hidden=false,  required=false, dataType="String")
+    private String companyScope;
 
     @ApiModelProperty(value="营业执照图片地址", hidden=false,  required=false, dataType="String")
     private String serverRegImage;
@@ -104,12 +108,20 @@ public class ServerAuthVo extends TokenVo {
         this.linkName = linkName;
     }
 
-    public String getServerCategory() {
-        return serverCategory;
+    public String getServerCodes() {
+        return serverCodes;
     }
 
-    public void setServerCategory(String serverCategory) {
-        this.serverCategory = serverCategory;
+    public void setServerCodes(String serverCodes) {
+        this.serverCodes = serverCodes;
+    }
+
+    public String getCompanyScope() {
+        return companyScope;
+    }
+
+    public void setCompanyScope(String companyScope) {
+        this.companyScope = companyScope;
     }
 
     public String getServerRegImage() {

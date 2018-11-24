@@ -37,7 +37,7 @@ public class ApiArticleController {
     @ApiOperation(value = "查询文章列表")
     @PostMapping("/findHomeArticle")
     public BaseResponse findHomeArticle(){
-        return ResultUtils.successV2(hjArticleService.findAdArticle(0,3));
+        return ResultUtils.successV2(hjArticleService.findHomeArticle(3));
     }
 
     @ApiOperation(value = "文章详情")

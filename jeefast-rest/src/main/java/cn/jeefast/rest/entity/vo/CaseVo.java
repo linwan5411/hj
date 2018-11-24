@@ -16,6 +16,10 @@ public class CaseVo extends TokenVo {
     @ApiModelProperty(value="案例", hidden=false,  required=true, dataType="String")
     private Long caseId;
 
+    @ApiModelProperty(value="服务类型不能为空", hidden=false,  required=true, dataType="String")
+    @NotNull(message = "服务类型不能为空")
+    private String serverType;
+
     @ApiModelProperty(value="项目名称", hidden=false,  required=true, dataType="String")
     @NotNull(message = "项目名称不能为空")
     @Length(max = 120,message = "项目名称称最大长度120")
@@ -30,6 +34,14 @@ public class CaseVo extends TokenVo {
 
     @ApiModelProperty(value="文字介绍", hidden=false,  required=true, dataType="JSON")
     private List<CaseRemakVo> list;
+
+    public String getServerType() {
+        return serverType;
+    }
+
+    public void setServerType(String serverType) {
+        this.serverType = serverType;
+    }
 
     public Long getCaseId() {
         return caseId;
