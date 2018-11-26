@@ -156,6 +156,12 @@ public class HjServerInfoServiceImpl extends ServiceImpl<HjServerInfoDao, HjServ
                     areaId,null,null,0, size,null);
             if(list != null){
                 redisUtils.put(hkey,ser_key,list);
+            }else{
+                list =  findServerMore(lng,lat,
+                        null,null,null,0, size,null);
+                if(list != null){
+                    redisUtils.put(hkey,ser_key,list);
+                }
             }
             return list;
         }

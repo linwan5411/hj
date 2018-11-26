@@ -19,6 +19,7 @@
 	<sql id="base_server_sql">
 		 y.server_id as serverId,
 		 y.company_name as companyName,
+		 y.company_image as companyImage,
 		 y.server_category as serverCategory,
 		 y.server_max as serverMax,
 		 y.detail_addr as detailAddr,

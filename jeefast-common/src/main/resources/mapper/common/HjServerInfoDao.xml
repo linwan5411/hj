@@ -44,6 +44,7 @@
 		server_category as serverCategory,
 		server_max as serverMax,
 		detail_addr as detailAddr,
+		company_image as companyImage,
 		server_type as serverType,
 		auth_status as authStatus
 	</sql>

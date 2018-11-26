@@ -17,4 +17,5 @@ import java.util.List;
 public interface HjServerCaseDao extends BaseMapper<HjServerCase> {
 
     List<HjServerCase> myCaseList(@Param("serverId") Long serverId);
+
 }

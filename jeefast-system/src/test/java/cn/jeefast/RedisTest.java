@@ -20,7 +20,7 @@ public class RedisTest {
 	public void contextLoads() {
 		SysUser user = new SysUser();
 		user.setEmail("qqq@qq.com");
-		redisUtils.set("user", user);
+		//redisUtils.set("user", user);
 
 		System.out.println(ToStringBuilder.reflectionToString(redisUtils.get("user", SysUser.class)));
 	}

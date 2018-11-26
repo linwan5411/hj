@@ -27,7 +27,7 @@ public enum ResultEnum {
 
     MOBILE_EXIST("12001","手机已注册","param bind exception"),
     MOBILE_NOT_EXIST("12002","手机未注册","param bind exception"),
-    MOBILE_REG_EXP("12003","手机已注册","param bind exception"),
+    MOBILE_REG_EXP("12003","注册失败","param bind exception"),
     MOBILE_PASS_EXP("12004","密码错误","param bind exception"),
     MOBILE_BLOCK_EXP("12005","账户被冻结","param bind exception"),
     TWO_PWD_EXP("12006","两次密码不一致","param bind exception"),

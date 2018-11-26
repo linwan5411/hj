@@ -29,15 +29,6 @@ public class DynamicDataSourceTest {
     @Resource
     private HjUserService hjUserService;
 
-    @Resource
-    private CustomerDao customerDao;
-
-    //@Test
-    public void xx(){
-        Customer c = new Customer();c.setName("heheh");c.setId(1L);
-        customerDao.updateByCustomer(c);
-    }
-
 
     /**
      * 测试Wrapper

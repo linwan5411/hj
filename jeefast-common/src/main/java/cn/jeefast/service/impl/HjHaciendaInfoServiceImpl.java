@@ -129,6 +129,12 @@ public class HjHaciendaInfoServiceImpl extends ServiceImpl<HjHaciendaInfoDao, Hj
                     areaId,null,null,0, homeSize,null);
             if(list != null){
                 redisUtils.put(hkey,ser_key,list);
+            }else{
+                list = findLandMore(lng,lat,
+                        null,null,null,0, homeSize,null);
+                if(list != null){
+                    redisUtils.put(hkey,ser_key,list);
+                }
             }
             return list;
         }
@@ -154,7 +160,7 @@ public class HjHaciendaInfoServiceImpl extends ServiceImpl<HjHaciendaInfoDao, Hj
             return null;
         }
         if(StringUtils.isNotBlank(hjServerInfo.getServerCategory())){
-            hjServerInfo.setCategoryList(Arrays.asList(hjServerInfo.getHaciendaScope().split(",")));
+            hjServerInfo.setCategoryList(Arrays.asList(hjServerInfo.getServerCategory().split(",")));
         }
         EntityWrapper entityWrapper = new EntityWrapper();entityWrapper.where("hacienda_id={0}",hjServerInfo.getHaciendaId());
         List<HjHaciendaRemark> remaks = hjHaciendaRemarkDao.selectList(entityWrapper);

@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 public class OrderVo extends TokenVo {
     private static final long serialVersionUID = 3858985501607274940L;
 
-    @ApiModelProperty(value="收藏的ID", hidden=false,  required=true, dataType="String")
+    @ApiModelProperty(value="被联系的ID", hidden=false,  required=true, dataType="String")
     @NotNull(message = "被联系的ID")
     private Long objectId;
 

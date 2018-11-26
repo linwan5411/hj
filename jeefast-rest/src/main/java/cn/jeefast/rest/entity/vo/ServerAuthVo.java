@@ -1,6 +1,5 @@
 package cn.jeefast.rest.entity.vo;
 
-import com.baomidou.mybatisplus.annotations.TableField;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
 

@@ -32,7 +32,7 @@
 			<result column="r_case_image" property="caseImage" />
 		</collection>
 	</resultMap>
-    <select id="myCaseList" resultType="cn.jeefast.entity.HjServerCase">
+    <select id="myCaseList" resultMap="myCase">
 		SELECT
 			c.case_id,c.server_id,c.case_image,c.server_type,c.case_name,c.case_max,c.case_time,
 			r.case_id as r_case_id,
