@@ -42,4 +42,11 @@ public class HjAreaServiceImpl extends ServiceImpl<HjAreaDao, HjArea> implements
         HjArea a = new HjArea();a.setAreaId(areaId);
         return hjAreaDao.selectOne(a);
     }
+
+    @Cacheable(key = "'AreaCode'+#areaCode")
+    @Override
+    public HjArea findByCode(String areaCode) {
+        HjArea a = new HjArea();a.setAreaCode(areaCode);
+        return hjAreaDao.selectOne(a);
+    }
 }

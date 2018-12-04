@@ -127,12 +127,12 @@ public class HjHaciendaInfoServiceImpl extends ServiceImpl<HjHaciendaInfoDao, Hj
             //服务商通知
             List<Map<String,Object>> list = findLandMore(lng,lat,
                     areaId,null,null,0, homeSize,null);
-            if(list != null){
+            if(list != null && list.size() > 0){
                 redisUtils.put(hkey,ser_key,list);
             }else{
                 list = findLandMore(lng,lat,
                         null,null,null,0, homeSize,null);
-                if(list != null){
+                if(list != null && list.size() > 0){
                     redisUtils.put(hkey,ser_key,list);
                 }
             }

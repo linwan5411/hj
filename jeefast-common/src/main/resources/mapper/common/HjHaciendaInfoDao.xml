@@ -58,7 +58,10 @@
 	<select id="findLandMore" resultType="java.util.Map">
 		SELECT t.* FROM (
 		SELECT
-		<include refid="base_sql"/>,point_map(latitude,longitude,#{lat},#{lng}) as distance
+		<include refid="base_sql"/>
+		<if test="lng != null and lat != null">
+			,point_map(latitude,longitude,#{lat},#{lng}) as distance
+		</if>
 		from hj_hacienda_info where hacienda_show = 1
 		<if test="authType != null">
 			and auth_status = #{authType}
@@ -72,7 +75,11 @@
 		<if test="categoryCode != null">
 			and server_category like '%${categoryCode}%'
 		</if>
-		) as t ORDER BY t.distance desc limit #{pageIndex},#{pageSize}
+		) as t
+		<if test="lng != null and lat != null">
+			ORDER BY t.distance desc
+		</if>
+		 limit #{pageIndex},#{pageSize}
 	</select>
 
 </mapper>

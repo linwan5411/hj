@@ -154,12 +154,12 @@ public class HjServerInfoServiceImpl extends ServiceImpl<HjServerInfoDao, HjServ
             //服务商通知
             List<Map<String,Object>> list = findServerMore(lng,lat,
                     areaId,null,null,0, size,null);
-            if(list != null){
+            if(list != null && list.size() > 0){
                 redisUtils.put(hkey,ser_key,list);
             }else{
                 list =  findServerMore(lng,lat,
                         null,null,null,0, size,null);
-                if(list != null){
+                if(list != null && list.size() > 0){
                     redisUtils.put(hkey,ser_key,list);
                 }
             }

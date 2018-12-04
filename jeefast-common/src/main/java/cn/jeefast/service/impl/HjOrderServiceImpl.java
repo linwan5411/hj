@@ -2,6 +2,7 @@ package cn.jeefast.service.impl;
 
 import cn.jeefast.common.enums.ResultEnum;
 import cn.jeefast.common.exception.BusinessException;
+import cn.jeefast.config.redis.Cacheable;
 import cn.jeefast.dao.HjHaciendaInfoDao;
 import cn.jeefast.dao.HjServerInfoDao;
 import cn.jeefast.dao.HjUserDao;
@@ -74,12 +75,17 @@ public class HjOrderServiceImpl extends ServiceImpl<HjOrderDao, HjOrder> impleme
         hjOrderDao.insert(t);
     }
 
+    @Cacheable(key = "homeNotify",expireTime = 3600L)
     @Override
     public List<RecordRps> orderListByTen(Integer size) {
         String beforeTime = null;
         Integer type = null;
         Long objectId = null;
-        return hjOrderDao.orderListByTen(size,beforeTime,type,objectId);
+        List<RecordRps> l =  hjOrderDao.orderListByTen(size,beforeTime,type,objectId);
+        if(l != null && l.size() > 0){
+            return l;
+        }
+        return null;
     }
 
     @Override

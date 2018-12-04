@@ -1,13 +1,8 @@
 package cn.jeefast.vo;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Data;
-
 import java.io.Serializable;
 
-@Data
 public class AreaVo implements Serializable {
 
     /**
@@ -17,11 +12,33 @@ public class AreaVo implements Serializable {
     /**
      * 地区编码
      */
-    @JsonIgnore
     private String areaCode;
     /**
      * 地区名
      */
     private String areaName;
 
+    public Long getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(Long areaId) {
+        this.areaId = areaId;
+    }
+
+    public String getAreaCode() {
+        return areaCode;
+    }
+
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode;
+    }
+
+    public String getAreaName() {
+        return areaName;
+    }
+
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
+    }
 }

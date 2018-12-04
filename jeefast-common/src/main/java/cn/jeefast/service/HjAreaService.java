@@ -31,4 +31,5 @@ public interface HjAreaService extends IService<HjArea> {
      */
     HjArea findByAreaId(Long areaId);
 
+    HjArea findByCode(String areaCode);
 }
