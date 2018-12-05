@@ -1,28 +1,21 @@
 package cn.jeefast.rest.controller;
 
-import cn.jeefast.common.enums.AdTypeEnum;
-import cn.jeefast.common.enums.CategoryCodeEnum;
 import cn.jeefast.common.utils.BaseResponse;
 import cn.jeefast.common.utils.ResultUtils;
-import cn.jeefast.config.RedisUtils;
-import cn.jeefast.rest.entity.BasePage;
-import cn.jeefast.rest.entity.vo.*;
+import cn.jeefast.rest.entity.vo.AdSiteVo;
+import cn.jeefast.rest.entity.vo.AddrReqVo;
+import cn.jeefast.rest.entity.vo.CategoryVo;
 import cn.jeefast.service.HjAdService;
 import cn.jeefast.service.HjAreaService;
-import cn.jeefast.service.HjMsgRecordService;
 import cn.jeefast.service.HjServerCodeService;
-import cn.jeefast.vo.AreaVo;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import sun.dc.pr.PRError;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 广告，类别相关的接口
