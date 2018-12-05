@@ -10,8 +10,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -67,5 +66,35 @@ public class HjAreaServiceImpl extends ServiceImpl<HjAreaDao, HjArea> implements
         vo.setLat(lat);
         vo.setLng(lng);
         return vo;
+    }
+
+    @Override
+    public List<Map<String, Object>> findAllArea() {
+        List<Map<String,Object>> list = new ArrayList<>();
+        List<AreaVo>  pList = findAreaByParentId(-1L);
+        for(AreaVo pv : pList){
+            Map<String,Object> p = new LinkedHashMap<>();
+            p.put("areaId",pv.getAreaId());
+            p.put("areaName",pv.getAreaName());
+            p.put("cities",findMoreArea(pv.getAreaId()));
+            list.add(p);
+        }
+        return list;
+    }
+
+
+    private List<Map<String, Object>> findMoreArea(Long areaId){
+        List<Map<String,Object>> list = new ArrayList<>();
+        List<AreaVo>  pList = findAreaByParentId(areaId);
+        if(pList != null && pList.size() > 0){
+            for(AreaVo pv : pList){
+                Map<String,Object> p = new LinkedHashMap<>();
+                p.put("areaId",pv.getAreaId());
+                p.put("areaName",pv.getAreaName());
+                p.put("counties",findMoreArea(pv.getAreaId()));
+                list.add(p);
+            }
+        }
+        return list;
     }
 }

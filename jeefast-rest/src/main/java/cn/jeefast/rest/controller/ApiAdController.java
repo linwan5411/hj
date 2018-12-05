@@ -58,5 +58,9 @@ public class ApiAdController {
         return ResultUtils.successV2(hjAreaService.findAreaByParentId(addrReqVo.getAreaId()));
     }
 
-
+    @ApiOperation(value = "查询所有的地址列表")
+    @PostMapping("/findAllArea")
+    public BaseResponse findAllArea(){
+        return ResultUtils.successV2(hjAreaService.findAllArea());
+    }
 }

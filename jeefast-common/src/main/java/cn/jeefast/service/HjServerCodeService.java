@@ -5,6 +5,7 @@ import cn.jeefast.vo.CategoryCode;
 import com.baomidou.mybatisplus.service.IService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -22,4 +23,5 @@ public interface HjServerCodeService extends IService<HjServerCode> {
     HjServerCode findByCode(String categoryCode);
 
     List<CategoryCode> findCodeList(String serverCodes);
+
 }

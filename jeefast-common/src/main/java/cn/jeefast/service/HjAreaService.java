@@ -35,4 +35,6 @@ public interface HjAreaService extends IService<HjArea> {
     HjArea findByCode(String areaCode);
 
     AreaLntGntVo findByCodeVo(String areaCode);
+
+    List<Map<String,Object>> findAllArea();
 }
