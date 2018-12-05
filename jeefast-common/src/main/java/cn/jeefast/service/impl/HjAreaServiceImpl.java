@@ -91,7 +91,10 @@ public class HjAreaServiceImpl extends ServiceImpl<HjAreaDao, HjArea> implements
                 Map<String,Object> p = new LinkedHashMap<>();
                 p.put("areaId",pv.getAreaId());
                 p.put("areaName",pv.getAreaName());
-                p.put("counties",findMoreArea(pv.getAreaId()));
+                List<Map<String, Object>> x = findMoreArea(pv.getAreaId());
+                if(x != null && x.size() > 0) {
+                    p.put("counties", findMoreArea(pv.getAreaId()));
+                }
                 list.add(p);
             }
         }
