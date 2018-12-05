@@ -1,6 +1,7 @@
 package cn.jeefast.service;
 
 import cn.jeefast.entity.HjArea;
+import cn.jeefast.vo.AreaLntGntVo;
 import cn.jeefast.vo.AreaVo;
 import com.baomidou.mybatisplus.service.IService;
 
@@ -32,4 +33,6 @@ public interface HjAreaService extends IService<HjArea> {
     HjArea findByAreaId(Long areaId);
 
     HjArea findByCode(String areaCode);
+
+    AreaLntGntVo findByCodeVo(String areaCode);
 }
