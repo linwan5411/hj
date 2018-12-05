@@ -22,7 +22,10 @@ public class BaseController {
 
 
    public static void setAreaCode(String code,HttpServletRequest request){
-       request.getSession().setAttribute(USER_CODE,code);
+       Object o = request.getSession().getAttribute(USER_CODE);
+       if(o == null){
+           request.getSession().setAttribute(USER_CODE,code);
+       }
    }
 
     public static String  getAreaCode(HttpServletRequest request){
@@ -42,6 +45,12 @@ public class BaseController {
      * @return
      */
    public static String getPriviceCode(HttpServletRequest request){
+
+       String areaCode = getAreaCode(request);
+       if(StringUtils.isNotBlank(areaCode)){
+           return areaCode;
+       }
+
        String ip = IPUtils.getIpAddr(request);
        if(StringUtils.isNotBlank(ip) || "127.0.0.1".equals(ip)){
            return default_address;
