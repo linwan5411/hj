@@ -2,10 +2,10 @@ package cn.jeefast.web;
 
 import cn.jeefast.base.BaseController;
 import cn.jeefast.common.utils.JsonUtils;
-import cn.jeefast.entity.HjArea;
 import cn.jeefast.service.HjAreaService;
+import cn.jeefast.service.HjHaciendaInfoService;
+import cn.jeefast.service.HjInvitationListService;
 import cn.jeefast.service.HjServerInfoService;
-import cn.jeefast.service.HomeService;
 import cn.jeefast.vo.AreaLntGntVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,56 +19,53 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 服务商列表页面
+ * 农场主
  */
 @Controller
-public class ServerListController extends BaseController{
+public class LandListController extends BaseController{
 
     @Resource
     private HjAreaService hjAreaService;
 
     @Resource
-    private HjServerInfoService hjServerInfoService;
+    private HjHaciendaInfoService hjHaciendaInfoService;
 
     /**
      * 主页数据的返回
      * @param request
      * @return
      */
-    @RequestMapping(value = "/serverList")
+    @RequestMapping(value = "/landList")
     public ModelAndView serverList(HttpServletRequest request){
         Map<String,Object> map = new HashMap<>();
         String code = BaseController.getPriviceCode(request);
         setAreaCode(code,request);
-
-        AreaLntGntVo area = hjAreaService.findByCodeVo(code);
-        List<Map<String,Object>> list = hjServerInfoService.findServerMore(area.getLat(),area.getLng(),null,
-                null,null,0,10,null);
+        AreaLntGntVo vo = hjAreaService.findByCodeVo(code);
+        List<Map<String,Object>> list = hjHaciendaInfoService.findLandMore(vo.getLng(), vo.getLat(), null,
+                null, null, 0, 10, null);
         map.put("list",list);
         System.out.println(JsonUtils.Bean2Json(list));
-        return new ModelAndView("severList",map);
+        return new ModelAndView("landList",map);
     }
 
+
     /**
-     * 查询列表的操作
+     * 主页数据的返回
      * @param request
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/ajaxListMore")
-    public List<Map<String,Object>> listMore(HttpServletRequest request){
-        Integer authTyppe = null;
-        Integer userTyppe = null;
-        String categoryCode = null;
-        Long areaId = null;
-        Integer page = 2;
-
+    @RequestMapping(value = "/ajaxLandListMore")
+    public List<Map<String,Object>> ajaxLandListMore(HttpServletRequest request){
         String code = BaseController.getPriviceCode(request);
         setAreaCode(code,request);
-
-        AreaLntGntVo area = hjAreaService.findByCodeVo(code);
-        List<Map<String,Object>> list = hjServerInfoService.findServerMore(area.getLat(),area.getLng(),areaId,
-                null,null,page,10,null);
+        AreaLntGntVo vo = hjAreaService.findByCodeVo(code);
+        Long areaId = null;
+        Integer authType = null;
+        Integer userType = null;
+        Integer pageIndex = null;
+        String categoryCode = null;
+        List<Map<String,Object>> list = hjHaciendaInfoService.findLandMore(vo.getLng(), vo.getLat(), areaId, authType, userType, pageIndex, 10, categoryCode);
         return list;
     }
 
