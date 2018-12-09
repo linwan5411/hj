@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50722
 File Encoding         : 65001
 
-Date: 2018-11-26 20:48:39
+Date: 2018-12-09 23:51:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -63,9 +63,9 @@ CREATE TABLE `hj_ad` (
 -- ----------------------------
 -- Records of hj_ad
 -- ----------------------------
-INSERT INTO `hj_ad` VALUES ('1', '1', '1', '平台上线', '3', '1', 'http://www.baidu.com', '0', 'xs', '2018-11-18 22:25:03', '2018-11-18 22:25:05', '1');
-INSERT INTO `hj_ad` VALUES ('2', '2', '2', '推荐嘻嘻嘻', '1', '1', 'http://www.baidu.com', '0', '1', '2018-11-24 11:51:35', null, '1');
-INSERT INTO `hj_ad` VALUES ('3', '1', '3', 'wqww', '1', '1', null, '0', 'wr', '2018-11-24 11:51:50', null, '1');
+INSERT INTO `hj_ad` VALUES ('1', '1', '1', '平台上线', '3', '1', 'http://www.baidu.com', '0', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '2018-11-18 22:25:03', '2018-11-18 22:25:05', '1');
+INSERT INTO `hj_ad` VALUES ('2', '2', '2', '推荐嘻嘻嘻', '1', '1', 'http://www.baidu.com', '0', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '2018-11-24 11:51:35', null, '1');
+INSERT INTO `hj_ad` VALUES ('3', '1', '3', 'wqww', '1', '1', null, '0', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '2018-11-24 11:51:50', null, '1');
 
 -- ----------------------------
 -- Table structure for hj_ad_site
@@ -465,7 +465,7 @@ INSERT INTO `hj_area` VALUES ('344', '344', '141129', '中阳县', '3', '0358', 
 INSERT INTO `hj_area` VALUES ('345', '345', '141130', '交口县', '3', '0358', '217,334,345', '111.181151,36.982186', '334', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('346', '346', '141181', '孝义市', '3', '0358', '217,334,346', '111.778818,37.146294', '334', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('347', '347', '141182', '汾阳市', '3', '0358', '217,334,347', '111.770477,37.261756', '334', '2018-11-17 15:00:04', null, '1');
-INSERT INTO `hj_area` VALUES ('348', '348', '150000', '内蒙古自治区', '1', '[]', '348', '111.76629,40.81739', '-1', '2018-11-17 15:00:04', null, '1');
+INSERT INTO `hj_area` VALUES ('348', '348', '150000', '内蒙古', '1', '[]', '348', '111.76629,40.81739', '-1', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('349', '349', '150100', '呼和浩特市', '2', '0471', '348,349', '111.749995,40.842356', '348', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('350', '350', '150102', '新城区', '3', '0471', '348,349,350', '111.665544,40.858289', '349', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('351', '351', '150103', '回民区', '3', '0471', '348,349,351', '111.623692,40.808608', '349', '2018-11-17 15:00:04', null, '1');
@@ -2196,7 +2196,7 @@ INSERT INTO `hj_area` VALUES ('2075', '2075', '445321', '新兴县', '3', '0766'
 INSERT INTO `hj_area` VALUES ('2076', '2076', '445322', '郁南县', '3', '0766', '1935,2072,2076', '111.535285,23.23456', '2072', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('2077', '2077', '445381', '罗定市', '3', '0766', '1935,2072,2077', '111.569892,22.768285', '2072', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('2078', '2078', '442100', '东沙群岛', '2', '[]', '1935,2078', '116.887613,20.617825', '1935', '2018-11-17 15:00:04', null, '1');
-INSERT INTO `hj_area` VALUES ('2079', '2079', '450000', '广西壮族自治区', '1', '[]', '2079', '108.327546,22.815478', '-1', '2018-11-17 15:00:04', null, '1');
+INSERT INTO `hj_area` VALUES ('2079', '2079', '450000', '广西', '1', '[]', '2079', '108.327546,22.815478', '-1', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('2080', '2080', '450100', '南宁市', '2', '0771', '2079,2080', '108.366543,22.817002', '2079', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('2081', '2081', '450102', '兴宁区', '3', '0771', '2079,2080,2081', '108.368871,22.854021', '2080', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('2082', '2082', '450103', '青秀区', '3', '0771', '2079,2080,2082', '108.494024,22.785879', '2080', '2018-11-17 15:00:04', null, '1');
@@ -2843,7 +2843,7 @@ INSERT INTO `hj_area` VALUES ('2722', '2722', '533400', '迪庆藏族自治州',
 INSERT INTO `hj_area` VALUES ('2723', '2723', '533401', '香格里拉市', '3', '0887', '2580,2722,2723', '99.700904,27.829578', '2722', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('2724', '2724', '533422', '德钦县', '3', '0887', '2580,2722,2724', '98.911559,28.486163', '2722', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('2725', '2725', '533423', '维西傈僳族自治县', '3', '0887', '2580,2722,2725', '99.287173,27.177161', '2722', '2018-11-17 15:00:04', null, '1');
-INSERT INTO `hj_area` VALUES ('2726', '2726', '540000', '西藏自治区', '1', '[]', '2726', '91.117525,29.647535', '-1', '2018-11-17 15:00:04', null, '1');
+INSERT INTO `hj_area` VALUES ('2726', '2726', '540000', '西藏', '1', '[]', '2726', '91.117525,29.647535', '-1', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('2727', '2727', '540100', '拉萨市', '2', '0891', '2726,2727', '91.172148,29.652341', '2726', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('2728', '2728', '540102', '城关区', '3', '0891', '2726,2727,2728', '91.140552,29.654838', '2727', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('2729', '2729', '540103', '堆龙德庆区', '3', '0891', '2726,2727,2729', '91.003339,29.646063', '2727', '2018-11-17 15:00:04', null, '1');
@@ -3197,7 +3197,7 @@ INSERT INTO `hj_area` VALUES ('3076', '3076', '632821', '乌兰县', '3', '0977'
 INSERT INTO `hj_area` VALUES ('3077', '3077', '632822', '都兰县', '3', '0977', '3027,3073,3077', '98.095844,36.302496', '3073', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3078', '3078', '632823', '天峻县', '3', '0977', '3027,3073,3078', '99.022984,37.300851', '3073', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3079', '3079', '632825', '海西蒙古族藏族自治州直辖', '3', '0977', '3027,3073,3079', '95.356546,37.853328', '3073', '2018-11-17 15:00:04', null, '1');
-INSERT INTO `hj_area` VALUES ('3080', '3080', '640000', '宁夏回族自治区', '1', '[]', '3080', '106.259126,38.472641', '-1', '2018-11-17 15:00:04', null, '1');
+INSERT INTO `hj_area` VALUES ('3080', '3080', '640000', '宁夏', '1', '[]', '3080', '106.259126,38.472641', '-1', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3081', '3081', '640100', '银川市', '2', '0951', '3080,3081', '106.230909,38.487193', '3080', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3082', '3082', '640104', '兴庆区', '3', '0951', '3080,3081,3082', '106.28865,38.473609', '3081', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3083', '3083', '640105', '西夏区', '3', '0951', '3080,3081,3083', '106.161106,38.502605', '3081', '2018-11-17 15:00:04', null, '1');
@@ -3225,7 +3225,7 @@ INSERT INTO `hj_area` VALUES ('3104', '3104', '640500', '中卫市', '2', '1953'
 INSERT INTO `hj_area` VALUES ('3105', '3105', '640502', '沙坡头区', '3', '1953', '3080,3104,3105', '105.173721,37.516883', '3104', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3106', '3106', '640521', '中宁县', '3', '1953', '3080,3104,3106', '105.685218,37.491546', '3104', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3107', '3107', '640522', '海原县', '3', '1953', '3080,3104,3107', '105.643487,36.565033', '3104', '2018-11-17 15:00:04', null, '1');
-INSERT INTO `hj_area` VALUES ('3108', '3108', '650000', '新疆维吾尔自治区', '1', '[]', '3108', '87.627704,43.793026', '-1', '2018-11-17 15:00:04', null, '1');
+INSERT INTO `hj_area` VALUES ('3108', '3108', '650000', '新疆', '1', '[]', '3108', '87.627704,43.793026', '-1', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3109', '3109', '659002', '阿拉尔市', '2', '1997', '3108,3109', '81.280527,40.547653', '3108', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3110', '3110', '659005', '北屯市', '2', '1906', '3108,3110', '87.837075,47.332643', '3108', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3111', '3111', '659008', '可克达拉市', '2', '1999', '3108,3111', '81.044542,43.944798', '3108', '2018-11-17 15:00:04', null, '1');
@@ -3346,7 +3346,7 @@ INSERT INTO `hj_area` VALUES ('3225', '3225', '659006', '铁门关市', '2', '19
 INSERT INTO `hj_area` VALUES ('3226', '3226', '659003', '图木舒克市', '2', '1998', '3108,3226', '79.073963,39.868965', '3108', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3227', '3227', '659004', '五家渠市', '2', '1994', '3108,3227', '87.54324,44.166756', '3108', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3228', '3228', '710000', '台湾省', '1', '1886', '3228', '121.509062,25.044332', '-1', '2018-11-17 15:00:04', null, '1');
-INSERT INTO `hj_area` VALUES ('3229', '3229', '810000', '香港特别行政区', '1', '1852', '3229', '114.171203,22.277468', '-1', '2018-11-17 15:00:04', null, '1');
+INSERT INTO `hj_area` VALUES ('3229', '3229', '810000', '香港', '1', '1852', '3229', '114.171203,22.277468', '-1', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3230', '3230', '810001', '中西区', '3', '1852', '3229,3230', '114.154373,22.281981', '3229', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3231', '3231', '810002', '湾仔区', '3', '1852', '3229,3231', '114.182915,22.276389', '3229', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3232', '3232', '810003', '东区', '3', '1852', '3229,3232', '114.226003,22.279693', '3229', '2018-11-17 15:00:04', null, '1');
@@ -3365,7 +3365,7 @@ INSERT INTO `hj_area` VALUES ('3246', '3246', '810015', '西贡区', '3', '1852'
 INSERT INTO `hj_area` VALUES ('3247', '3247', '810016', '沙田区', '3', '1852', '3229,3247', '114.195365,22.379532', '3229', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3248', '3248', '810017', '葵青区', '3', '1852', '3229,3248', '114.139319,22.363877', '3229', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3249', '3249', '810018', '离岛区', '3', '1852', '3229,3249', '113.94612,22.286408', '3229', '2018-11-17 15:00:04', null, '1');
-INSERT INTO `hj_area` VALUES ('3251', '3251', '820000', '澳门特别行政区', '1', '1853', '3251', '113.543028,22.186835', '-1', '2018-11-17 15:00:04', null, '1');
+INSERT INTO `hj_area` VALUES ('3251', '3251', '820000', '澳门', '1', '1853', '3251', '113.543028,22.186835', '-1', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3252', '3252', '820001', '花地玛堂区', '3', '1853', '3251,3252', '113.552896,22.20787', '3251', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3253', '3253', '820002', '花王堂区', '3', '1853', '3251,3253', '113.548961,22.199207', '3251', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3254', '3254', '820003', '望德堂区', '3', '1853', '3251,3254', '113.550183,22.193721', '3251', '2018-11-17 15:00:04', null, '1');
@@ -3400,12 +3400,13 @@ CREATE TABLE `hj_article` (
   KEY `article_catgory_code_idx` (`article_category_name`),
   KEY `article_show_idx` (`article_show`) USING BTREE,
   KEY `article_id_idx` (`article_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='文章';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='文章';
 
 -- ----------------------------
 -- Records of hj_article
 -- ----------------------------
-INSERT INTO `hj_article` VALUES ('1', '273071216468688896', 'xxxxx', '学农', '16', 'z', 'xaswqrwrqwr', '454554', '4', '15', '12', '原创', '1', '2018-11-24 12:49:30', null, null);
+INSERT INTO `hj_article` VALUES ('1', '273071216468688896', 'xxxxx', '学农', '16', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', 'xaswqrwrqwr', '454554', '4', '15', '12', '原创', '1', '2018-11-24 12:49:30', null, '1');
+INSERT INTO `hj_article` VALUES ('2', '21224124', 'yyyy', '学农', '16', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', 'wrqwr', 'qwrw', '1', '14', '12', '原创', '1', '2018-12-08 17:51:16', null, '1');
 
 -- ----------------------------
 -- Table structure for hj_hacienda_info
@@ -3423,6 +3424,8 @@ CREATE TABLE `hj_hacienda_info` (
   `hacienda_email` varchar(60) DEFAULT NULL COMMENT '邮箱',
   `hacienda_reg_image` varchar(120) DEFAULT NULL COMMENT '注册工商图片',
   `hacienda_scope` varchar(600) DEFAULT NULL COMMENT '附着种植范围',
+  `need_server_name` varchar(300) DEFAULT NULL COMMENT '服务类别名称',
+  `need_server` varchar(300) DEFAULT NULL COMMENT '所需服务编码',
   `hacienda_image` varchar(600) DEFAULT NULL COMMENT '图片地址，采用,进行分割',
   `hacienda_land` varchar(200) DEFAULT NULL COMMENT '土地性质',
   `server_category` varchar(300) DEFAULT NULL COMMENT '土地性质类别 ',
@@ -3449,7 +3452,7 @@ CREATE TABLE `hj_hacienda_info` (
 -- ----------------------------
 -- Records of hj_hacienda_info
 -- ----------------------------
-INSERT INTO `hj_hacienda_info` VALUES ('1', '273187894326198272', '273051435812257792', '1242414', '恆大農村', '13366555', '張三年', '1', null, '12412.jpg', '草', 'a.jpg', '园地', '22', '10.00', null, '廣告是啊是否hi盎司附近拍攝是', '1', '2', '3', '1,2,3', '214', '124', '1', '0', '0', '2018-11-24 20:31:10', '2018-11-24 20:43:14', null);
+INSERT INTO `hj_hacienda_info` VALUES ('1', '273187894326198272', '273051435812257792', '1242414', '恆大農村', '13366555', '張三年', '1', null, 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '草', '土地平整,测土施肥', '2,3', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '园地', '22', '10.00', '0.00', '廣告是啊是否hi盎司附近拍攝是', '1', '2', '3', '1,2,3', '214', '124', '1', '0', '0', '2018-11-24 20:31:10', '2018-11-24 20:43:14', '1');
 
 -- ----------------------------
 -- Table structure for hj_hacienda_remark
@@ -3470,7 +3473,7 @@ CREATE TABLE `hj_hacienda_remark` (
 -- ----------------------------
 -- Records of hj_hacienda_remark
 -- ----------------------------
-INSERT INTO `hj_hacienda_remark` VALUES ('2', '273187894326198272', 'a.jpg', 'asfsfas', '2018-11-24 20:43:18', null, null);
+INSERT INTO `hj_hacienda_remark` VALUES ('2', '273187894326198272', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', 'asfsfas', '2018-11-24 20:43:18', null, null);
 
 -- ----------------------------
 -- Table structure for hj_invitation
@@ -3498,8 +3501,8 @@ CREATE TABLE `hj_invitation` (
 -- ----------------------------
 -- Records of hj_invitation
 -- ----------------------------
-INSERT INTO `hj_invitation` VALUES ('1', '273051435812257792', '273097583667183616', 'a.jpg,b.jpg,c.jpg', null, '273051435812257792', '4', '测土施肥', '32', 'sfasfasfasfasfsfasasascasfaf', '1', '1', '2018-11-24 14:32:18', null, '1');
-INSERT INTO `hj_invitation` VALUES ('2', '273051435812257792', '273097943379083264', 'a.jpg,b.jpg,c.jpg,c.jpg，c.jpg，c.jpg，c.jpg，c.jpg', null, '273051435812257792', '3', '土地平整', '31', 'asafsfas3212141241245445555112124141', '0', '1', '2018-11-24 14:33:44', null, '1');
+INSERT INTO `hj_invitation` VALUES ('1', '273051435812257792', '273097583667183616', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', null, '273051435812257792', '4', '测土施肥', '32', 'sfasfasfasfasfsfasasascasfaf', '1', '1', '2018-11-24 14:32:18', null, '1');
+INSERT INTO `hj_invitation` VALUES ('2', '273051435812257792', '273097943379083264', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', null, '273051435812257792', '3', '土地平整', '31', 'asafsfas3212141241245445555112124141', '0', '1', '2018-11-24 14:33:44', null, '1');
 
 -- ----------------------------
 -- Table structure for hj_invitation_list
@@ -3525,8 +3528,8 @@ CREATE TABLE `hj_invitation_list` (
 -- ----------------------------
 -- Records of hj_invitation_list
 -- ----------------------------
-INSERT INTO `hj_invitation_list` VALUES ('1', null, '273097583667183616', '273051435812257792', null, null, null, '你说的是个撒子哦，完全听不懂........', '1', '1', '2018-11-24 17:40:39', null, '1');
-INSERT INTO `hj_invitation_list` VALUES ('2', null, '273097583667183616', '273051435812257792', null, '273051435812257792', null, '你说的是个撒子哦，完全听不懂..16556555454..255554122252122....', '0', '1', '2018-11-24 17:45:04', null, '1');
+INSERT INTO `hj_invitation_list` VALUES ('1', '1', '273097583667183616', '273051435812257792', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '1242414', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '你说的是个撒子哦，完全听不懂........', '1', '1', '2018-11-24 17:40:39', null, '1');
+INSERT INTO `hj_invitation_list` VALUES ('2', '2', '273097583667183616', '273051435812257792', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '273051435812257792', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '你说的是个撒子哦，完全听不懂..16556555454..255554122252122....', '0', '1', '2018-11-24 17:45:04', null, '1');
 
 -- ----------------------------
 -- Table structure for hj_message
@@ -3623,7 +3626,7 @@ CREATE TABLE `hj_server_case` (
 -- ----------------------------
 -- Records of hj_server_case
 -- ----------------------------
-INSERT INTO `hj_server_case` VALUES ('1', '273176280935956480', '273162788300390400', '农场服务', null, '合作社的相关', '50', '2018-10-20', '2018-11-24 19:45:01', null, null);
+INSERT INTO `hj_server_case` VALUES ('1', '273176280935956480', '273162788300390400', '农场服务', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '合作社的相关', '50', '2018-10-20', '2018-11-24 19:45:01', null, null);
 
 -- ----------------------------
 -- Table structure for hj_server_case_remark
@@ -3645,7 +3648,7 @@ CREATE TABLE `hj_server_case_remark` (
 -- ----------------------------
 -- Records of hj_server_case_remark
 -- ----------------------------
-INSERT INTO `hj_server_case_remark` VALUES ('1', '273176280935956480', 'asfasfsfasfasfasf', '1', 'x.jpg', '2018-11-24 19:45:04', '2018-11-24 19:46:42', null);
+INSERT INTO `hj_server_case_remark` VALUES ('1', '273176280935956480', 'asfasfsfasfasfasf', '1', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '2018-11-24 19:45:04', '2018-11-24 19:46:42', null);
 
 -- ----------------------------
 -- Table structure for hj_server_code
@@ -3666,7 +3669,7 @@ CREATE TABLE `hj_server_code` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `category_code_dix` (`category_code`) USING BTREE,
   KEY `parent_id_idx` (`parent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='服务类别编码';
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='服务类别编码';
 
 -- ----------------------------
 -- Records of hj_server_code
@@ -3688,6 +3691,9 @@ INSERT INTO `hj_server_code` VALUES ('14', '牧草地', '牧草地', null, '9', 
 INSERT INTO `hj_server_code` VALUES ('15', '学农图标', '学农图标', null, '0', '1', '3', '1', '2018-11-18 22:38:11', null, '1');
 INSERT INTO `hj_server_code` VALUES ('16', '土地平整', '土地平整', null, '15', '1', '31', '1', '2018-11-18 22:38:31', null, '1');
 INSERT INTO `hj_server_code` VALUES ('17', '测土施肥', '测土施肥', null, '15', '1', '32', '1', '2018-11-18 22:38:45', null, '1');
+INSERT INTO `hj_server_code` VALUES ('18', '附着物种类', '附着物种类', null, '0', '1', '4', '1', '2018-12-09 13:19:35', null, '1');
+INSERT INTO `hj_server_code` VALUES ('19', '鱼', '鱼', null, '18', '1', '41', '1', '2018-12-09 13:20:54', null, '1');
+INSERT INTO `hj_server_code` VALUES ('20', '大米', '大米', null, '18', '1', '42', '1', '2018-12-09 13:21:15', null, '1');
 
 -- ----------------------------
 -- Table structure for hj_server_info
@@ -3737,7 +3743,7 @@ CREATE TABLE `hj_server_info` (
 -- ----------------------------
 -- Records of hj_server_info
 -- ----------------------------
-INSERT INTO `hj_server_info` VALUES ('4', '273162788300390400', '273051435812257792', '测试农业合作伙伴1221', '18993656523', '张三1', null, '农1，林2等相关的', 'x.jpg', null, '土地平整,测土施肥,育苗播种', null, '12231424214.jpg', null, '1', '0', '12,13,14', '150万', '北京市海定区中关村2-1太平路1331', '0', '0', '1', '2', '3', '1,2,3', '39.904211', '116.407394', '1', '0', '0', '2018-11-24 18:51:24', '2018-11-24 18:59:45', '1');
+INSERT INTO `hj_server_info` VALUES ('4', '273162788300390400', '273051435812257792', '测试农业合作伙伴1221', '18993656523', '张三1', null, '农1，林2等相关的', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', null, '土地平整,测土施肥,育苗播种', null, 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', null, '1', '0', '12,13,14', '150万', '北京市海定区中关村2-1太平路1331', '0', '0', '1', '2', '3', '1,2,3', '39.904211', '116.407394', '1', '0', '0', '2018-11-24 18:51:24', '2018-11-24 18:59:45', '1');
 
 -- ----------------------------
 -- Table structure for hj_server_remak
@@ -3759,8 +3765,8 @@ CREATE TABLE `hj_server_remak` (
 -- ----------------------------
 -- Records of hj_server_remak
 -- ----------------------------
-INSERT INTO `hj_server_remak` VALUES ('11', '273162788300390400', '124241412414', '1', 'x.jpg', '2018-11-24 18:59:45', null, '1');
-INSERT INTO `hj_server_remak` VALUES ('12', '273162788300390400', '124241412414', '1', 'j.jpg', '2018-11-24 18:59:45', null, '1');
+INSERT INTO `hj_server_remak` VALUES ('11', '273162788300390400', '124241412414', '1', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '2018-11-24 18:59:45', null, '1');
+INSERT INTO `hj_server_remak` VALUES ('12', '273162788300390400', '124241412414', '1', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '2018-11-24 18:59:45', null, '1');
 
 -- ----------------------------
 -- Table structure for hj_user
@@ -3791,7 +3797,7 @@ CREATE TABLE `hj_user` (
 -- ----------------------------
 -- Records of hj_user
 -- ----------------------------
-INSERT INTO `hj_user` VALUES ('2', '273051435812257792', '13368466998', null, '0', '0', '新农人2730', '1', null, '998843cbfe14aa46031399e9220e303e', '6L7UqN', '2018-11-24 22:46:40', '2018-11-24 11:28:55', null, '1');
+INSERT INTO `hj_user` VALUES ('2', '273051435812257792', '13368466998', null, '0', '0', '新农人2730', '1', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '998843cbfe14aa46031399e9220e303e', '6L7UqN', '2018-11-24 22:46:40', '2018-11-24 11:28:55', null, '1');
 
 -- ----------------------------
 -- Table structure for hj_user_collect
