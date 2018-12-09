@@ -24,6 +24,12 @@
     <script src="/static/js/vue.min.js"></script>
     <script src="/static/js/zepto.js"></script>
     <style>
+        a{
+            color: black;text-decoration: none;
+        }
+        a:visited{
+            color: black;
+        }
         .p0{
             padding: 0;
         }
@@ -62,40 +68,53 @@
         label{
             font-weight: normal;
         }
+        div,ul,li{margin: 0;padding: 0}/*先初始化一下默认样式*/
+        .notice {
+            height: 35px;/*固定公告栏显示区域的高度*/
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        .notice ul li {
+            list-style: none;
+            line-height: 35px;
+            /*以下为了单行显示，超出隐藏*/
+            display: block;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
     </style>
 </head>
 <body style="overflow-y: auto;padding: 0;margin: 0">
 
 <div class="container-fluid">
     <div class="row gradient" style="height: 50px;line-height: 50px;">
-        <div class="col-xs-2">
-            <select class="select-green">
-                <#if adList?exists>
-                <#list areas as item>
-                    <#if item.areaCode == areaCode>
+        <div class="col-xs-3 p0">
+            <div class="col-xs-7 p0">
+                <select class="select-green">
+                    <#if adList?exists>
+                    <#list areas as item>
+                        <#if item.areaCode == areaCode>
                         <option style="color: black" selected="selected" value="${item.areaId?if_exists}">${item.areaName?if_exists}</option>
                         <#else>
                         <option style="color: black" value="${item.areaId?if_exists}">${item.areaName?if_exists}</option>
                     </#if>
-                </#list>
-                <#else>
+                    </#list>
+                    <#else>
                     <option style="color: black">重庆</option>
-                </#if>
-              <!--  <option style="color: black">重庆</option>
-                <option style="color: black">四川</option>
-                <option style="color: black">背景</option>-->
-            </select>
-            <div class="select-green-btn" style="left: 60px;"></div>
-        </div>
-        <div class="col-xs-8 padd_0">
-            <div class="search-input col-sm-12 padd_0">
-                <label class="icon icon-search" for="search" style="font-size: 16px;margin-left: 15px;top: 50%"></label>
-                <input type="search" id='search' placeholder='输入关键字...'
-                       style="padding-right:0;height: 30px;margin-top: 10px;text-indent: 5px;min-width: 14rem"/>
+                    </#if>
+                </select>
+            </div>
+            <div class="col-xs-5 p0">
+                <div class="select-green-btn" style="text-align: left"></div>
             </div>
         </div>
-        <div class="col-xs-2" style="text-align: center;padding-right: 10px">
-            <img src="../static/image/tips.png" height="21" width="17"/>
+        <div class="col-xs-9 p0" style="padding-right: 2rem">
+            <div class="search-input col-sm-12 p0">
+                <label class="icon icon-search" for="search" style="font-size: 16px;margin-left: 5px;top: 50%"></label>
+                <input type="search" id='search' placeholder='输入关键字...'
+                       style="padding-right:0;height: 30px;margin-top: 10px;text-indent: 8px;min-width: 13rem"/>
+            </div>
         </div>
     </div>
 </div>
@@ -117,7 +136,7 @@
                     <#if adList?exists>
                         <#list adList as item>
                             <div class="swiper-slide">
-                                <img class="img-responsive" src="${item.adImage}"/>
+                                <img src="${item.adImage}" style="max-height: 160px;width: 100%;"/>
                             </div>
                         </#list>
                     <#else>
@@ -191,7 +210,7 @@
         <div class="col-xs-4">
             <div style="font-size: 20px;font-weight: 700">
                 <#if counts?exists>
-                    ${counts.orderNum}+
+                    ${counts.orderNum?c}+
                 <#else>
                     2000+
                 </#if>
@@ -201,7 +220,7 @@
         <div class="col-xs-4">
             <div style="font-size: 20px;font-weight: 700">
                 <#if counts?exists>
-                    ${counts.landNum}+
+                    ${counts.landNum?c}+
                 <#else>
                     5000+
                 </#if>
@@ -211,7 +230,7 @@
         <div class="col-xs-4">
             <div style="font-size: 20px;font-weight: 700">
                 <#if counts?exists>
-                    ${counts.serverNum}+
+                    ${counts.serverNum?c}+
                 <#else>
                     5000+
                 </#if>
@@ -220,32 +239,43 @@
         </div>
     </div>
     <div class="col-xs-12" style="padding: 0;text-align: left;line-height: 25px;font-size: 14px;">
-
-        <#if records?exists>
-            <#list records as item>
-                <div class="col-xs-12" style="padding: 0;">
-                    <div class="col-xs-3">${item.dateTime}</div>
-                    <div class="col-xs-4">${item.mobile}</div>
-                    <div class="col-xs-5">${item.userName}</div>
-                </div>
-            </#list>
-            <#else>
-            <div class="col-xs-12" style="padding: 0;">
-                <div class="col-xs-3">5分钟前</div>
-                <div class="col-xs-4">新农人9527</div>
-                <div class="col-xs-5">联系了订单服务</div>
-            </div>
-            <div class="col-xs-12" style="padding: 0;">
-                <div class="col-xs-3">5分钟前</div>
-                <div class="col-xs-4">新农人9527</div>
-                <div class="col-xs-5">联系了订单服务</div>
-            </div>
-            <div class="col-xs-12" style="padding: 0;">
-                <div class="col-xs-3">5分钟前</div>
-                <div class="col-xs-4">新农人9527</div>
-                <div class="col-xs-5">联系了订单服务</div>
-            </div>
-        </#if>
+        <div class="notice">
+            <ul >
+                <#if records?exists>
+                <#list records as item>
+                <li>
+                    <div class="col-xs-12 p0">
+                        <div class="col-xs-3">${item.dateTime}</div>
+                        <div class="col-xs-4">${item.mobile}</div>
+                        <div class="col-xs-5">${item.userName}</div>
+                    </div>
+                </li>
+                </#list>
+                <#else>
+                <li>
+                    <div class="col-xs-12 p0">
+                        <div class="col-xs-3">5分钟前</div>
+                        <div class="col-xs-4">新农人9527</div>
+                        <div class="col-xs-5">联系了订单服务</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="col-xs-12 p0">
+                        <div class="col-xs-3">5分钟前</div>
+                        <div class="col-xs-4">新农人9527</div>
+                        <div class="col-xs-5">联系了订单服务</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="col-xs-12 p0">
+                        <div class="col-xs-3">5分钟前</div>
+                        <div class="col-xs-4">新农人9527</div>
+                        <div class="col-xs-5">联系了订单服务</div>
+                    </div>
+                </li>
+                </#if>
+            </ul>
+        </div>
     </div>
     <div class="col-xs-12" style="padding: 0;height: 52px;margin-top: 10px;">
         <div class="col-xs-6" style="padding: 0;background: #F5F5F5;padding: 10px;border-right: 5px solid white">
@@ -291,44 +321,63 @@
         <div class="col-xs-3">
         </div>
         <div class="col-xs-4" style="font-size: 12px;padding: 0;text-align: right">
-            查看全部>>
+            <a href="/serverList">查看全部>></a>
         </div>
     </div>
 
     <#if serverList?exists>
         <#list serverList as item>
-        <div class="col-xs-12 p0" style="margin-top: 1rem;height: 80px">
-            <div class="col-xs-4 p0" style="height: 80px;">
-                <#if item.companyImage?exists>
-                <img class="img-responsive" src="${item.companyImage}" style="max-height: 80px"/>
-                <#else>
-                <img class="img-responsive" src="../static/show/ser1.png" style="max-height: 80px"/>
-                </#if>
-            </div>
-            <div class="col-xs-8 p0" style="padding-left: 0.8rem">
-                <div style="font-weight: 400;">
-                    ${item.companyName}
-                </div>
-                <div style="margin-top: 0.1rem">
-                    <#if item.serverCategory?exists>
-                    <#list item.serverCategory?split(",") as name>
-                        <label class="label-green">${name}</label>
-                    </#list>
+        <a href="/severInfo/${item.serverId?c}">
+            <div class="col-xs-12 p0" style="padding-top: 1rem;padding-bottom: 1rem">
+                <div class="col-xs-4 p0" style="height: 80px;">
+                    <#if item.companyImage?exists>
+                    <img  src="${item.companyImage}" style="max-height: 80px"/>
                     <#else>
-                    <label class="label-green">育苗播种</label>
-                    <label class="label-blue">农机收割</label>
-                    <label class="label-red">烘干收藏</label>
+                    <img  src="../static/show/ser1.png" style="max-height: 80px"/>
                     </#if>
                 </div>
-                <div style="margin-top: 0.1rem">
-                    服务<font style="color:#14BC4D;font-weight: 700;">${item.serverMax}</font>亩+
-                </div>
-                <div style="margin-top: 0.1rem;font-size: 12px">
-                    <img src="../static/image/addr.png" height="11" width="9"/>
-                    ${item.detailAddr}距您${item.distance/1000}公里
+                <div class="col-xs-8 p0" style="padding-left: 0.8rem">
+                    <div style="font-weight: 400;">
+                        <#if item.companyName? length gt 15>
+                            ${item.companyName?substring(0,12)}...
+                        <#else>
+                            ${item.companyName}
+                        </#if>
+                    </div>
+                    <div style="margin-top: 0.1rem">
+                        <#if item.serverCategory?exists>
+                        <#list item.serverCategory?split(",") as name>
+                            <#if name_index == 0>
+                                <label class="label-green">${name}</label>
+                            </#if>
+                            <#if name_index == 1>
+                                <label class="label-blue">${name}</label>
+                            </#if>
+                            <#if name_index gt 1>
+                            <label class="label-red">${name}</label>
+                            </#if>
+                        </#list>
+                        <#else>
+                        <label class="label-green">育苗播种</label>
+                        <label class="label-blue">农机收割</label>
+                        <label class="label-red">烘干收藏</label>
+                        </#if>
+                    </div>
+                    <div style="margin-top: 0.1rem">
+                        服务<font style="color:#14BC4D;font-weight: 700;">${item.serverMax}</font>亩
+                    </div>
+                    <div style="margin-top: 0.1rem;font-size: 12px">
+                        <img src="../static/image/addr.png" height="11" width="9"/>
+                        <#if item.detailAddr? length gt 10>
+                            ${item.detailAddr?substring(0,10)}...
+                        <#else>
+                            ${item.detailAddr}
+                        </#if>
+                        距您${(item.distance/1000)?int?c}公里
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
         </#list>
     <#else>
         <div class="col-xs-12 p0" style="margin-top: 1rem;height: 80px">
@@ -415,12 +464,13 @@
         <div class="col-xs-3">
         </div>
         <div class="col-xs-4" style="font-size: 12px;padding: 0;text-align: right">
-            查看全部>>
+            <a href="/landList">查看全部>></a>
         </div>
     </div>
     <#if landList?exists>
         <#list landList as item>
-            <div class="col-xs-12 p0" style="margin-top: 1rem;height: 90px;border-bottom: 1px solid #efeff4;line-height: 20px;padding-bottom: 5px">
+            <a href="/landInfo/${item.haciendaId?c}">
+            <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;line-height: 20px;padding-bottom:1rem">
                 <div class="col-xs-4 p0" style="height: 80px;text-align:center;">
                     <#if item.haciendaImage?exists>
                     <img  src="${item.haciendaImage}" style="max-height: 80px"/>
@@ -439,10 +489,16 @@
                     </div>
                     <div class="col-xs-12 p0" style="font-size: 12px;margin-top: 0.5rem">
                         <img src="../static/image/addr.png" height="11" width="9"/>
-                        ${item.detailAddr}距您${item.distance/1000}公里
+                        <#if item.detailAddr? length gt 10>
+                            ${item.detailAddr?substring(0,10)}...
+                        <#else>
+                            ${item.detailAddr}
+                        </#if>
+                        距您${(item.distance/1000)?int?c}公里
                     </div>
                 </div>
             </div>
+            </a>
         </#list>
     <#else>
     <div class="col-xs-12 p0" style="margin-top: 1rem;height: 90px;border-bottom: 1px solid #efeff4;line-height: 20px;padding-bottom: 5px">
@@ -514,6 +570,26 @@
         centeredSlides: true,
         autoplay: 3000,
         autoplayDisableOnInteraction: false
+    });
+    /*
+    * 参数说明
+    * obj : 动画的节点，本例中是ul
+    * top : 动画的高度，本例中是-35px;注意向上滚动是负数
+    * time : 动画的速度，即完成动画所用时间，本例中是500毫秒，即marginTop从0到-35px耗时500毫秒
+    * function : 回调函数，每次动画完成，marginTop归零，并把此时第一条信息添加到列表最后;
+    *
+    */
+    function noticeUp(obj,top,time) {
+        $(obj).animate({
+            marginTop: top
+        }, time, function () {
+            $(this).css({marginTop:"0"}).find(":first").appendTo(this);
+        })
+    }
+
+    $(function () {
+        // 调用 公告滚动函数
+        setInterval("noticeUp('.notice ul','-35px',500)", 2000);
     });
 </script>
 </html>

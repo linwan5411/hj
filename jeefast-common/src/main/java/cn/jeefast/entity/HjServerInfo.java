@@ -171,7 +171,6 @@ public class HjServerInfo extends BaseEntity {
     /**
      * 0:待审核，1：审核中，2：审核通过
      */
-	@JsonIgnore
 	@TableField("auth_status")
 	private Integer authStatus;
 
@@ -187,12 +186,25 @@ public class HjServerInfo extends BaseEntity {
 	@TableField(exist = false)
 	private List<HjServerRemak> remaks;
 
+	/**
+	 * 距离
+	 */
+	@TableField(exist = false)
+	private String distnce;
 
 	/**
 	 * 案例
 	 */
 	@TableField(exist = false)
 	private List<HjServerCase> caseList;
+
+	public String getDistnce() {
+		return distnce;
+	}
+
+	public void setDistnce(String distnce) {
+		this.distnce = distnce;
+	}
 
 	public List<String> getCategoryList() {
 		return categoryList;

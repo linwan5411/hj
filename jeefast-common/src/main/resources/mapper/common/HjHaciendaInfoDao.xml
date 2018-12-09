@@ -21,6 +21,8 @@
 		<result column="hacienda_image" property="haciendaImage" />
 		<result column="hacienda_land" property="haciendaLand" />
 		<result column="server_category" property="serverCategory" />
+		<result column="need_server" property="needServer" />
+		<result column="need_server_name" property="needServerName" />
 		<result column="server_max" property="serverMax" />
 		<result column="server_use_max" property="serverUseMax" />
 		<result column="detail_addr" property="detailAddr" />

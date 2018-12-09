@@ -84,6 +84,18 @@ public class HjHaciendaInfo extends BaseEntity {
      */
 	@TableField("server_category")
 	private String serverCategory;
+
+	/**
+	 * 所需服务的编码
+	 */
+	@TableField("need_server")
+	private String needServer;
+
+	/**
+	 * 所需服务的类别名称
+	 */
+	@TableField("need_server_name")
+	private String needServerName;
     /**
      * 土地面积
      */
@@ -151,6 +163,22 @@ public class HjHaciendaInfo extends BaseEntity {
 	 */
 	@TableField(exist = false)
 	private List<HjHaciendaRemark> remarks;
+
+	public String getNeedServer() {
+		return needServer;
+	}
+
+	public void setNeedServer(String needServer) {
+		this.needServer = needServer;
+	}
+
+	public String getNeedServerName() {
+		return needServerName;
+	}
+
+	public void setNeedServerName(String needServerName) {
+		this.needServerName = needServerName;
+	}
 
 	public List<HjHaciendaRemark> getRemarks() {
 		return remarks;

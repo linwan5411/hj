@@ -47,6 +47,8 @@ spring:
         expose-spring-macro-helpers: false
         suffix: .html
         template-loader-path: classpath:/views/
+        settings:
+            template_update_delay: 0
 #mybatis
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*Dao.xml

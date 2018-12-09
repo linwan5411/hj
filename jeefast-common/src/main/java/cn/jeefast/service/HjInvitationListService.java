@@ -18,6 +18,8 @@ public interface HjInvitationListService extends IService<HjInvitationList> {
 
     List<HjInvitationList> findNoteInvitation(Long noteId, Integer pageIndex, Integer pageSize);
 
+    Integer findListNum(Long noteId);
+
     void doComment(HjUser user, Long invitationId, String comment);
 
     void commentIdOk(Long commentId);

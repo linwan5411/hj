@@ -5,11 +5,13 @@ import cn.jeefast.entity.HjInvitationList;
 import cn.jeefast.dao.HjInvitationListDao;
 import cn.jeefast.entity.HjUser;
 import cn.jeefast.service.HjInvitationListService;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.sql.Wrapper;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +35,13 @@ public class HjInvitationListServiceImpl extends ServiceImpl<HjInvitationListDao
     @Override
     public List<HjInvitationList> findNoteInvitation(Long noteId, Integer pageIndex, Integer pageSize) {
         return hjInvitationListDao.findNoteInvitation(noteId,pageIndex,pageSize);
+    }
+
+    @Override
+    public Integer findListNum(Long noteId) {
+        EntityWrapper wrapper = new EntityWrapper();
+        wrapper.where("invitation_id={0}",noteId);
+        return hjInvitationListDao.selectCount(wrapper);
     }
 
     @Transactional(rollbackFor = {Exception.class,RuntimeException.class})

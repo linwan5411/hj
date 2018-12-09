@@ -35,11 +35,7 @@
     overflow: hidden;
 }
 .select-green-btn{
-    content:' ';
-    position: absolute;
-    left:20%;
-    top:50%;
-    margin-top:-5px;
+    margin-top:20px;
     width:0px;
     height:0px;
     border-left:8px solid transparent;

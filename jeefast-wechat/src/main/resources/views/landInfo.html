@@ -69,7 +69,7 @@
             <img src="../show/lands.png" height="60" width="60"/>
         </div>
         <div class="col-xs-9 p0" style="text-align: left;font-size: 16px;color: white;height: 125px;line-height:125px;">
-            <div>新农人9527</div>
+            <div>${info.haciendaName}</div>
         </div>
     </div>
 </div>
@@ -88,9 +88,23 @@
         </div>
     </div>
     <div class="col-xs-12" style="height: 60px;margin-top: 10px;">
-        <label class="label-green">育苗播种</label>
-        <label class="label-blue">农机收割</label>
-        <label class="label-yellow">烘干收藏</label>
+        <#if info.needServerName?exists>
+            <#list info.needServerName?split(",") as name>
+            <#if name_index == 0>
+                <label class="label-green">${name}</label>
+            </#if>
+            <#if name_index == 1>
+                <label class="label-blue">${name}</label>
+            </#if>
+            <#if name_index gt 1>
+                <label class="label-yellow">${name}</label>
+            </#if>
+        </#list>
+        <#else>
+            <label class="label-green">育苗播种</label>
+            <label class="label-blue">农机收割</label>
+            <label class="label-yellow">烘干收藏</label>
+        </#if>
     </div>
 </div>
 
@@ -106,7 +120,7 @@
             土地性质
         </div>
         <div class="col-xs-9 p0">
-            园地
+            ${info.haciendaLand}
         </div>
     </div>
     <div class="col-xs-12" style="height: 40px;line-height: 40px;border-bottom: 1px solid #efeff4">
@@ -114,7 +128,7 @@
             土地面积
         </div>
         <div class="col-xs-9 p0">
-            500亩
+            ${info.serverMax}亩
         </div>
     </div>
     <div class="col-xs-12" style="height: 40px;line-height: 40px;border-bottom: 1px solid #efeff4">
@@ -122,7 +136,7 @@
             附着物种类
         </div>
         <div class="col-xs-9 p0">
-            苗木种植及水稻、小麦种植
+            ${info.haciendaScope}
         </div>
     </div>
     <div class="col-xs-12" style="height: 40px;line-height: 40px;border-bottom: 1px solid #efeff4">
@@ -130,7 +144,7 @@
             所在地
         </div>
         <div class="col-xs-9 p0">
-            重庆市大渡口区
+            ${info.detailAddr}
         </div>
     </div>
     <div class="col-xs-12" style="height: 40px;line-height: 40px;border-bottom: 1px solid #efeff4">
@@ -138,7 +152,7 @@
             联系人
         </div>
         <div class="col-xs-9 p0">
-            18222269999
+            ${info.linkName}
         </div>
     </div>
     <div class="col-xs-12" style="height: 40px;line-height: 40px;border-bottom: 1px solid #efeff4">
@@ -146,7 +160,7 @@
             发布时间
         </div>
         <div class="col-xs-9 p0">
-            2018-11-16  12：42
+            ${info.createTime?string('yyyy-MM-dd HH:mm')}
         </div>
     </div>
 </div>
@@ -162,26 +176,12 @@
         土地详情
     </div>
     <div class="col-xs-12" style="font-size: 12px;padding-top: 10px">
-        佛山振威农机科技有限公司成立于2012年8月，注册资金500万元，
-        官网http://www.henongjia.com 主营业务包括农业产业 投资、
-        种业研发与运营、农产品全球采购和智慧流通、产业链金融、
-        农业科技研究与应用、农业土地生态修复与治理、农资和农技服务及基础设施投资与建设等。
-        在产业端，通过产业投资和技术服务建设高标准农田、开展种业研究与运营、打造综合产业基地。
-        佛山振威农机科技有限公司成立于2012年8月，注册资金500万元，
-        官网http://www.henongjia.com 主营业务包括农业产业 投资、
-        种业研发与运营、农产品全球采购和智慧流通、产业链金融、
-        农业科技研究与应用、农业土地生态修复与治理、农资和农技服务及基础设施投资与建设等。
-        在产业端，通过产业投资和技术服务建设高标准农田、开展种业研究与运营、打造综合产业基地。
-        佛山振威农机科技有限公司成立于2012年8月，注册资金500万元，
-        官网http://www.henongjia.com 主营业务包括农业产业 投资、
-        种业研发与运营、农产品全球采购和智慧流通、产业链金融、
-        农业科技研究与应用、农业土地生态修复与治理、农资和农技服务及基础设施投资与建设等。
-        在产业端，通过产业投资和技术服务建设高标准农田、开展种业研究与运营、打造综合产业基地。
-        佛山振威农机科技有限公司成立于2012年8月，注册资金500万元，
-        官网http://www.henongjia.com 主营业务包括农业产业 投资、
-        种业研发与运营、农产品全球采购和智慧流通、产业链金融、
-        农业科技研究与应用、农业土地生态修复与治理、农资和农技服务及基础设施投资与建设等。
-        在产业端，通过产业投资和技术服务建设高标准农田、开展种业研究与运营、打造综合产业基地。
+        <#if info.remarks?exists>
+        <#list info.remarks as item>
+            <p>${item.haciendaInfo}</p>
+            <img src="${item.haciendaImage}" class="img-responsive"/>
+        </#list>
+        </#if>
     </div>
 </div>
 

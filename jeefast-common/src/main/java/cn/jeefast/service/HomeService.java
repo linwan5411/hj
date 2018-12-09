@@ -13,4 +13,11 @@ public interface HomeService {
     Map<String,Object> homeIndex(String areaCode);
 
     Map<String,Object> homeIndexOther(HjArea area);
+
+    /**
+     * 文章主题
+     * @return
+     */
+    Map<String,Object> articleHomeIndex();
+
 }

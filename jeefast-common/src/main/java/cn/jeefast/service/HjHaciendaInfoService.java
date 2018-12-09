@@ -23,6 +23,6 @@ public interface HjHaciendaInfoService extends IService<HjHaciendaInfo> {
 
     List<Map<String,Object>> findLandMore(Double lng, Double lat, Long areaId, Integer authType, Integer userType, Integer pageIndex, Integer pageSize, String categoryCode);
 
-    Object findLandDetail(Long haciendaId);
+    HjHaciendaInfo findLandDetail(Long haciendaId);
 
 }

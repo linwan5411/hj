@@ -2,12 +2,14 @@ package cn.jeefast.web;
 
 import cn.jeefast.base.BaseController;
 import cn.jeefast.common.utils.JsonUtils;
+import cn.jeefast.entity.HjHaciendaInfo;
 import cn.jeefast.service.HjAreaService;
 import cn.jeefast.service.HjHaciendaInfoService;
 import cn.jeefast.service.HjInvitationListService;
 import cn.jeefast.service.HjServerInfoService;
 import cn.jeefast.vo.AreaLntGntVo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -46,6 +48,19 @@ public class LandListController extends BaseController{
         map.put("list",list);
         System.out.println(JsonUtils.Bean2Json(list));
         return new ModelAndView("landList",map);
+    }
+
+    /**
+     * 农场主详情
+     * @return
+     */
+    @RequestMapping(value = "/landInfo/{landId}")
+    public ModelAndView landInfo(@PathVariable("landId")Long landId){
+        Map<String,Object> map = new HashMap<>();
+        HjHaciendaInfo info = hjHaciendaInfoService.findLandDetail(landId);
+        map.put("info",info);
+        System.out.println(JsonUtils.Bean2Json(info));
+        return new ModelAndView("landInfo",map);
     }
 
 

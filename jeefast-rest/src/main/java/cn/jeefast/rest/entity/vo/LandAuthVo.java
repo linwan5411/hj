@@ -41,6 +41,10 @@ public class LandAuthVo extends TokenVo {
     @NotNull(message = "土地性质不能为空")
     private String serverCategory;
 
+    @ApiModelProperty(value="所需服务编码", hidden=false,  required=true, dataType="String")
+    @NotNull(message = "所需服务编码不能为空")
+    private String needServer;
+
     @ApiModelProperty(value="营业执照图片地址", hidden=false,  required=false, dataType="String")
     private String haciendaRegImage;
 
@@ -73,6 +77,14 @@ public class LandAuthVo extends TokenVo {
 
     public List<LandRemakVo> getRemarkList() {
         return remarkList;
+    }
+
+    public String getNeedServer() {
+        return needServer;
+    }
+
+    public void setNeedServer(String needServer) {
+        this.needServer = needServer;
     }
 
     public void setRemarkList(List<LandRemakVo> remarkList) {

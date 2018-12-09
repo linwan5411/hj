@@ -46,7 +46,7 @@ public class ApiLandController {
         //token
         Long userId = TokenUtil.parseUserId(serverAuthVo.getToken());
 
-        //服务
+        //农场主
         HjHaciendaInfo info = new HjHaciendaInfo();
         BeanUtils.copyProperties(serverAuthVo,info);
 

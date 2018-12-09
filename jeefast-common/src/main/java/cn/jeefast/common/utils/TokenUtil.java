@@ -123,19 +123,6 @@ public class TokenUtil {
                 throw new BusinessException("登陆信息不正确", ResultEnum.LOGIN_EXP.getCode());
             }
             user.setUserId(Long.valueOf(userId.toString()));
-            Object userName =  c.get("userId");
-            if(userName != null){
-                user.setUserName(userName.toString());
-            }
-            Object hideUserMobile =  c.get("hideUserMobile");
-            if(hideUserMobile != null){
-                user.setUserMobile(hideUserMobile.toString());
-            }
-
-            Object userPortrait =  c.get("userPortrait");
-            if(userPortrait != null){
-                user.setUserPortrait(userPortrait.toString());
-            }
             return user;
         }catch (Exception e){
             throw new BusinessException("登陆信息不正确", ResultEnum.LOGIN_EXP.getCode());
@@ -149,13 +136,13 @@ public class TokenUtil {
      */
     public static Map<String,Object> loginRps(HjUser user){
         Map<String,Object> map = new HashMap<>();
-        map.put("userName",user.getUserName());
+       /* map.put("userName",user.getUserName());
         map.put("userMobile",user.getUserMobile());
         map.put("hideUserMobile",MobileUtils.subMobile(user.getUserMobile()));
         map.put("userPortrait",user.getUserPortrait());
-        map.put("userId",user.getUserId());
         map.put("userType",user.getUserType());
-        map.put("authType",user.getAuthType());
+        map.put("authType",user.getAuthType());*/
+        map.put("userId",user.getUserId());
         String token = TokenUtil.createToken(map);
         map.put("token",token);
         map.remove("userId");

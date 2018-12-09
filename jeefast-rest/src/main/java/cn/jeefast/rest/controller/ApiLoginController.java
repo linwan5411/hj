@@ -5,12 +5,12 @@ import cn.jeefast.common.enums.ResultEnum;
 import cn.jeefast.common.exception.BusinessException;
 import cn.jeefast.common.utils.BaseResponse;
 import cn.jeefast.common.utils.ResultUtils;
-import cn.jeefast.rest.entity.vo.BackPwdVo;
-import cn.jeefast.rest.entity.vo.EnrollVo;
-import cn.jeefast.rest.entity.vo.LoginParamVo;
-import cn.jeefast.rest.entity.vo.TokenVo;
+import cn.jeefast.common.utils.TokenUtil;
+import cn.jeefast.entity.HjUser;
+import cn.jeefast.rest.entity.vo.*;
 import cn.jeefast.service.HjMsgRecordService;
 import cn.jeefast.service.HjUserService;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -81,4 +81,21 @@ public class ApiLoginController {
         return ResultUtils.successV2();
     }
 
+
+    @ApiOperation(value = "修改个人资料")
+    @ApiImplicitParams({ @ApiImplicitParam(paramType = "body",
+            dataType = "UserDataVo", name = "userDataVo", value = "修改个人资料", required = true) })
+    @PostMapping("/updateData")
+    public BaseResponse updateData(@Valid @RequestBody UserDataVo userDataVo){
+        Long userId = TokenUtil.parseUserId(userDataVo.getToken());
+        HjUser user = new HjUser();
+        user.setUserMobile(userDataVo.getMobile());
+        user.setUserId(userId);
+        user.setUserPortrait(userDataVo.getUserPortrait());
+        user.setUserName(userDataVo.getUserName());
+        EntityWrapper entityWrapper = new EntityWrapper();
+        entityWrapper.where("user_id={0}",userId);
+        hjUserService.update(user,entityWrapper);
+        return ResultUtils.successV2();
+    }
 }

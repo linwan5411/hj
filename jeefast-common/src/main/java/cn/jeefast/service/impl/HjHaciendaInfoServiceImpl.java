@@ -59,7 +59,7 @@ public class HjHaciendaInfoServiceImpl extends ServiceImpl<HjHaciendaInfoDao, Hj
         if(info.getHaciendaType() == null || info.getHaciendaType() > 2 || info.getHaciendaType() < 0){
             throw new BusinessException("类型参数不正确", ResultEnum.REQ_PARAM_EXP.getCode());
         }
-        //服务的类型
+        //土地性质
         if(StringUtils.isNotBlank(info.getServerCategory())){
             List<CategoryCode> codes = hjServerCodeService.findCodeList(info.getServerCategory());
             if(codes != null && codes.size() > 0){
@@ -68,6 +68,18 @@ public class HjHaciendaInfoServiceImpl extends ServiceImpl<HjHaciendaInfoDao, Hj
                     buffer.append(e.getServerCategory()).append(",");
                 });
                 info.setHaciendaLand(buffer.toString().substring(0,buffer.toString().length() - 1));
+            }
+        }
+
+        //土地性质
+        if(StringUtils.isNotBlank(info.getNeedServer())){
+            List<CategoryCode> codes = hjServerCodeService.findCodeList(info.getNeedServer());
+            if(codes != null && codes.size() > 0){
+                StringBuffer buffer = new StringBuffer();
+                codes.forEach( e ->{
+                    buffer.append(e.getServerCategory()).append(",");
+                });
+                info.setNeedServerName(buffer.toString().substring(0,buffer.toString().length() - 1));
             }
         }
 
@@ -153,7 +165,7 @@ public class HjHaciendaInfoServiceImpl extends ServiceImpl<HjHaciendaInfoDao, Hj
     }
 
     @Override
-    public Object findLandDetail(Long haciendaId) {
+    public HjHaciendaInfo findLandDetail(Long haciendaId) {
         HjHaciendaInfo hjServerInfo = new HjHaciendaInfo();hjServerInfo.setHaciendaId(haciendaId);
         hjServerInfo = hjHaciendaInfoDao.selectOne(hjServerInfo);
         if(hjServerInfo == null){

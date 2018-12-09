@@ -16,7 +16,7 @@ import cn.jeefast.common.utils.R;
  * @email 36780272@qq.com
  * @date 2017年10月27日 下午10:16:19
  */
-@RestControllerAdvice
+//@RestControllerAdvice
 public class RRExceptionHandler {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 

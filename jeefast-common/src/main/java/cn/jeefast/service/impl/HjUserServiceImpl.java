@@ -103,13 +103,27 @@ public class HjUserServiceImpl extends ServiceImpl<HjUserDao, HjUser> implements
             throw new BusinessException("已被冻结", ResultEnum.MOBILE_BLOCK_EXP.getCode());
         }
         updateLoginTime(mobile);
-        return TokenUtil.loginRps(user);
+        Map<String,Object> map = TokenUtil.loginRps(user);
+        map.put("userName",user.getUserName());
+        map.put("userMobile",user.getUserMobile());
+        map.put("hideUserMobile",MobileUtils.subMobile(user.getUserMobile()));
+        map.put("userPortrait",user.getUserPortrait());
+        map.put("userType",user.getUserType());
+        map.put("authType",user.getAuthType());
+        return map;
     }
 
     @Override
     public Map<String, Object> enroll(String mobile, String pass) {
         HjUser user = createNewUser(mobile,pass,CommonEnum.ZERO.getInt_state());
-        return TokenUtil.loginRps(user);
+        Map<String,Object> map = TokenUtil.loginRps(user);
+        map.put("userName",user.getUserName());
+        map.put("userMobile",user.getUserMobile());
+        map.put("hideUserMobile",MobileUtils.subMobile(user.getUserMobile()));
+        map.put("userPortrait",user.getUserPortrait());
+        map.put("userType",user.getUserType());
+        map.put("authType",user.getAuthType());
+        return map;
     }
 
 

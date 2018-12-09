@@ -3,11 +3,15 @@ package cn.jeefast.web;
 import cn.jeefast.base.BaseController;
 import cn.jeefast.common.utils.JsonUtils;
 import cn.jeefast.entity.HjArea;
+import cn.jeefast.entity.HjServerCase;
+import cn.jeefast.entity.HjServerInfo;
 import cn.jeefast.service.HjAreaService;
+import cn.jeefast.service.HjServerCaseService;
 import cn.jeefast.service.HjServerInfoService;
 import cn.jeefast.service.HomeService;
 import cn.jeefast.vo.AreaLntGntVo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,8 +34,11 @@ public class ServerListController extends BaseController{
     @Resource
     private HjServerInfoService hjServerInfoService;
 
+    @Resource
+    private HjServerCaseService hjServerCaseService;
+
     /**
-     * 主页数据的返回
+     * 服务商列表页面
      * @param request
      * @return
      */
@@ -47,6 +54,34 @@ public class ServerListController extends BaseController{
         map.put("list",list);
         System.out.println(JsonUtils.Bean2Json(list));
         return new ModelAndView("severList",map);
+    }
+
+
+    /**
+     * 案例详情
+     * @return
+     */
+    @RequestMapping(value = "/caseInfo/{caseId}")
+    public ModelAndView caseInfo(@PathVariable("caseId") Long caseId){
+        Map<String,Object> map = new HashMap<>();
+        HjServerCase info = hjServerCaseService.findCase(Long.valueOf(caseId));
+        map.put("info",info);
+        System.out.println(JsonUtils.Bean2Json(info));
+        return new ModelAndView("severCaseInfo",map);
+    }
+
+
+    /**
+     * 服务商详情
+     * @return
+     */
+    @RequestMapping(value = "/severInfo/{serverId}")
+    public ModelAndView serverList(@PathVariable("serverId") Long serverId){
+        Map<String,Object> map = new HashMap<>();
+        HjServerInfo info = hjServerInfoService.findServerDetail(serverId);
+        map.put("info",info);
+        System.out.println(JsonUtils.Bean2Json(info));
+        return new ModelAndView("severInfo",map);
     }
 
     /**
@@ -71,5 +106,7 @@ public class ServerListController extends BaseController{
                 null,null,page,10,null);
         return list;
     }
+
+
 
 }

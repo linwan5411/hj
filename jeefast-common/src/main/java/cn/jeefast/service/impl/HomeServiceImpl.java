@@ -1,9 +1,12 @@
 package cn.jeefast.service.impl;
 
 import cn.jeefast.common.annotation.Log;
+import cn.jeefast.common.utils.JsonUtils;
 import cn.jeefast.entity.HjArea;
+import cn.jeefast.entity.HjInvitation;
 import cn.jeefast.service.*;
 import cn.jeefast.vo.AreaVo;
+import cn.jeefast.vo.CategoryCode;
 import cn.jeefast.vo.RecordRps;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +32,42 @@ public class HomeServiceImpl implements HomeService {
 
     @Resource
     private HjServerInfoService hjServerInfoService;
+
+    @Resource
+    private HjServerCodeService hjServerCodeService;
+
+    @Resource
+    private HjArticleService hjArticleService;
+
+    @Resource
+    private HjInvitationService hjInvitationService;
+
+    /**
+     * 查询对应的文章主题相关消息
+     * @return
+     */
+    @Override
+    public Map<String, Object> articleHomeIndex() {
+        Map<String,Object> map = new HashMap<>();
+
+        //ad
+        List<Map<String,Object>> adList = hjAdService.findAdBySite(2L);
+        map.put("adList",adList);
+
+        //类别
+        List<CategoryCode> l = hjServerCodeService.findByParenId(15L);
+        map.put("cList",l);
+
+
+        //文章
+        List<Map<String,Object>> ts = hjArticleService.findAdArticle(0,3);
+        map.put("aList",ts);
+        //帖子
+        List<HjInvitation> noteList = hjInvitationService.findAdNote(0,3);
+
+        map.put("noteList",noteList);
+        return map;
+    }
 
     /**
      * 查询对应的主页相关信息
@@ -99,5 +138,6 @@ public class HomeServiceImpl implements HomeService {
         map.put("serverList",serverList);
         return map;
     }
+
 
 }
