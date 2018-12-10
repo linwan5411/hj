@@ -20,4 +20,6 @@ public interface HjInvitationListDao extends BaseMapper<HjInvitationList> {
                                               @Param("pageSize")Integer pageSize);
 
     int commentIdOk(@Param("commentId")Long commentId);
+
+    int doReadNum(@Param("noteId")Long noteId);
 }

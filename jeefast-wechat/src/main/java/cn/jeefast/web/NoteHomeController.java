@@ -1,7 +1,9 @@
 package cn.jeefast.web;
 
 import cn.jeefast.base.BaseController;
+import cn.jeefast.common.utils.BaseResponse;
 import cn.jeefast.common.utils.JsonUtils;
+import cn.jeefast.common.utils.ResultUtils;
 import cn.jeefast.entity.HjInvitation;
 import cn.jeefast.entity.HjInvitationList;
 import cn.jeefast.service.HjArticleService;
@@ -64,8 +66,31 @@ public class NoteHomeController extends BaseController {
         Integer num = hjInvitationListService.findListNum(noteId);
         map.put("num", num);
 
+        hjInvitationListService.doReadNum(noteId);
+
         System.out.println(JsonUtils.Bean2Json(map));
         return new ModelAndView("noteInfo", map);
     }
 
+    /**
+     * 帖子点赞
+     * @param noteId
+     * @return
+     */
+    @RequestMapping(value = "/noteOk/{noteId}")
+    public BaseResponse noteOk(@PathVariable("noteId")Long noteId) {
+        hjInvitationService.noteOk(noteId);
+        return ResultUtils.successV2();
+    }
+
+    /**
+     * 帖子点赞
+     * @param noteId
+     * @return
+     */
+    @RequestMapping(value = "/noteListOk/{noteId}")
+    public BaseResponse noteListOk(@PathVariable("noteId")Long noteId) {
+        hjInvitationListService.commentIdOk(noteId);
+        return ResultUtils.successV2();
+    }
 }

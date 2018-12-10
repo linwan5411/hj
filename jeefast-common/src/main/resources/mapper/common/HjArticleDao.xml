@@ -91,6 +91,9 @@
 		where  id = #{id}
 
     </update>
+    <update id="articleLight">
+		UPDATE hj_article set article_read_num = article_read_num + 1 where article_id = #{articleId}
+	</update>
     <select id="findAdArticle" resultType="java.util.Map">
 		SELECT <include refid="Base_Column_List"/>  from hj_article where article_show = 1 ORDER by article_sort,create_time desc limit #{pageIndex},#{pageSize}
 	</select>

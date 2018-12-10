@@ -7,6 +7,7 @@ import cn.jeefast.entity.HjUser;
 import cn.jeefast.service.HjInvitationListService;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -67,5 +68,15 @@ public class HjInvitationListServiceImpl extends ServiceImpl<HjInvitationListDao
        }catch (Exception e){
 
        }
+    }
+
+    @Async
+    @Override
+    public void doReadNum(Long noteId) {
+        try {
+            hjInvitationListDao.doReadNum(noteId);
+        }catch (Exception e){
+
+        }
     }
 }

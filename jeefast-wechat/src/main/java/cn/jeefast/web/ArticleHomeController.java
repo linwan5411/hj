@@ -1,7 +1,9 @@
 package cn.jeefast.web;
 
 import cn.jeefast.base.BaseController;
+import cn.jeefast.common.utils.BaseResponse;
 import cn.jeefast.common.utils.JsonUtils;
+import cn.jeefast.common.utils.ResultUtils;
 import cn.jeefast.entity.HjArea;
 import cn.jeefast.entity.HjArticle;
 import cn.jeefast.entity.HjInvitationList;
@@ -74,6 +76,7 @@ public class ArticleHomeController extends BaseController{
 
         List<Map<String,Object>> list = hjArticleService.findLikeArticle(articleId);
         map.put("list",list);
+        hjArticleService.articleLight(articleId);
         System.out.println(JsonUtils.Bean2Json(map));
         return new ModelAndView("articleInfo",map);
     }

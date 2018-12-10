@@ -23,4 +23,6 @@ public interface HjInvitationListService extends IService<HjInvitationList> {
     void doComment(HjUser user, Long invitationId, String comment);
 
     void commentIdOk(Long commentId);
+
+    void doReadNum(Long noteId);
 }

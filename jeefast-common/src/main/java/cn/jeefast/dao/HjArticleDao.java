@@ -24,4 +24,6 @@ public interface HjArticleDao extends BaseMapper<HjArticle> {
     List<Map<String,Object>> findAdArticle(@Param("pageIndex") Integer pageIndex, @Param("pageSize") Integer pageSize);
 
     List<Map<String,Object>> findLikeArticle(@Param("code")Long code, @Param("pageSize")int pageSize, @Param("articleId")Long  articleId);
+
+    int articleLight(@Param("articleId")Long articleId);
 }

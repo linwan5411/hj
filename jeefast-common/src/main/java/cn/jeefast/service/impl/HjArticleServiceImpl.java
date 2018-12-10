@@ -6,6 +6,7 @@ import cn.jeefast.dao.HjArticleDao;
 import cn.jeefast.service.HjArticleService;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -46,5 +47,15 @@ public class HjArticleServiceImpl extends ServiceImpl<HjArticleDao, HjArticle> i
     @Override
     public List<Map<String, Object>> findHomeArticle(Integer pageSize) {
         return hjArticleDao.findAdArticle(0,pageSize);
+    }
+
+    @Async
+    @Override
+    public void articleLight(Long articleId) {
+        try {
+            hjArticleDao.articleLight(articleId);
+        }catch (Exception e){
+
+        }
     }
 }

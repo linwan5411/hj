@@ -26,4 +26,6 @@ public interface HjArticleService extends IService<HjArticle> {
      * @return
      */
     List<Map<String,Object>> findHomeArticle(Integer pageSize);
+
+    void articleLight(Long articleId);
 }

@@ -35,6 +35,9 @@
     <update id="commentIdOk">
         UPDATE hj_invitation_list set answer_num_ok = answer_num_ok + 1 WHERE  comment_id = #{commentId}
     </update>
+    <update id="doReadNum">
+		UPDATE hj_invitation set answer_num = answer_num +1 where invitation_id = #{noteId}
+	</update>
     <select id="findNoteInvitation" resultType="cn.jeefast.entity.HjInvitationList">
 		SELECT <include refid="Base_Column_List"/> from hj_invitation_list where invitation_status = 1 ORDER by create_time,answer_num_ok desc limit #{pageIndex},#{pageSize}
 	</select>
