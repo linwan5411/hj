@@ -61,7 +61,7 @@
     </style>
 </head>
 <body style="overflow-y: auto">
-<div class="container-fluid">
+<!--<div class="container-fluid">
     <div class="row gradient" style="height: 40px;line-height:40px;text-align: center;color: white;">
         <div class="col-xs-1 p0" style="font-size: 20px;font-weight: 300">
             <
@@ -70,11 +70,11 @@
             服务案例
         </div>
     </div>
-</div>
+</div>-->
 
 <!--文字-->
 <div class="container-fluid" style="font-size: 13px">
-    <div class="col-xs-12" style="height: 40px;line-height: 40px;border-bottom: 1px solid #efeff4">
+    <div class="col-xs-12" style="border-bottom: 1px solid #efeff4;min-height: 40px;">
         <div class="col-xs-3 p0">
             项目描述
         </div>
@@ -82,17 +82,12 @@
             ${info.caseName}
         </div>
     </div>
-    <div class="col-xs-12" style="height: 40px;line-height: 40px;border-bottom: 1px solid #efeff4">
+    <div class="col-xs-12" style="border-bottom: 1px solid #efeff4;height: 40px;line-height: 40px">
         <div class="col-xs-3 p0">
             规模
         </div>
         <div class="col-xs-9 p0">
             ${info.caseMax}
-        </div>
-    </div>
-    <div class="col-xs-12" style="height: 40px;line-height: 40px;border-bottom: 1px solid #efeff4">
-        <div class="col-xs-12 p0">
-            <img src="${info.caseImage}" class="img-responsive"/>
         </div>
     </div>
 </div>
@@ -107,7 +102,7 @@
                     <img src="${item.caseImage}" class="img-responsive"/>
                 </#if>
                 <p>
-                    ${item.caseInfo}
+                    ${item.caseInfo!}
                 </p>
             </div>
             </#list>

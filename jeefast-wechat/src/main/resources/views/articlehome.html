@@ -52,7 +52,7 @@
             <div class="search-input col-sm-12 padd_0">
                 <label class="icon icon-search" for="search" style="font-size: 16px;margin-left: 15px;top: 50%"></label>
                 <input type="search" id='search' placeholder='输入关键字...'
-                       style="padding-right:0;height: 30px;margin-top: 10px;text-indent: 5px;min-width: 14rem"/>
+                       style="padding-right:0;height: 30px;margin-top: 10px;font-size: 18px;text-indent: 5px;min-width: 14rem"/>
             </div>
         </div>
         <div class="col-xs-2" style="text-align: center;padding-right: 10px">
@@ -298,7 +298,7 @@
                 <div class="col-xs-12 p0">
                     <div class="col-xs-2 p0">
                         <#if item?? && item.userHeader??>
-                        <img  src="${item.userHeader}" style="max-height: 40px"/>
+                        <img  src="${item.userHeader}" style="height: 40px;width: 40px;border-radius: 20px;"/>
                         <#else>
                         <img  src="../show/lands.png" style="max-height: 40px"/>
                         </#if>

@@ -21,6 +21,7 @@ root
     -Dlogging.path=/var/logs :指定日志的配置地址
 
     nohup java -Xms512m -Xmx1024m -Dlogging.path=/wanhe/logs -jar jeefast-rest.jar --spring.profiles.active=pro >&1 &
+    nohup java -Xms512m -Xmx1024m -Dlogging.path=/wanhe/logs -jar jeefast-wechat.jar --spring.profiles.active=pro >&1 &
 
 3.停止服务
     关闭通过ps -aux | grep spring 找到pid.用kill -9 [pid]结束进程

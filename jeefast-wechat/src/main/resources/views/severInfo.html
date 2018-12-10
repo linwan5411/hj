@@ -202,7 +202,11 @@
                 <img src="../image/addr.png" class="img-responsive"/>
                 </#if>
                 <p>
+                <#if item.caseName?length gt 20>
+                    ${item.caseName?substring(0,20)}...
+                <#else>
                     ${item.caseName}
+                </#if>
                 </p>
             </div>
             </a>
