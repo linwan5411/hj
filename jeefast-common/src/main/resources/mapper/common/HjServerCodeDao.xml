@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jeefast.dao.HjServerCodeDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="cn.jeefast.entity.HjServerCode">
+	<result column="id" property="id" />
+	<result column="create_time" property="createTime" />
+	<result column="update_time" property="updateTime" />
+	<result column="data_version" property="dataVersion" />
+		<result column="server_category" property="serverCategory" />
+		<result column="server_remark" property="serverRemark" />
+		<result column="server_icon" property="serverIcon" />
+		<result column="parent_id" property="parentId" />
+		<result column="server_sort" property="serverSort" />
+		<result column="category_code" property="categoryCode" />
+		<result column="data_status" property="dataStatus" />
+	</resultMap>
+	<sql id="base_sql">
+		server_category as serverCategory,
+		server_icon as serverIcon,
+		category_code as categoryCode,
+		server_remark as serverRemark
+	</sql>
+    <select id="findByParenId" resultType="cn.jeefast.vo.CategoryCode">
+		SELECT <include refid="base_sql"/> FROM hj_server_code where parent_id = #{parentId} and data_status = 1 order by server_sort desc
+	</select>
+	<select id="findCodeList" resultType="cn.jeefast.vo.CategoryCode">
+		SELECT <include refid="base_sql"/> FROM hj_server_code where data_status = 1 and category_code in
+		<foreach collection="codes" index="index" item="item" open="(" separator="," close=")">
+		    #{item}
+		</foreach>
+	</select>
+
+</mapper>

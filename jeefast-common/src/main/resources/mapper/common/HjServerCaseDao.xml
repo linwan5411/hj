@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jeefast.dao.HjServerCaseDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="cn.jeefast.entity.HjServerCase">
+	<result column="id" property="id" />
+	<result column="create_time" property="createTime" />
+	<result column="update_time" property="updateTime" />
+	<result column="data_version" property="dataVersion" />
+		<result column="case_id" property="caseId" />
+		<result column="server_id" property="serverId" />
+		<result column="case_image" property="caseImage" />
+		<result column="server_type" property="serverType" />
+		<result column="case_name" property="caseName" />
+		<result column="case_max" property="caseMax" />
+		<result column="case_time" property="caseTime" />
+	</resultMap>
+
+	<resultMap id="myCase" type="cn.jeefast.entity.HjServerCase">
+		<result column="create_time" property="createTime" />
+		<result column="case_id" property="caseId" />
+		<result column="server_id" property="serverId" />
+		<result column="case_image" property="caseImage" />
+		<result column="server_type" property="serverType" />
+		<result column="case_name" property="caseName" />
+		<result column="case_max" property="caseMax" />
+		<result column="case_time" property="caseTime" />
+		<collection property="list" ofType="cn.jeefast.entity.HjServerCaseRemark">
+			<result column="r_case_id" property="caseId" />
+			<result column="r_case_info" property="caseInfo" />
+			<result column="r_case_image" property="caseImage" />
+		</collection>
+	</resultMap>
+    <select id="myCaseList" resultMap="myCase">
+		SELECT
+			c.case_id,c.server_id,c.case_image,c.server_type,c.case_name,c.case_max,c.case_time,
+			r.case_id as r_case_id,
+			r.case_info as r_case_info,
+			r.case_image as r_case_image
+		FROM
+			hj_server_case c
+		LEFT JOIN hj_server_case_remark r ON c.case_id = r.case_id
+		WHERE
+			c.server_id = #{serverId}
+	</select>
+
+</mapper>

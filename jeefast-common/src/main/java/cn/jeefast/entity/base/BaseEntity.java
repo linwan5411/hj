@@ -2,7 +2,10 @@ package cn.jeefast.entity.base;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.FieldStrategy;
 import com.baomidou.mybatisplus.enums.IdType;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -24,16 +27,20 @@ import java.util.Date;
  */
 public class BaseEntity implements Serializable{
 
+    @JsonIgnore
     @TableId(value="id", type= IdType.AUTO)
     private Long id;
 
-    @TableField("create_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone = "GMT+8")
+    @TableField(value = "create_time",strategy = FieldStrategy.NOT_EMPTY)
     private Date createTime;
 
-    @TableField("update_time")
+    @JsonIgnore
+    @TableField(value = "update_time",strategy = FieldStrategy.NOT_EMPTY)
     private Date updateTime;
 
-    @TableField("data_version")
+    @JsonIgnore
+    @TableField(value = "data_version",strategy = FieldStrategy.NOT_EMPTY)
     private Integer dataVersion;
 
     public Long getId() {

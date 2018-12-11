@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>主页</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="/static/css/sm.css">
+    <link rel="stylesheet" href="/static/css/sm-extend.css">
+    <link rel="stylesheet" href="/static/css/home/home.css">
+    <link rel="stylesheet" href="/static/plugins/Bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/plugins/Bootstrap/css/swiper.css">
+    <link rel="stylesheet" href="/static/plugins/Bootstrap/css/dropload.css">
+
+    <script src="/static/plugins/jquery/jquery-3.1.1.min.js"></script>
+    <script src="/static/plugins/jquery/swiper.js"></script>
+    <script src="/static/plugins/jquery/dropload.js"></script>
+    <script src="/static/js/sm.js"></script>
+    <script src="/static/js/sm-extend.js"></script>
+    <script src="/static/js/vue.min.js"></script>
+    <script src="/static/js/zepto.js"></script>
+    <style>
+        a{
+            color: black;text-decoration: none;
+        }
+        a:visited{
+            color: black;
+        }
+        .p0{
+            padding: 0;
+        }
+        .label-green{
+            font-size: 10px;
+            color: #14BC4D;
+            padding-left: 0.2rem;
+            padding-right: 0.2rem;
+            background: #E1F9E3;
+            border: 1px solid #14BC4D;
+        }
+        .label-blue{
+             font-size: 10px;
+             color: #2B85E1;
+            padding-left: 0.2rem;
+            padding-right: 0.2rem;
+             background: #E8F3FF;
+             border: 1px solid #2B85E1;
+         }
+        .label-red{
+            font-size: 10px;
+            color: #FD4F4A;
+            padding-left: 0.2rem;
+            padding-right: 0.2rem;
+            background: #FFEBEB;
+            border: 1px solid #FD4F4A;
+        }
+        .label-yellow{
+            font-size: 10px;
+            color: #EEA70E;
+            padding-left: 0.2rem;
+            padding-right: 0.2rem;
+            background: #FCF5E3;
+            border: 1px solid #EEA70E;
+        }
+        label{
+            font-weight: normal;
+        }
+        div,ul,li{margin: 0;padding: 0}/*先初始化一下默认样式*/
+        .notice {
+            height: 35px;/*固定公告栏显示区域的高度*/
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        .notice ul li {
+            list-style: none;
+            line-height: 35px;
+            /*以下为了单行显示，超出隐藏*/
+            display: block;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body style="overflow-y: auto;padding: 0;margin: 0">
+
+<div class="container-fluid">
+    <div class="row gradient" style="height: 50px;line-height: 50px;">
+        <div class="col-xs-3 p0">
+            <div class="col-xs-7 p0">
+                <select class="select-green">
+                    <#if adList?exists>
+                    <#list areas as item>
+                        <#if item.areaCode == areaCode>
+                        <option style="color: black" selected="selected" value="${item.areaId?if_exists}">${item.areaName?if_exists}</option>
+                        <#else>
+                        <option style="color: black" value="${item.areaId?if_exists}">${item.areaName?if_exists}</option>
+                    </#if>
+                    </#list>
+                    <#else>
+                    <option style="color: black">重庆</option>
+                    </#if>
+                </select>
+            </div>
+            <div class="col-xs-5 p0">
+                <div class="select-green-btn" style="text-align: left"></div>
+            </div>
+        </div>
+        <div class="col-xs-9 p0" style="padding-right: 2rem">
+            <div class="search-input col-sm-12 p0">
+                <label class="icon icon-search" for="search" style="font-size: 16px;margin-left: 5px;top: 50%"></label>
+                <input type="search" id='search' placeholder='输入关键字...'
+                       style="padding-right:0;height: 30px;margin-top: 10px;text-indent: 8px;min-width: 13rem;font-size: 18px"/>
+            </div>
+        </div>
+    </div>
+</div>
+<!--轮播-->
+<div class="container-fluid slide padd_0" style="padding: 0;">
+    <div class="row padd_0">
+        <div class="col-xs-12 padd_0">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <!--<div class="swiper-slide">
+                        <img class="img-responsive" src="../static/show/slide.png"/>
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="img-responsive" src="../static/show/slide.png"/>
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="img-responsive" src="../static/show/slide.png"/>
+                    </div>-->
+                    <#if adList?exists>
+                        <#list adList as item>
+                            <div class="swiper-slide">
+                                <img src="${item.adImage}" style="max-height: 160px;width: 100%;"/>
+                            </div>
+                        </#list>
+                    <#else>
+                        <div class="swiper-slide">
+                            <img class="img-responsive" src="../static/show/slide.png"/>
+                        </div>
+                    </#if>
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--6个类别-->
+<div class="container-fluid" style="text-align: center">
+    <div class="col-xs-4" style="background: #F5F5F5;padding-top: 0.1rem;height: 105px;border-right: 5px solid white">
+        <div style="padding-top: 0.2rem;">
+            <img src="../static/image/home_c.png" height="40" width="40"/></div>
+        <div>
+            <p>土地平整</p>
+            <p style="font-size: 12px">耕种科学规划</p>
+        </div>
+    </div>
+    <div class="col-xs-4" style="background: #F5F5F5;padding-top: 0.1rem;height: 105px;border-left: 5px solid white;border-right: 5px solid white">
+        <div style="padding-top: 0.2rem;">
+            <img src="../static/image/bz.png" height="40" width="40"/></div>
+        <div>
+            <p>育苗播种</p>
+            <p style="font-size: 12px">专业苗床培养</p>
+        </div>
+    </div>
+    <div class="col-xs-4" style="background: #F5F5F5;padding-top: 0.1rem;height: 105px;border-left: 5px solid white">
+        <div style="padding-top: 0.2rem;">
+            <img src="../static/image/sf.png" height="40" width="40"/></div>
+        <div>
+            <p>测土施肥</p>
+            <p style="font-size: 12px">精准营养补给</p>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="text-align: center;margin-top: 10px;">
+    <div class="col-xs-4" style="background: #F5F5F5;padding-top: 0.1rem;height: 105px;border-right: 5px solid white">
+        <div style="padding-top: 0.2rem;">
+            <img src="../static/image/kj.png" height="40" width="40"/></div>
+        <div>
+            <p>科技植保</p>
+            <p style="font-size: 12px">科技生长护航</p>
+        </div>
+    </div>
+    <div class="col-xs-4" style="background: #F5F5F5;padding-top: 0.1rem;height: 105px;border-left: 5px solid white;border-right: 5px solid white">
+        <div style="padding-top: 0.2rem;">
+            <img src="../static/image/sg.png" height="40" width="40"/></div>
+        <div>
+            <p>农机收割</p>
+            <p style="font-size: 12px">一键操作收获</p>
+        </div>
+    </div>
+    <div class="col-xs-4" style="background: #F5F5F5;padding-top: 0.1rem;height: 105px;border-left: 5px solid white">
+        <div style="padding-top: 0.2rem;">
+            <img src="../static/image/ft.png" height="40" width="40"/></div>
+        <div>
+            <p>烘干储藏</p>
+            <p style="font-size: 12px">最佳健康储藏</p>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="text-align: center;margin-top: 10px;" >
+    <div class="col-xs-12 gradient" style="height: 60px;color: white;line-height: 28px;padding-top: 5px;padding-bottom: 5px;">
+        <div class="col-xs-4">
+            <div style="font-size: 20px;font-weight: 700">
+                <#if counts?exists>
+                    ${counts.orderNum?c}+
+                <#else>
+                    2000+
+                </#if>
+            </div>
+            <div style="font-size: 12px">农业订单</div>
+        </div>
+        <div class="col-xs-4">
+            <div style="font-size: 20px;font-weight: 700">
+                <#if counts?exists>
+                    ${counts.landNum?c}+
+                <#else>
+                    5000+
+                </#if>
+            </div>
+            <div style="font-size: 12px">农场主</div>
+        </div>
+        <div class="col-xs-4">
+            <div style="font-size: 20px;font-weight: 700">
+                <#if counts?exists>
+                    ${counts.serverNum?c}+
+                <#else>
+                    5000+
+                </#if>
+            </div>
+            <div style="font-size: 12px">服务面积</div>
+        </div>
+    </div>
+    <div class="col-xs-12" style="padding: 0;text-align: left;line-height: 25px;font-size: 14px;">
+        <div class="notice">
+            <ul >
+                <#if records?exists>
+                <#list records as item>
+                <li>
+                    <div class="col-xs-12 p0">
+                        <div class="col-xs-3">${item.dateTime}</div>
+                        <div class="col-xs-4">${item.mobile}</div>
+                        <div class="col-xs-5">${item.userName}</div>
+                    </div>
+                </li>
+                </#list>
+                <#else>
+                <li>
+                    <div class="col-xs-12 p0">
+                        <div class="col-xs-3">5分钟前</div>
+                        <div class="col-xs-4">新农人9527</div>
+                        <div class="col-xs-5">联系了订单服务</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="col-xs-12 p0">
+                        <div class="col-xs-3">5分钟前</div>
+                        <div class="col-xs-4">新农人9527</div>
+                        <div class="col-xs-5">联系了订单服务</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="col-xs-12 p0">
+                        <div class="col-xs-3">5分钟前</div>
+                        <div class="col-xs-4">新农人9527</div>
+                        <div class="col-xs-5">联系了订单服务</div>
+                    </div>
+                </li>
+                </#if>
+            </ul>
+        </div>
+    </div>
+    <div class="col-xs-12" style="padding: 0;height: 52px;margin-top: 10px;">
+        <div class="col-xs-6" style="padding: 0;background: #F5F5F5;padding: 10px;border-right: 5px solid white">
+            <div class="col-xs-4" style="padding: 0;">
+                <img src="../static/image/point1.png" height="36" width="31"/>
+            </div>
+            <div class="col-xs-6" style="padding: 0;">
+                <div style="font-size: 13px">
+                    农产品订单
+                </div>
+                <div style="font-size: 10px;">
+                    让种植后顾无忧
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6" style="padding: 0;background: #F5F5F5;padding: 10px;border-left: 5px solid white">
+            <div class="col-xs-4" style="padding: 0;">
+                <img src="../static/image/point3.png" height="36" width="31"/>
+            </div>
+            <div class="col-xs-6" style="padding: 0;">
+                <div style="font-size: 13px">
+                    供应链金融
+                </div>
+                <div style="font-size: 10px;">
+                    种植补给有保障
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--分隔线-->
+<div class="col-xs-12" style="padding: 0;background: #F0F0F0;height: 10px;margin-top: 10px;">
+
+</div>
+<!--服务商-->
+<div class="container-fluid">
+    <div class="col-xs-12 p0" style="text-align: left;padding-top: 0.8rem">
+        <div class="col-xs-5 p0" style="font-size: 14px;font-weight: 700;">
+            <img src="../static/image/server.png" height="22" width="22"/>
+            农业服务提供商
+        </div>
+        <div class="col-xs-3">
+        </div>
+        <div class="col-xs-4" style="font-size: 12px;padding: 0;text-align: right">
+            <a href="/serverList">查看全部>></a>
+        </div>
+    </div>
+
+    <#if serverList?exists>
+        <#list serverList as item>
+        <a href="/severInfo/${item.serverId?c}">
+            <div class="col-xs-12 p0" style="padding-top: 1rem;padding-bottom: 1rem">
+                <div class="col-xs-4 p0" style="height: 80px;">
+                    <#if item.companyImage?exists>
+                    <img  src="${item.companyImage}" style="max-height: 80px"/>
+                    <#else>
+                    <img  src="../static/show/ser1.png" style="max-height: 80px"/>
+                    </#if>
+                </div>
+                <div class="col-xs-8 p0" style="padding-left: 0.8rem">
+                    <div style="font-weight: 400;">
+                        <#if item.companyName? length gt 15>
+                            ${item.companyName?substring(0,12)}...
+                        <#else>
+                            ${item.companyName}
+                        </#if>
+                    </div>
+                    <div style="margin-top: 0.1rem">
+                        <#if item.serverCategory?exists>
+                        <#list item.serverCategory?split(",") as name>
+                            <#if name_index == 0>
+                                <label class="label-green">${name}</label>
+                            </#if>
+                            <#if name_index == 1>
+                                <label class="label-blue">${name}</label>
+                            </#if>
+                            <#if name_index gt 1>
+                            <label class="label-red">${name}</label>
+                            </#if>
+                        </#list>
+                        <#else>
+                        <label class="label-green">育苗播种</label>
+                        <label class="label-blue">农机收割</label>
+                        <label class="label-red">烘干收藏</label>
+                        </#if>
+                    </div>
+                    <div style="margin-top: 0.1rem">
+                        服务<font style="color:#14BC4D;font-weight: 700;">${item.serverMax}</font>亩
+                    </div>
+                    <div style="margin-top: 0.1rem;font-size: 12px">
+                        <img src="../static/image/addr.png" height="11" width="9"/>
+                        <#if item.detailAddr? length gt 10>
+                            ${item.detailAddr?substring(0,10)}...
+                        <#else>
+                            ${item.detailAddr}
+                        </#if>
+                        距您${(item.distance/1000)?int?c}公里
+                    </div>
+                </div>
+            </div>
+        </a>
+        </#list>
+    <#else>
+        <div class="col-xs-12 p0" style="margin-top: 1rem;height: 80px">
+            <div class="col-xs-4 p0" style="height: 80px;">
+                <img class="img-responsive" src="../static/show/ser1.png" style="max-height: 80px"/>
+            </div>
+            <div class="col-xs-8 p0" style="padding-left: 0.8rem">
+                <div style="font-weight: 400;">
+                    重庆北碚土地整合服务中心
+                </div>
+                <div style="margin-top: 0.1rem">
+                    <label class="label-green">育苗播种</label>
+                    <label class="label-blue">农机收割</label>
+                    <label class="label-red">烘干收藏</label>
+                </div>
+                <div style="margin-top: 0.1rem">
+                    服务<font style="color:#14BC4D;font-weight: 700;">1500</font>亩+
+                </div>
+                <div style="margin-top: 0.1rem;font-size: 12px">
+                    <img src="../static/image/addr.png" height="11" width="9"/>
+                    重庆市距您1500公里
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 p0" style="margin-top: 1rem;height: 80px">
+            <div class="col-xs-4 p0" style="height: 80px;">
+                <img class="img-responsive" src="../static/show/ser1.png" style="max-height: 80px"/>
+            </div>
+            <div class="col-xs-8 p0" style="padding-left: 0.8rem">
+                <div style="font-weight: 400;">
+                    重庆北碚土地整合服务中心
+                </div>
+                <div style="margin-top: 0.1rem">
+                    <label class="label-green">育苗播种</label>
+                    <label class="label-blue">农机收割</label>
+                    <label class="label-red">烘干收藏</label>
+                </div>
+                <div style="margin-top: 0.1rem">
+                    服务<font style="color:#14BC4D;font-weight: 700;">1500</font>亩+
+                </div>
+                <div style="margin-top: 0.1rem;font-size: 12px">
+                    <img src="../static/image/addr.png" height="11" width="9"/>
+                    重庆市距您1500公里
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 p0" style="margin-top: 1rem;height: 80px">
+            <div class="col-xs-4 p0" style="height: 80px;">
+                <img class="img-responsive" src="../static/show/ser1.png" style="max-height: 80px"/>
+            </div>
+            <div class="col-xs-8 p0" style="padding-left: 0.8rem">
+                <div style="font-weight: 400;">
+                    重庆北碚土地整合服务中心
+                </div>
+                <div style="margin-top: 0.1rem">
+                    <label class="label-green">育苗播种</label>
+                    <label class="label-blue">农机收割</label>
+                    <label class="label-red">烘干收藏</label>
+                </div>
+                <div style="margin-top: 0.1rem">
+                    服务<font style="color:#14BC4D;font-weight: 700;">1500</font>亩+
+                </div>
+                <div style="margin-top: 0.1rem;font-size: 12px">
+                    <img src="../static/image/addr.png" height="11" width="9"/>
+                    重庆市距您1500公里
+                </div>
+            </div>
+        </div>
+    </#if>
+</div>
+
+<!--分隔线-->
+<div class="col-xs-12" style="padding: 0;background: #F0F0F0;height: 10px;margin-top: 10px;">
+
+</div>
+
+<!--农场主-->
+<div class="container-fluid">
+    <div class="col-xs-12 p0" style="text-align: left;padding-top: 0.8rem">
+        <div class="col-xs-5 p0" style="font-size: 14px;font-weight: 700;">
+            <img src="../static/image/lan.png" height="22" width="22"/>
+            农场主需求
+        </div>
+        <div class="col-xs-3">
+        </div>
+        <div class="col-xs-4" style="font-size: 12px;padding: 0;text-align: right">
+            <a href="/landList">查看全部>></a>
+        </div>
+    </div>
+    <#if landList?exists>
+        <#list landList as item>
+            <a href="/landInfo/${item.haciendaId?c}">
+            <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;line-height: 20px;padding-bottom:1rem">
+                <div class="col-xs-4 p0" style="height: 80px;text-align:center;">
+                    <#if item.haciendaImage?exists>
+                    <img  src="${item.haciendaImage}" style="max-height: 80px"/>
+                    <#else>
+                    <img  src="../static/show/lands.png" style="max-height: 80px"/>
+                    </#if>
+                </div>
+                <div class="col-xs-8 p0" style="padding-left: 0.8rem">
+                    <div style="font-weight: 400;">
+                        ${item.haciendaName}
+                        <#if item.haciendaType == 1>(个人)<#else>(其他)</#if>
+                    </div>
+                    <div style="margin-top: 0.5rem;font-size: 12px">
+                        <label class="label-yellow">${item.haciendaLand}</label>
+                        <label>水域 <font style="font-weight: 600;color: #17BE74">${item.serverMax}亩</font></label>
+                    </div>
+                    <div class="col-xs-12 p0" style="font-size: 12px;margin-top: 0.5rem">
+                        <img src="../static/image/addr.png" height="11" width="9"/>
+                        <#if item.detailAddr? length gt 10>
+                            ${item.detailAddr?substring(0,10)}...
+                        <#else>
+                            ${item.detailAddr}
+                        </#if>
+                        距您${(item.distance/1000)?int?c}公里
+                    </div>
+                </div>
+            </div>
+            </a>
+        </#list>
+    <#else>
+    <div class="col-xs-12 p0" style="margin-top: 1rem;height: 90px;border-bottom: 1px solid #efeff4;line-height: 20px;padding-bottom: 5px">
+        <div class="col-xs-4 p0" style="height: 80px;text-align:center;">
+            <img  src="../static/show/lands.png" style="max-height: 80px"/>
+        </div>
+        <div class="col-xs-8 p0" style="padding-left: 0.8rem">
+            <div style="font-weight: 400;">
+                新农人9527（个人）
+            </div>
+            <div style="margin-top: 0.5rem;font-size: 12px">
+                <label class="label-yellow">土地平整</label>
+                <label>水域 <font style="font-weight: 600;color: #17BE74">500亩</font></label>
+            </div>
+            <div class="col-xs-12 p0" style="font-size: 12px;margin-top: 0.5rem">
+                <img src="../static/image/addr.png" height="11" width="9"/>
+                重庆市距您1500公里
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 p0" style="margin-top: 1rem;height: 90px;border-bottom: 1px solid #efeff4;line-height: 20px;padding-bottom: 5px">
+        <div class="col-xs-4 p0" style="height: 80px;text-align:center;">
+            <img  src="../static/show/lands.png" style="max-height: 80px"/>
+        </div>
+        <div class="col-xs-8 p0" style="padding-left: 0.8rem">
+            <div style="font-weight: 400;">
+                新农人9527（个人）
+            </div>
+            <div style="margin-top: 0.5rem;font-size: 12px">
+                <label class="label-yellow">土地平整</label>
+                <label>水域 <font style="font-weight: 600;color: #17BE74">500亩</font></label>
+            </div>
+            <div class="col-xs-12 p0" style="font-size: 12px;margin-top: 0.5rem">
+                <img src="../static/image/addr.png" height="11" width="9"/>
+                重庆市距您1500公里
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 p0" style="margin-top: 1rem;height: 90px;border-bottom: 1px solid #efeff4;line-height: 20px;padding-bottom: 5px">
+        <div class="col-xs-4 p0" style="height: 80px;text-align:center;">
+            <img  src="../static/show/lands.png" style="max-height: 80px"/>
+        </div>
+        <div class="col-xs-8 p0" style="padding-left: 0.8rem">
+            <div style="font-weight: 400;">
+                新农人9527（个人）
+            </div>
+            <div style="margin-top: 0.5rem;font-size: 12px">
+                <label class="label-yellow">土地平整</label>
+                <label>水域 <font style="font-weight: 600;color: #17BE74">500亩</font></label>
+            </div>
+            <div class="col-xs-12 p0" style="font-size: 12px;margin-top: 0.5rem">
+                <img src="../static/image/addr.png" height="11" width="9"/>
+                重庆市距您1500公里
+            </div>
+        </div>
+    </div>
+    </#if>
+</div>
+
+
+</body>
+<script type="text/javascript">
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        paginationClickable: true,
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: 3000,
+        autoplayDisableOnInteraction: false
+    });
+    /*
+    * 参数说明
+    * obj : 动画的节点，本例中是ul
+    * top : 动画的高度，本例中是-35px;注意向上滚动是负数
+    * time : 动画的速度，即完成动画所用时间，本例中是500毫秒，即marginTop从0到-35px耗时500毫秒
+    * function : 回调函数，每次动画完成，marginTop归零，并把此时第一条信息添加到列表最后;
+    *
+    */
+    function noticeUp(obj,top,time) {
+        $(obj).animate({
+            marginTop: top
+        }, time, function () {
+            $(this).css({marginTop:"0"}).find(":first").appendTo(this);
+        })
+    }
+
+    $(function () {
+        // 调用 公告滚动函数
+        setInterval("noticeUp('.notice ul','-35px',500)", 2000);
+    });
+</script>
+</html>

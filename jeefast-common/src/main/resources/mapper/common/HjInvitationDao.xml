@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jeefast.dao.HjInvitationDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="cn.jeefast.entity.HjInvitation">
+	<result column="id" property="id" />
+	<result column="create_time" property="createTime" />
+	<result column="update_time" property="updateTime" />
+	<result column="data_version" property="dataVersion" />
+		<result column="user_id" property="userId" />
+		<result column="invitation_id" property="invitationId" />
+		<result column="invitation_images" property="invitationImages" />
+		<result column="user_header" property="userHeader" />
+		<result column="user_name" property="userName" />
+		<result column="article_category" property="articleCategory" />
+		<result column="article_category_code" property="articleCategoryCode" />
+		<result column="invitation_info" property="invitationInfo" />
+		<result column="answer_num" property="answerNum" />
+		<result column="ok_num" property="okNum" />
+		<result column="invitation_status" property="invitationStatus" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+		create_time as createTime,
+        user_id AS userId,
+        invitation_id AS invitationId,
+        invitation_images AS invitationImages,
+        user_header AS userHeader,
+        user_name AS userName,
+        ok_num as okNum,
+        article_category AS articleCategory,
+        invitation_info AS invitationInfo,
+        answer_num AS answerNum
+    </sql>
+
+    <update id="updateByHjInvitation"  parameterType="cn.jeefast.entity.HjInvitation">
+		update hj_invitation
+		<set>
+                <if test="id != null" >
+					id = #{id},
+                </if>
+                <if test="createTime != null" >
+					create_time = #{createTime},
+                </if>
+                <if test="updateTime != null" >
+					update_time = #{updateTime},
+                </if>
+                <if test="dataVersion != null" >
+					data_version = #{dataVersion},
+                </if>
+                <if test="userId != null" >
+					user_id = #{userId},
+                </if>
+                <if test="invitationId != null" >
+					invitation_id = #{invitationId},
+                </if>
+                <if test="invitationImages != null" >
+					invitation_images = #{invitationImages},
+                </if>
+                <if test="userHeader != null" >
+					user_header = #{userHeader},
+                </if>
+                <if test="userName != null" >
+					user_name = #{userName},
+                </if>
+                <if test="articleCategory != null" >
+					article_category = #{articleCategory},
+                </if>
+                <if test="articleCategoryCode != null" >
+					article_category_code = #{articleCategoryCode},
+                </if>
+                <if test="invitationInfo != null" >
+					invitation_info = #{invitationInfo},
+                </if>
+                <if test="answerNum != null" >
+					answer_num = #{answerNum},
+                </if>
+                <if test="answerNum != null" >
+                    ok_num = #{okNum},
+                </if>
+                <if test="invitationStatus != null" >
+					invitation_status = #{invitationStatus},
+                </if>
+		</set>
+		where  invitation_id = #{invitationId}
+
+    </update>
+    <update id="noteOk">
+        UPDATE hj_invitation set ok_num = ok_num + 1 where invitation_id = #{noteId};
+    </update>
+    <update id="updateAnswerNum">
+        UPDATE hj_invitation set answer_num = answer_num + 1 where invitation_id = #{noteId}
+    </update>
+    <select id="findAdNote" resultType="cn.jeefast.entity.HjInvitation">
+		SELECT <include refid="Base_Column_List"/> FROM hj_invitation WHERE invitation_status = 1 ORDER by create_time,answer_num desc limit #{pageIndex}, #{pageSize}
+	</select>
+</mapper>

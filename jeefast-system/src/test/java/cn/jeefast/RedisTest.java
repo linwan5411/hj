@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import cn.jeefast.common.utils.RedisUtils;
+import cn.jeefast.config.RedisUtils;
 import cn.jeefast.system.entity.SysUser;
 
 @RunWith(SpringRunner.class)
@@ -20,7 +20,7 @@ public class RedisTest {
 	public void contextLoads() {
 		SysUser user = new SysUser();
 		user.setEmail("qqq@qq.com");
-		redisUtils.set("user", user);
+		//redisUtils.set("user", user);
 
 		System.out.println(ToStringBuilder.reflectionToString(redisUtils.get("user", SysUser.class)));
 	}

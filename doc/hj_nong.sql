@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : jvv-127.0.0.1
-Source Server Version : 50720
+Source Server         : 127.0.0.1
+Source Server Version : 50722
 Source Host           : localhost:3306
 Source Database       : hj_nong
 
 Target Server Type    : MYSQL
-Target Server Version : 50720
+Target Server Version : 50722
 File Encoding         : 65001
 
-Date: 2018-11-17 16:38:44
+Date: 2018-12-09 23:51:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,19 +24,20 @@ CREATE TABLE `customer` (
   `name` varchar(50) NOT NULL COMMENT '名称',
   `lon` double(9,6) NOT NULL COMMENT '经度',
   `lat` double(8,6) NOT NULL COMMENT '纬度',
+  `cid` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='商户表';
 
 -- ----------------------------
 -- Records of customer
 -- ----------------------------
-INSERT INTO `customer` VALUES ('1', '天津市区', '117.315575', '39.133462');
-INSERT INTO `customer` VALUES ('2', '北京市区', '116.407999', '39.894073');
-INSERT INTO `customer` VALUES ('3', '保定', '115.557124', '38.853490');
-INSERT INTO `customer` VALUES ('4', '石家庄', '114.646458', '38.072369');
-INSERT INTO `customer` VALUES ('5', '昌平区1', '116.367180', '40.009561');
-INSERT INTO `customer` VALUES ('6', '海淀区2', '116.313425', '39.973078');
-INSERT INTO `customer` VALUES ('7', '海淀区1', '116.329236', '39.987231');
+INSERT INTO `customer` VALUES ('1', 'heheh', '117.315575', '39.133462', '1');
+INSERT INTO `customer` VALUES ('2', '北京市区', '116.407999', '39.894073', '2');
+INSERT INTO `customer` VALUES ('3', '保定', '115.557124', '38.853490', '3');
+INSERT INTO `customer` VALUES ('4', '石家庄', '114.646458', '38.072369', '4');
+INSERT INTO `customer` VALUES ('5', '昌平区1', '116.367180', '40.009561', '5');
+INSERT INTO `customer` VALUES ('6', '海淀区2', '116.313425', '39.973078', '6');
+INSERT INTO `customer` VALUES ('7', '海淀区1', '116.329236', '39.987231', '7');
 
 -- ----------------------------
 -- Table structure for hj_ad
@@ -44,7 +45,7 @@ INSERT INTO `customer` VALUES ('7', '海淀区1', '116.329236', '39.987231');
 DROP TABLE IF EXISTS `hj_ad`;
 CREATE TABLE `hj_ad` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `ad_site_id` bigint(20) DEFAULT NULL,
+  `ad_site_id` bigint(20) NOT NULL,
   `ad_id` bigint(20) DEFAULT NULL COMMENT '广告ID',
   `ad_name` varchar(20) DEFAULT '' COMMENT '名称',
   `ad_sort` int(11) DEFAULT NULL COMMENT '排序',
@@ -54,13 +55,17 @@ CREATE TABLE `hj_ad` (
   `ad_image` varchar(120) DEFAULT NULL COMMENT '尺寸',
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
-  `data_version` int(1) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='广告';
+  `data_version` int(1) DEFAULT '1',
+  PRIMARY KEY (`id`,`ad_site_id`),
+  KEY `ad_site_id_idx` (`ad_site_id`,`ad_status`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='广告';
 
 -- ----------------------------
 -- Records of hj_ad
 -- ----------------------------
+INSERT INTO `hj_ad` VALUES ('1', '1', '1', '平台上线', '3', '1', 'http://www.baidu.com', '0', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '2018-11-18 22:25:03', '2018-11-18 22:25:05', '1');
+INSERT INTO `hj_ad` VALUES ('2', '2', '2', '推荐嘻嘻嘻', '1', '1', 'http://www.baidu.com', '0', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '2018-11-24 11:51:35', null, '1');
+INSERT INTO `hj_ad` VALUES ('3', '1', '3', 'wqww', '1', '1', null, '0', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '2018-11-24 11:51:50', null, '1');
 
 -- ----------------------------
 -- Table structure for hj_ad_site
@@ -68,19 +73,22 @@ CREATE TABLE `hj_ad` (
 DROP TABLE IF EXISTS `hj_ad_site`;
 CREATE TABLE `hj_ad_site` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `ad_site_id` bigint(20) DEFAULT NULL,
+  `ad_site_id` bigint(20) NOT NULL,
   `ad_site_name` varchar(30) DEFAULT NULL COMMENT '广告位置',
   `ad_type` int(1) DEFAULT '1' COMMENT '1:图片，2：文字',
-  `ad_size` varchar(30) DEFAULT NULL COMMENT '尺寸',
+  `ad_size_w` int(11) DEFAULT NULL COMMENT '尺寸宽度',
+  `ad_size_h` int(11) DEFAULT NULL COMMENT '尺寸高',
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
-  `data_version` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='广告位置';
+  `data_version` int(11) DEFAULT '1',
+  PRIMARY KEY (`id`,`ad_site_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='广告位置';
 
 -- ----------------------------
 -- Records of hj_ad_site
 -- ----------------------------
+INSERT INTO `hj_ad_site` VALUES ('1', '1', '首页广告位', '1', null, null, '2018-11-18 22:23:31', null, '1');
+INSERT INTO `hj_ad_site` VALUES ('2', '2', '学农广告位', '1', null, null, '2018-11-18 22:23:33', null, '1');
 
 -- ----------------------------
 -- Table structure for hj_area
@@ -88,7 +96,7 @@ CREATE TABLE `hj_ad_site` (
 DROP TABLE IF EXISTS `hj_area`;
 CREATE TABLE `hj_area` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `area_id` bigint(20) DEFAULT NULL COMMENT '地区Id',
+  `area_id` bigint(20) NOT NULL COMMENT '地区Id',
   `area_code` varchar(50) DEFAULT NULL COMMENT '地区编码',
   `area_name` varchar(20) DEFAULT NULL COMMENT '地区名',
   `level` tinyint(4) DEFAULT '-1' COMMENT '地区级别（1:省份province,2:市city,3:区县district,4:街道street）',
@@ -99,13 +107,13 @@ CREATE TABLE `hj_area` (
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `data_version` int(1) DEFAULT '1',
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`,`area_id`),
   KEY `areaCode` (`area_code`),
   KEY `parentId` (`parent_id`),
   KEY `level` (`level`),
   KEY `areaName` (`area_name`),
   KEY `relation_code` (`relation_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=3268 DEFAULT CHARSET=utf8 COMMENT='地区码表';
+) ENGINE=InnoDB AUTO_INCREMENT=3260 DEFAULT CHARSET=utf8 COMMENT='地区码表';
 
 -- ----------------------------
 -- Records of hj_area
@@ -457,7 +465,7 @@ INSERT INTO `hj_area` VALUES ('344', '344', '141129', '中阳县', '3', '0358', 
 INSERT INTO `hj_area` VALUES ('345', '345', '141130', '交口县', '3', '0358', '217,334,345', '111.181151,36.982186', '334', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('346', '346', '141181', '孝义市', '3', '0358', '217,334,346', '111.778818,37.146294', '334', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('347', '347', '141182', '汾阳市', '3', '0358', '217,334,347', '111.770477,37.261756', '334', '2018-11-17 15:00:04', null, '1');
-INSERT INTO `hj_area` VALUES ('348', '348', '150000', '内蒙古自治区', '1', '[]', '348', '111.76629,40.81739', '-1', '2018-11-17 15:00:04', null, '1');
+INSERT INTO `hj_area` VALUES ('348', '348', '150000', '内蒙古', '1', '[]', '348', '111.76629,40.81739', '-1', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('349', '349', '150100', '呼和浩特市', '2', '0471', '348,349', '111.749995,40.842356', '348', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('350', '350', '150102', '新城区', '3', '0471', '348,349,350', '111.665544,40.858289', '349', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('351', '351', '150103', '回民区', '3', '0471', '348,349,351', '111.623692,40.808608', '349', '2018-11-17 15:00:04', null, '1');
@@ -2188,7 +2196,7 @@ INSERT INTO `hj_area` VALUES ('2075', '2075', '445321', '新兴县', '3', '0766'
 INSERT INTO `hj_area` VALUES ('2076', '2076', '445322', '郁南县', '3', '0766', '1935,2072,2076', '111.535285,23.23456', '2072', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('2077', '2077', '445381', '罗定市', '3', '0766', '1935,2072,2077', '111.569892,22.768285', '2072', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('2078', '2078', '442100', '东沙群岛', '2', '[]', '1935,2078', '116.887613,20.617825', '1935', '2018-11-17 15:00:04', null, '1');
-INSERT INTO `hj_area` VALUES ('2079', '2079', '450000', '广西壮族自治区', '1', '[]', '2079', '108.327546,22.815478', '-1', '2018-11-17 15:00:04', null, '1');
+INSERT INTO `hj_area` VALUES ('2079', '2079', '450000', '广西', '1', '[]', '2079', '108.327546,22.815478', '-1', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('2080', '2080', '450100', '南宁市', '2', '0771', '2079,2080', '108.366543,22.817002', '2079', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('2081', '2081', '450102', '兴宁区', '3', '0771', '2079,2080,2081', '108.368871,22.854021', '2080', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('2082', '2082', '450103', '青秀区', '3', '0771', '2079,2080,2082', '108.494024,22.785879', '2080', '2018-11-17 15:00:04', null, '1');
@@ -2835,7 +2843,7 @@ INSERT INTO `hj_area` VALUES ('2722', '2722', '533400', '迪庆藏族自治州',
 INSERT INTO `hj_area` VALUES ('2723', '2723', '533401', '香格里拉市', '3', '0887', '2580,2722,2723', '99.700904,27.829578', '2722', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('2724', '2724', '533422', '德钦县', '3', '0887', '2580,2722,2724', '98.911559,28.486163', '2722', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('2725', '2725', '533423', '维西傈僳族自治县', '3', '0887', '2580,2722,2725', '99.287173,27.177161', '2722', '2018-11-17 15:00:04', null, '1');
-INSERT INTO `hj_area` VALUES ('2726', '2726', '540000', '西藏自治区', '1', '[]', '2726', '91.117525,29.647535', '-1', '2018-11-17 15:00:04', null, '1');
+INSERT INTO `hj_area` VALUES ('2726', '2726', '540000', '西藏', '1', '[]', '2726', '91.117525,29.647535', '-1', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('2727', '2727', '540100', '拉萨市', '2', '0891', '2726,2727', '91.172148,29.652341', '2726', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('2728', '2728', '540102', '城关区', '3', '0891', '2726,2727,2728', '91.140552,29.654838', '2727', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('2729', '2729', '540103', '堆龙德庆区', '3', '0891', '2726,2727,2729', '91.003339,29.646063', '2727', '2018-11-17 15:00:04', null, '1');
@@ -3189,7 +3197,7 @@ INSERT INTO `hj_area` VALUES ('3076', '3076', '632821', '乌兰县', '3', '0977'
 INSERT INTO `hj_area` VALUES ('3077', '3077', '632822', '都兰县', '3', '0977', '3027,3073,3077', '98.095844,36.302496', '3073', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3078', '3078', '632823', '天峻县', '3', '0977', '3027,3073,3078', '99.022984,37.300851', '3073', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3079', '3079', '632825', '海西蒙古族藏族自治州直辖', '3', '0977', '3027,3073,3079', '95.356546,37.853328', '3073', '2018-11-17 15:00:04', null, '1');
-INSERT INTO `hj_area` VALUES ('3080', '3080', '640000', '宁夏回族自治区', '1', '[]', '3080', '106.259126,38.472641', '-1', '2018-11-17 15:00:04', null, '1');
+INSERT INTO `hj_area` VALUES ('3080', '3080', '640000', '宁夏', '1', '[]', '3080', '106.259126,38.472641', '-1', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3081', '3081', '640100', '银川市', '2', '0951', '3080,3081', '106.230909,38.487193', '3080', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3082', '3082', '640104', '兴庆区', '3', '0951', '3080,3081,3082', '106.28865,38.473609', '3081', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3083', '3083', '640105', '西夏区', '3', '0951', '3080,3081,3083', '106.161106,38.502605', '3081', '2018-11-17 15:00:04', null, '1');
@@ -3217,7 +3225,7 @@ INSERT INTO `hj_area` VALUES ('3104', '3104', '640500', '中卫市', '2', '1953'
 INSERT INTO `hj_area` VALUES ('3105', '3105', '640502', '沙坡头区', '3', '1953', '3080,3104,3105', '105.173721,37.516883', '3104', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3106', '3106', '640521', '中宁县', '3', '1953', '3080,3104,3106', '105.685218,37.491546', '3104', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3107', '3107', '640522', '海原县', '3', '1953', '3080,3104,3107', '105.643487,36.565033', '3104', '2018-11-17 15:00:04', null, '1');
-INSERT INTO `hj_area` VALUES ('3108', '3108', '650000', '新疆维吾尔自治区', '1', '[]', '3108', '87.627704,43.793026', '-1', '2018-11-17 15:00:04', null, '1');
+INSERT INTO `hj_area` VALUES ('3108', '3108', '650000', '新疆', '1', '[]', '3108', '87.627704,43.793026', '-1', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3109', '3109', '659002', '阿拉尔市', '2', '1997', '3108,3109', '81.280527,40.547653', '3108', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3110', '3110', '659005', '北屯市', '2', '1906', '3108,3110', '87.837075,47.332643', '3108', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3111', '3111', '659008', '可克达拉市', '2', '1999', '3108,3111', '81.044542,43.944798', '3108', '2018-11-17 15:00:04', null, '1');
@@ -3338,7 +3346,7 @@ INSERT INTO `hj_area` VALUES ('3225', '3225', '659006', '铁门关市', '2', '19
 INSERT INTO `hj_area` VALUES ('3226', '3226', '659003', '图木舒克市', '2', '1998', '3108,3226', '79.073963,39.868965', '3108', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3227', '3227', '659004', '五家渠市', '2', '1994', '3108,3227', '87.54324,44.166756', '3108', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3228', '3228', '710000', '台湾省', '1', '1886', '3228', '121.509062,25.044332', '-1', '2018-11-17 15:00:04', null, '1');
-INSERT INTO `hj_area` VALUES ('3229', '3229', '810000', '香港特别行政区', '1', '1852', '3229', '114.171203,22.277468', '-1', '2018-11-17 15:00:04', null, '1');
+INSERT INTO `hj_area` VALUES ('3229', '3229', '810000', '香港', '1', '1852', '3229', '114.171203,22.277468', '-1', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3230', '3230', '810001', '中西区', '3', '1852', '3229,3230', '114.154373,22.281981', '3229', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3231', '3231', '810002', '湾仔区', '3', '1852', '3229,3231', '114.182915,22.276389', '3229', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3232', '3232', '810003', '东区', '3', '1852', '3229,3232', '114.226003,22.279693', '3229', '2018-11-17 15:00:04', null, '1');
@@ -3357,7 +3365,7 @@ INSERT INTO `hj_area` VALUES ('3246', '3246', '810015', '西贡区', '3', '1852'
 INSERT INTO `hj_area` VALUES ('3247', '3247', '810016', '沙田区', '3', '1852', '3229,3247', '114.195365,22.379532', '3229', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3248', '3248', '810017', '葵青区', '3', '1852', '3229,3248', '114.139319,22.363877', '3229', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3249', '3249', '810018', '离岛区', '3', '1852', '3229,3249', '113.94612,22.286408', '3229', '2018-11-17 15:00:04', null, '1');
-INSERT INTO `hj_area` VALUES ('3251', '3251', '820000', '澳门特别行政区', '1', '1853', '3251', '113.543028,22.186835', '-1', '2018-11-17 15:00:04', null, '1');
+INSERT INTO `hj_area` VALUES ('3251', '3251', '820000', '澳门', '1', '1853', '3251', '113.543028,22.186835', '-1', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3252', '3252', '820001', '花地玛堂区', '3', '1853', '3251,3252', '113.552896,22.20787', '3251', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3253', '3253', '820002', '花王堂区', '3', '1853', '3251,3253', '113.548961,22.199207', '3251', '2018-11-17 15:00:04', null, '1');
 INSERT INTO `hj_area` VALUES ('3254', '3254', '820003', '望德堂区', '3', '1853', '3251,3254', '113.550183,22.193721', '3251', '2018-11-17 15:00:04', null, '1');
@@ -3373,12 +3381,13 @@ INSERT INTO `hj_area` VALUES ('3259', '3259', '820008', '圣方济各堂区', '3
 DROP TABLE IF EXISTS `hj_article`;
 CREATE TABLE `hj_article` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `article_id` bigint(20) DEFAULT NULL,
+  `article_id` bigint(20) NOT NULL,
   `article_title` varchar(60) DEFAULT NULL COMMENT '文章标题',
-  `article_type` varchar(30) DEFAULT NULL COMMENT '文章类型',
-  `article_catgory` bigint(20) DEFAULT NULL COMMENT '文章类型',
+  `article_category_name` varchar(30) DEFAULT NULL COMMENT '类型名称',
+  `article_category` bigint(20) DEFAULT NULL COMMENT '文章类型',
   `article_image` varchar(120) DEFAULT NULL COMMENT '图片',
   `create_info` varchar(1200) DEFAULT NULL COMMENT '详情',
+  `article_url` varchar(300) DEFAULT NULL COMMENT '文章的链接,如果是自创，默认带上服务器的地址',
   `article_sort` int(11) DEFAULT NULL COMMENT '排序',
   `article_ok` int(11) DEFAULT '0' COMMENT '点赞量',
   `article_read_num` int(11) DEFAULT '0' COMMENT '阅读量',
@@ -3386,13 +3395,18 @@ CREATE TABLE `hj_article` (
   `article_show` int(11) DEFAULT '1' COMMENT '1:展示，0：不展示',
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
-  `data_version` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章';
+  `data_version` int(11) DEFAULT '1',
+  PRIMARY KEY (`id`,`article_id`),
+  KEY `article_catgory_code_idx` (`article_category_name`),
+  KEY `article_show_idx` (`article_show`) USING BTREE,
+  KEY `article_id_idx` (`article_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='文章';
 
 -- ----------------------------
 -- Records of hj_article
 -- ----------------------------
+INSERT INTO `hj_article` VALUES ('1', '273071216468688896', 'xxxxx', '学农', '16', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', 'xaswqrwrqwr', '454554', '4', '15', '12', '原创', '1', '2018-11-24 12:49:30', null, '1');
+INSERT INTO `hj_article` VALUES ('2', '21224124', 'yyyy', '学农', '16', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', 'wrqwr', 'qwrw', '1', '14', '12', '原创', '1', '2018-12-08 17:51:16', null, '1');
 
 -- ----------------------------
 -- Table structure for hj_hacienda_info
@@ -3400,17 +3414,21 @@ CREATE TABLE `hj_article` (
 DROP TABLE IF EXISTS `hj_hacienda_info`;
 CREATE TABLE `hj_hacienda_info` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `hacienda_id` bigint(20) DEFAULT NULL COMMENT '农场主ID',
+  `hacienda_id` bigint(20) NOT NULL COMMENT '农场主ID',
   `user_id` bigint(20) DEFAULT NULL COMMENT '会员ID',
+  `hacienda_remark` varchar(600) DEFAULT NULL COMMENT '介绍',
   `hacienda_name` varchar(160) DEFAULT NULL COMMENT '农场名称',
   `link_phone` varchar(20) DEFAULT NULL COMMENT '联系电话',
   `link_name` varchar(20) DEFAULT NULL COMMENT '联系人',
-  `hacienda_remark` varchar(1200) DEFAULT NULL COMMENT '农场介绍',
+  `hacienda_type` int(1) DEFAULT '1' COMMENT '2:企业，1：个人',
   `hacienda_email` varchar(60) DEFAULT NULL COMMENT '邮箱',
+  `hacienda_reg_image` varchar(120) DEFAULT NULL COMMENT '注册工商图片',
   `hacienda_scope` varchar(600) DEFAULT NULL COMMENT '附着种植范围',
+  `need_server_name` varchar(300) DEFAULT NULL COMMENT '服务类别名称',
+  `need_server` varchar(300) DEFAULT NULL COMMENT '所需服务编码',
   `hacienda_image` varchar(600) DEFAULT NULL COMMENT '图片地址，采用,进行分割',
   `hacienda_land` varchar(200) DEFAULT NULL COMMENT '土地性质',
-  `server_category` varchar(300) DEFAULT NULL COMMENT '所需要服务的领域',
+  `server_category` varchar(300) DEFAULT NULL COMMENT '土地性质类别 ',
   `server_max` double(20,2) DEFAULT '0.00' COMMENT '土地面积',
   `server_use_max` double(20,2) DEFAULT NULL COMMENT '托管可使用面积',
   `detail_addr` varchar(200) DEFAULT NULL COMMENT '详细地址',
@@ -3425,13 +3443,37 @@ CREATE TABLE `hj_hacienda_info` (
   `auth_status` int(11) DEFAULT '0' COMMENT '0:待审核，1：审核中，2：审核通过',
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
-  `data_version` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='农场主';
+  `data_version` int(11) DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `h_u_id_idx` (`user_id`) USING BTREE,
+  KEY `hacienda_id_idx` (`hacienda_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='农场主';
 
 -- ----------------------------
 -- Records of hj_hacienda_info
 -- ----------------------------
+INSERT INTO `hj_hacienda_info` VALUES ('1', '273187894326198272', '273051435812257792', '1242414', '恆大農村', '13366555', '張三年', '1', null, 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '草', '土地平整,测土施肥', '2,3', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '园地', '22', '10.00', '0.00', '廣告是啊是否hi盎司附近拍攝是', '1', '2', '3', '1,2,3', '214', '124', '1', '0', '0', '2018-11-24 20:31:10', '2018-11-24 20:43:14', '1');
+
+-- ----------------------------
+-- Table structure for hj_hacienda_remark
+-- ----------------------------
+DROP TABLE IF EXISTS `hj_hacienda_remark`;
+CREATE TABLE `hj_hacienda_remark` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `hacienda_id` bigint(20) DEFAULT NULL,
+  `hacienda_image` varchar(120) DEFAULT NULL COMMENT '介绍图片',
+  `hacienda_info` varchar(600) DEFAULT NULL COMMENT '介绍内容',
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `data_version` int(1) DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `r_h_idx` (`hacienda_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='农场的土地介绍相关';
+
+-- ----------------------------
+-- Records of hj_hacienda_remark
+-- ----------------------------
+INSERT INTO `hj_hacienda_remark` VALUES ('2', '273187894326198272', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', 'asfsfas', '2018-11-24 20:43:18', null, null);
 
 -- ----------------------------
 -- Table structure for hj_invitation
@@ -3441,9 +3483,12 @@ CREATE TABLE `hj_invitation` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) DEFAULT NULL,
   `invitation_id` bigint(20) DEFAULT NULL,
+  `invitation_images` varchar(1200) DEFAULT NULL COMMENT '图片地址',
   `user_header` varchar(120) DEFAULT NULL COMMENT '头像',
   `user_name` varchar(30) DEFAULT NULL COMMENT '昵称',
-  `invitation_type` bigint(20) DEFAULT NULL COMMENT '帖子类型',
+  `ok_num` int(11) DEFAULT '1' COMMENT '点赞数量',
+  `article_category` varchar(60) DEFAULT NULL COMMENT '类型名称',
+  `article_category_code` varchar(30) DEFAULT NULL COMMENT '帖子类型',
   `invitation_info` varchar(600) DEFAULT NULL COMMENT '内容',
   `answer_num` int(11) DEFAULT '0' COMMENT '回复数量',
   `invitation_status` int(11) DEFAULT '1' COMMENT '1:显示，0：不显示',
@@ -3451,11 +3496,13 @@ CREATE TABLE `hj_invitation` (
   `update_time` datetime DEFAULT NULL,
   `data_version` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='帖子';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='帖子';
 
 -- ----------------------------
 -- Records of hj_invitation
 -- ----------------------------
+INSERT INTO `hj_invitation` VALUES ('1', '273051435812257792', '273097583667183616', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', null, '273051435812257792', '4', '测土施肥', '32', 'sfasfasfasfasfsfasasascasfaf', '1', '1', '2018-11-24 14:32:18', null, '1');
+INSERT INTO `hj_invitation` VALUES ('2', '273051435812257792', '273097943379083264', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', null, '273051435812257792', '3', '土地平整', '31', 'asafsfas3212141241245445555112124141', '0', '1', '2018-11-24 14:33:44', null, '1');
 
 -- ----------------------------
 -- Table structure for hj_invitation_list
@@ -3463,9 +3510,12 @@ CREATE TABLE `hj_invitation` (
 DROP TABLE IF EXISTS `hj_invitation_list`;
 CREATE TABLE `hj_invitation_list` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `comment_id` bigint(20) DEFAULT NULL COMMENT '评论Id',
   `invitation_id` bigint(20) DEFAULT NULL,
   `user_id` bigint(20) DEFAULT NULL COMMENT '用户ID',
   `user_header` varchar(120) DEFAULT NULL COMMENT '头像',
+  `user_name` varchar(60) DEFAULT NULL COMMENT '用户的昵称',
+  `invitation_images` varchar(1200) DEFAULT NULL COMMENT '图片地址',
   `invitation_info` varchar(600) DEFAULT NULL COMMENT '回复类容',
   `answer_num_ok` int(11) DEFAULT '0' COMMENT '点赞数量',
   `invitation_status` int(11) DEFAULT '1' COMMENT '1:显示，0：不显示',
@@ -3473,11 +3523,13 @@ CREATE TABLE `hj_invitation_list` (
   `update_time` datetime DEFAULT NULL,
   `data_version` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='回复列表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='回复列表';
 
 -- ----------------------------
 -- Records of hj_invitation_list
 -- ----------------------------
+INSERT INTO `hj_invitation_list` VALUES ('1', '1', '273097583667183616', '273051435812257792', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '1242414', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '你说的是个撒子哦，完全听不懂........', '1', '1', '2018-11-24 17:40:39', null, '1');
+INSERT INTO `hj_invitation_list` VALUES ('2', '2', '273097583667183616', '273051435812257792', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '273051435812257792', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '你说的是个撒子哦，完全听不懂..16556555454..255554122252122....', '0', '1', '2018-11-24 17:45:04', null, '1');
 
 -- ----------------------------
 -- Table structure for hj_message
@@ -3501,6 +3553,30 @@ CREATE TABLE `hj_message` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for hj_msg_record
+-- ----------------------------
+DROP TABLE IF EXISTS `hj_msg_record`;
+CREATE TABLE `hj_msg_record` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `mobile` varchar(20) DEFAULT NULL COMMENT '用户手机号码',
+  `msg_num` varchar(10) DEFAULT NULL COMMENT '验证码',
+  `msg_type` int(1) DEFAULT '1' COMMENT '1：注册，2：修改密码，3：找回密码',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL,
+  `data_version` int(1) DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `index` (`mobile`,`msg_type`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='短信记录表';
+
+-- ----------------------------
+-- Records of hj_msg_record
+-- ----------------------------
+INSERT INTO `hj_msg_record` VALUES ('5', '13368466998', '440690', '1', '2018-11-24 11:27:59', null, '1');
+INSERT INTO `hj_msg_record` VALUES ('6', '13368466998', '413425', '1', '2018-11-24 11:28:12', null, '1');
+INSERT INTO `hj_msg_record` VALUES ('7', '13368466998', '761666', '2', '2018-11-24 11:40:16', null, '1');
+INSERT INTO `hj_msg_record` VALUES ('8', '13368466998', '319739', '3', '2018-11-24 11:49:23', null, '1');
+
+-- ----------------------------
 -- Table structure for hj_order
 -- ----------------------------
 DROP TABLE IF EXISTS `hj_order`;
@@ -3508,11 +3584,11 @@ CREATE TABLE `hj_order` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `from_user_id` bigint(20) DEFAULT NULL COMMENT '联系人ID',
   `from_user_name` varchar(30) DEFAULT NULL COMMENT '联系人名称',
-  `from_user_type` int(1) DEFAULT NULL COMMENT '联系人类型',
+  `from_user_type` int(1) DEFAULT NULL COMMENT '被联系人1:农场主，2：服务，0：普通',
   `from_user_mobile` varchar(30) DEFAULT NULL COMMENT '联系人电话',
-  `to_user_id` int(11) DEFAULT NULL COMMENT '被联系人',
-  `to_user_name` varchar(20) DEFAULT NULL COMMENT '被联系人',
-  `to_user_type` int(1) DEFAULT NULL COMMENT '被联系人',
+  `to_user_id` bigint(11) DEFAULT NULL COMMENT '被联系人',
+  `to_user_name` varchar(120) DEFAULT NULL COMMENT '被联系人',
+  `to_user_type` int(1) DEFAULT NULL COMMENT '被联系人1:农场主，2：服务',
   `to_user_mobile` varchar(30) DEFAULT NULL COMMENT '被联系人',
   `need_question` varchar(1200) DEFAULT NULL COMMENT '需要的服务咨询描述',
   `opt_status` int(1) DEFAULT '1' COMMENT '0:待处理，1：已处理',
@@ -3532,21 +3608,47 @@ CREATE TABLE `hj_order` (
 DROP TABLE IF EXISTS `hj_server_case`;
 CREATE TABLE `hj_server_case` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `case_id` bigint(20) DEFAULT NULL,
   `server_id` bigint(20) DEFAULT NULL,
-  `case_intro` varchar(300) DEFAULT NULL COMMENT '案例简介',
-  `case_info` varchar(1200) DEFAULT NULL COMMENT '案例详情',
+  `server_type` varchar(30) DEFAULT NULL COMMENT '服务类型',
+  `case_image` varchar(120) DEFAULT NULL COMMENT '案例图片',
+  `case_name` varchar(120) DEFAULT NULL COMMENT '项目名称',
   `case_max` varchar(30) DEFAULT NULL COMMENT '服务的亩数',
   `case_time` varchar(30) DEFAULT NULL COMMENT '服务时间',
-  `case_show` int(11) DEFAULT '1' COMMENT '1:展示，0：不展示',
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `data_version` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='服务商案例';
+  PRIMARY KEY (`id`),
+  KEY `ser_idx` (`case_id`),
+  KEY `c_ser_idx` (`server_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='服务商案例';
 
 -- ----------------------------
 -- Records of hj_server_case
 -- ----------------------------
+INSERT INTO `hj_server_case` VALUES ('1', '273176280935956480', '273162788300390400', '农场服务', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '合作社的相关', '50', '2018-10-20', '2018-11-24 19:45:01', null, null);
+
+-- ----------------------------
+-- Table structure for hj_server_case_remark
+-- ----------------------------
+DROP TABLE IF EXISTS `hj_server_case_remark`;
+CREATE TABLE `hj_server_case_remark` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `case_id` bigint(20) DEFAULT NULL,
+  `case_info` varchar(600) DEFAULT NULL COMMENT '介绍文字描述',
+  `case_show` int(1) DEFAULT '1' COMMENT '1:显示',
+  `case_image` varchar(120) DEFAULT NULL COMMENT '图片',
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `data_version` int(1) DEFAULT '1' COMMENT '1',
+  PRIMARY KEY (`id`),
+  KEY `case_id_idx` (`case_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='服务商案例详情介绍';
+
+-- ----------------------------
+-- Records of hj_server_case_remark
+-- ----------------------------
+INSERT INTO `hj_server_case_remark` VALUES ('1', '273176280935956480', 'asfasfsfasfasfasf', '1', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '2018-11-24 19:45:04', '2018-11-24 19:46:42', null);
 
 -- ----------------------------
 -- Table structure for hj_server_code
@@ -3556,37 +3658,61 @@ CREATE TABLE `hj_server_code` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `server_category` varchar(30) DEFAULT NULL,
   `server_remark` varchar(200) DEFAULT NULL,
+  `server_icon` varchar(120) DEFAULT NULL COMMENT '图片地址',
   `parent_id` bigint(20) DEFAULT NULL,
-  `category_code` varchar(200) DEFAULT NULL COMMENT '编码',
+  `server_sort` int(10) DEFAULT '1' COMMENT '排序,所有越大顺序越靠前',
+  `category_code` varchar(30) DEFAULT NULL COMMENT '编码',
   `data_status` int(11) DEFAULT '1' COMMENT '0:停用，1：启用',
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `data_version` int(11) DEFAULT '1' COMMENT '版本号',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='服务类别编码';
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `category_code_dix` (`category_code`) USING BTREE,
+  KEY `parent_id_idx` (`parent_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='服务类别编码';
 
 -- ----------------------------
 -- Records of hj_server_code
 -- ----------------------------
+INSERT INTO `hj_server_code` VALUES ('1', '服务项目', '农场主，服务商的项目', null, '0', '1', '1', '1', '2018-11-18 19:51:45', null, '1');
+INSERT INTO `hj_server_code` VALUES ('2', '土地平整', '土地平整', null, '1', '1', '12', '1', '2018-11-18 19:54:47', null, '1');
+INSERT INTO `hj_server_code` VALUES ('3', '测土施肥', '测土施肥', null, '1', '1', '13', '1', '2018-11-18 19:55:45', null, '1');
+INSERT INTO `hj_server_code` VALUES ('4', '育苗播种', '育苗播种', null, '1', '1', '14', '1', '2018-11-18 19:56:06', null, '1');
+INSERT INTO `hj_server_code` VALUES ('5', '专业植保', '专业植保', null, '1', '1', '15', '1', '2018-11-18 19:56:18', null, '1');
+INSERT INTO `hj_server_code` VALUES ('6', '农机收割', '农机收割', null, '1', '1', '16', '1', '2018-11-18 19:56:33', null, '1');
+INSERT INTO `hj_server_code` VALUES ('7', '土地托管', '土地托管', null, '1', '1', '17', '1', '2018-11-18 19:56:48', null, '1');
+INSERT INTO `hj_server_code` VALUES ('8', '订单收购', '订单收购', null, '1', '1', '18', '1', '2018-11-18 19:57:02', null, '1');
+INSERT INTO `hj_server_code` VALUES ('9', '土地性质', '土地性质', null, '0', '1', '2', '1', '2018-11-18 19:57:35', null, '1');
+INSERT INTO `hj_server_code` VALUES ('10', '耕地', '耕地', null, '9', '1', '21', '1', '2018-11-18 19:57:57', null, '1');
+INSERT INTO `hj_server_code` VALUES ('11', '园地', '园地', null, '9', '1', '22', '1', '2018-11-18 19:58:15', null, '1');
+INSERT INTO `hj_server_code` VALUES ('12', '林地', '林地', null, '9', '1', '23', '1', '2018-11-18 19:58:30', null, '1');
+INSERT INTO `hj_server_code` VALUES ('13', '水域', '水域', null, '9', '1', '24', '1', '2018-11-18 19:58:43', null, '1');
+INSERT INTO `hj_server_code` VALUES ('14', '牧草地', '牧草地', null, '9', '1', '25', '1', '2018-11-18 19:58:58', null, '1');
+INSERT INTO `hj_server_code` VALUES ('15', '学农图标', '学农图标', null, '0', '1', '3', '1', '2018-11-18 22:38:11', null, '1');
+INSERT INTO `hj_server_code` VALUES ('16', '土地平整', '土地平整', null, '15', '1', '31', '1', '2018-11-18 22:38:31', null, '1');
+INSERT INTO `hj_server_code` VALUES ('17', '测土施肥', '测土施肥', null, '15', '1', '32', '1', '2018-11-18 22:38:45', null, '1');
+INSERT INTO `hj_server_code` VALUES ('18', '附着物种类', '附着物种类', null, '0', '1', '4', '1', '2018-12-09 13:19:35', null, '1');
+INSERT INTO `hj_server_code` VALUES ('19', '鱼', '鱼', null, '18', '1', '41', '1', '2018-12-09 13:20:54', null, '1');
+INSERT INTO `hj_server_code` VALUES ('20', '大米', '大米', null, '18', '1', '42', '1', '2018-12-09 13:21:15', null, '1');
 
 -- ----------------------------
 -- Table structure for hj_server_info
 -- ----------------------------
 DROP TABLE IF EXISTS `hj_server_info`;
 CREATE TABLE `hj_server_info` (
-  `id` bigint(20) NOT NULL,
-  `server_id` bigint(20) DEFAULT NULL COMMENT '服务商ID',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `server_id` bigint(20) NOT NULL COMMENT '服务商ID',
   `user_id` bigint(20) DEFAULT NULL COMMENT '会员ID',
   `company_name` varchar(160) DEFAULT NULL COMMENT '企业名称',
   `link_phone` varchar(20) DEFAULT NULL COMMENT '联系电话',
   `link_name` varchar(20) DEFAULT NULL COMMENT '联系人',
-  `company_remark` varchar(1200) DEFAULT NULL COMMENT '服务商介绍',
   `company_email` varchar(60) DEFAULT NULL COMMENT '邮箱',
   `company_scope` varchar(600) DEFAULT NULL COMMENT '经营范围',
-  `company_image` varchar(600) DEFAULT NULL COMMENT '图片地址，采用,进行分割',
+  `company_image` varchar(600) DEFAULT NULL COMMENT '图片主图',
   `company_website` varchar(120) DEFAULT NULL COMMENT '网站介绍',
-  `server_category` varchar(300) DEFAULT NULL COMMENT '服务的领域',
+  `server_category` varchar(120) DEFAULT NULL COMMENT '服务的领域',
   `server_reg_time` varchar(20) DEFAULT NULL COMMENT '注册时间',
+  `server_reg_image` varchar(120) DEFAULT NULL COMMENT '营业执照图片',
   `server_registration` varchar(120) DEFAULT NULL COMMENT '工商注册码',
   `server_type` int(11) DEFAULT '1' COMMENT '1:个人，2：企业',
   `server_max` double DEFAULT '0' COMMENT '服务的亩数，单位亩',
@@ -3606,13 +3732,41 @@ CREATE TABLE `hj_server_info` (
   `auth_status` int(11) DEFAULT '0' COMMENT '0:待审核，1：审核中，2：审核通过',
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
-  `data_version` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='服务商详请';
+  `data_version` int(11) DEFAULT '1',
+  PRIMARY KEY (`id`,`server_id`),
+  UNIQUE KEY `user_id_server_idx` (`user_id`) USING BTREE,
+  KEY `ser_idx` (`server_id`),
+  KEY `cate_idx` (`server_codes`),
+  KEY `area_idx` (`area_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='服务商详请';
 
 -- ----------------------------
 -- Records of hj_server_info
 -- ----------------------------
+INSERT INTO `hj_server_info` VALUES ('4', '273162788300390400', '273051435812257792', '测试农业合作伙伴1221', '18993656523', '张三1', null, '农1，林2等相关的', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', null, '土地平整,测土施肥,育苗播种', null, 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', null, '1', '0', '12,13,14', '150万', '北京市海定区中关村2-1太平路1331', '0', '0', '1', '2', '3', '1,2,3', '39.904211', '116.407394', '1', '0', '0', '2018-11-24 18:51:24', '2018-11-24 18:59:45', '1');
+
+-- ----------------------------
+-- Table structure for hj_server_remak
+-- ----------------------------
+DROP TABLE IF EXISTS `hj_server_remak`;
+CREATE TABLE `hj_server_remak` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `server_id` bigint(20) DEFAULT NULL,
+  `server_info` varchar(600) DEFAULT NULL COMMENT '介绍文字描述',
+  `server_show` int(1) DEFAULT '1' COMMENT '1:显示',
+  `server_image` varchar(120) DEFAULT NULL COMMENT '图片',
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `data_version` int(1) DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `serId_idx` (`server_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='服务商的介绍';
+
+-- ----------------------------
+-- Records of hj_server_remak
+-- ----------------------------
+INSERT INTO `hj_server_remak` VALUES ('11', '273162788300390400', '124241412414', '1', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '2018-11-24 18:59:45', null, '1');
+INSERT INTO `hj_server_remak` VALUES ('12', '273162788300390400', '124241412414', '1', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '2018-11-24 18:59:45', null, '1');
 
 -- ----------------------------
 -- Table structure for hj_user
@@ -3625,24 +3779,25 @@ CREATE TABLE `hj_user` (
   `open_id` varchar(32) DEFAULT NULL COMMENT '微信OPEN_ID',
   `user_type` int(1) DEFAULT '0' COMMENT '0:普通，1：农场主，2：服务商',
   `auth_type` int(1) DEFAULT '0' COMMENT '0:未认证，1：已认证',
-  `data_status` int(1) DEFAULT '1' COMMENT '1:启用，0：禁用',
   `user_name` varchar(30) DEFAULT NULL COMMENT '昵称',
+  `data_status` int(1) DEFAULT '1' COMMENT '1:启用，0：禁用',
   `user_portrait` varchar(120) DEFAULT NULL COMMENT '头像',
   `login_pwd` varchar(60) DEFAULT NULL COMMENT '登陆密码',
-  `login_salt` varchar(4) DEFAULT NULL COMMENT '密码盐',
+  `login_salt` varchar(6) DEFAULT NULL COMMENT '密码盐',
   `last_login_time` datetime DEFAULT NULL COMMENT '最后登陆时间',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
-  `data_version` int(1) DEFAULT NULL COMMENT '版本号',
+  `data_version` int(1) DEFAULT '1' COMMENT '版本号',
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_moblie_idx` (`user_mobile`),
   UNIQUE KEY `user_open_idx` (`open_id`),
   KEY `use_id_idx` (`user_id`,`user_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户管理表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户管理表';
 
 -- ----------------------------
 -- Records of hj_user
 -- ----------------------------
+INSERT INTO `hj_user` VALUES ('2', '273051435812257792', '13368466998', null, '0', '0', '新农人2730', '1', 'http://img.jutubao.com/test/uploads/images/20181206/3e965e127d917dedfaaa273cd9eada83.jpg', '998843cbfe14aa46031399e9220e303e', '6L7UqN', '2018-11-24 22:46:40', '2018-11-24 11:28:55', null, '1');
 
 -- ----------------------------
 -- Table structure for hj_user_collect
@@ -3650,6 +3805,7 @@ CREATE TABLE `hj_user` (
 DROP TABLE IF EXISTS `hj_user_collect`;
 CREATE TABLE `hj_user_collect` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `collect_id` bigint(20) DEFAULT NULL,
   `user_id` bigint(20) DEFAULT NULL,
   `collect_type` int(11) DEFAULT NULL COMMENT '1:服务商，2：农场，3：文章',
   `object_id` bigint(20) DEFAULT NULL COMMENT '对于的ID',
@@ -3658,7 +3814,8 @@ CREATE TABLE `hj_user_collect` (
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `data_version` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `u_o_idx` (`user_id`,`collect_type`,`object_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户的收藏表';
 
 -- ----------------------------
@@ -3947,6 +4104,25 @@ CREATE TABLE `qrtz_triggers` (
 -- ----------------------------
 INSERT INTO `qrtz_triggers` VALUES ('JeeFastScheduler', 'TASK_1', 'DEFAULT', 'TASK_1', 'DEFAULT', null, '1542442200000', '-1', '5', 'WAITING', 'CRON', '1542441802000', '0', null, '2', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B45597400B77B226A6F624964223A312C226265616E4E616D65223A22746573745461736B222C226D6574686F644E616D65223A2274657374222C22706172616D73223A226A656566617374222C2263726F6E45787072657373696F6E223A223020302F3130202A202A202A203F222C22737461747573223A302C2272656D61726B223A22E69C89E58F82E695B0E6B58BE8AF95222C2263726561746554696D65223A2244656320312C20323031362031313A31363A343620504D227D7800);
 INSERT INTO `qrtz_triggers` VALUES ('JeeFastScheduler', 'TASK_2', 'DEFAULT', 'TASK_2', 'DEFAULT', null, '1542442200000', '-1', '5', 'PAUSED', 'CRON', '1542441802000', '0', null, '2', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B45597400A47B226A6F624964223A322C226265616E4E616D65223A22746573745461736B222C226D6574686F644E616D65223A227465737432222C2263726F6E45787072657373696F6E223A223020302F3130202A202A202A203F222C22737461747573223A312C2272656D61726B223A22E697A0E58F82E695B0E6B58BE8AF95222C2263726561746554696D65223A2244656320332C203230313620323A35353A353620504D227D7800);
+
+-- ----------------------------
+-- Table structure for redis_key_config
+-- ----------------------------
+DROP TABLE IF EXISTS `redis_key_config`;
+CREATE TABLE `redis_key_config` (
+  `id` bigint(20) NOT NULL,
+  `redis_name` varchar(60) DEFAULT NULL,
+  `redis_key` varchar(60) DEFAULT NULL,
+  `redis_type` varchar(30) DEFAULT NULL,
+  `exprise_time` int(11) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='redis的key的管理配置';
+
+-- ----------------------------
+-- Records of redis_key_config
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for schedule_job

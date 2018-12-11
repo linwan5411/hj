@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jeefast.dao.HjHaciendaInfoDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="cn.jeefast.entity.HjHaciendaInfo">
+	<result column="id" property="id" />
+	<result column="create_time" property="createTime" />
+	<result column="update_time" property="updateTime" />
+	<result column="data_version" property="dataVersion" />
+		<result column="hacienda_id" property="haciendaId" />
+		<result column="user_id" property="userId" />
+		<result column="hacienda_remark" property="haciendaRemark" />
+		<result column="hacienda_name" property="haciendaName" />
+		<result column="link_phone" property="linkPhone" />
+		<result column="link_name" property="linkName" />
+		<result column="hacienda_type" property="haciendaType" />
+		<result column="hacienda_email" property="haciendaEmail" />
+		<result column="hacienda_reg_image" property="haciendaRegImage" />
+		<result column="hacienda_scope" property="haciendaScope" />
+		<result column="hacienda_image" property="haciendaImage" />
+		<result column="hacienda_land" property="haciendaLand" />
+		<result column="server_category" property="serverCategory" />
+		<result column="need_server" property="needServer" />
+		<result column="need_server_name" property="needServerName" />
+		<result column="server_max" property="serverMax" />
+		<result column="server_use_max" property="serverUseMax" />
+		<result column="detail_addr" property="detailAddr" />
+		<result column="provice" property="provice" />
+		<result column="city" property="city" />
+		<result column="district" property="district" />
+		<result column="area_code" property="areaCode" />
+		<result column="latitude" property="latitude" />
+		<result column="longitude" property="longitude" />
+		<result column="hacienda_show" property="haciendaShow" />
+		<result column="hacienda_sort" property="haciendaSort" />
+		<result column="auth_status" property="authStatus" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+	id,
+	create_time,
+	update_time,
+	data_version,
+        hacienda_id AS haciendaId, user_id AS userId, hacienda_remark AS haciendaRemark, hacienda_name AS haciendaName, link_phone AS linkPhone, link_name AS linkName, hacienda_type AS haciendaType, hacienda_email AS haciendaEmail, hacienda_reg_image AS haciendaRegImage, hacienda_scope AS haciendaScope, hacienda_image AS haciendaImage, hacienda_land AS haciendaLand, server_category AS serverCategory, server_max AS serverMax, server_use_max AS serverUseMax, detail_addr AS detailAddr, provice, city, district, area_code AS areaCode, latitude, longitude, hacienda_show AS haciendaShow, hacienda_sort AS haciendaSort, auth_status AS authStatus
+    </sql>
+
+	<sql id="base_sql">
+		hacienda_id as haciendaId,
+		hacienda_name as haciendaName,
+		hacienda_land as haciendaLand,
+		server_max as serverMax,
+		detail_addr as detailAddr,
+		hacienda_type as haciendaType,
+		hacienda_image as haciendaImage,
+		hacienda_scope as haciendaScope,
+		auth_status as authStatus
+	</sql>
+	<select id="findLandMore" resultType="java.util.Map">
+		SELECT t.* FROM (
+		SELECT
+		<include refid="base_sql"/>
+		<if test="lng != null and lat != null">
+			,point_map(latitude,longitude,#{lat},#{lng}) as distance
+		</if>
+		from hj_hacienda_info where hacienda_show = 1
+		<if test="authType != null">
+			and auth_status = #{authType}
+		</if>
+		<if test="userType != null">
+			and hacienda_type = #{userType}
+		</if>
+		<if test="areaCode != null">
+			and area_code like '${areaCode}%'
+		</if>
+		<if test="categoryCode != null">
+			and server_category like '%${categoryCode}%'
+		</if>
+		) as t
+		<if test="lng != null and lat != null">
+			ORDER BY t.distance desc
+		</if>
+		 limit #{pageIndex},#{pageSize}
+	</select>
+
+</mapper>

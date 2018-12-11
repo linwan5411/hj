@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jeefast.dao.HjOrderDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="cn.jeefast.entity.HjOrder">
+	<result column="id" property="id" />
+	<result column="create_time" property="createTime" />
+	<result column="update_time" property="updateTime" />
+	<result column="data_version" property="dataVersion" />
+		<result column="from_user_id" property="fromUserId" />
+		<result column="from_user_name" property="fromUserName" />
+		<result column="from_user_type" property="fromUserType" />
+		<result column="from_user_mobile" property="fromUserMobile" />
+		<result column="to_user_id" property="toUserId" />
+		<result column="to_user_name" property="toUserName" />
+		<result column="to_user_type" property="toUserType" />
+		<result column="to_user_mobile" property="toUserMobile" />
+		<result column="need_question" property="needQuestion" />
+		<result column="opt_status" property="optStatus" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+	id,
+	create_time,
+	update_time,
+	data_version,
+        from_user_id AS fromUserId, from_user_name AS fromUserName, from_user_type AS fromUserType, from_user_mobile AS fromUserMobile, to_user_id AS toUserId, to_user_name AS toUserName, to_user_type AS toUserType, to_user_mobile AS toUserMobile, need_question AS needQuestion, opt_status AS optStatus
+    </sql>
+
+    <update id="updateByHjOrder"  parameterType="cn.jeefast.entity.HjOrder">
+		update ${table.tableName}
+		<set>
+                <if test="id != null" >
+					id = #{id},
+                </if>
+                <if test="createTime != null" >
+					create_time = #{createTime},
+                </if>
+                <if test="updateTime != null" >
+					update_time = #{updateTime},
+                </if>
+                <if test="dataVersion != null" >
+					data_version = #{dataVersion},
+                </if>
+                <if test="fromUserId != null" >
+					from_user_id = #{fromUserId},
+                </if>
+                <if test="fromUserName != null" >
+					from_user_name = #{fromUserName},
+                </if>
+                <if test="fromUserType != null" >
+					from_user_type = #{fromUserType},
+                </if>
+                <if test="fromUserMobile != null" >
+					from_user_mobile = #{fromUserMobile},
+                </if>
+                <if test="toUserId != null" >
+					to_user_id = #{toUserId},
+                </if>
+                <if test="toUserName != null" >
+					to_user_name = #{toUserName},
+                </if>
+                <if test="toUserType != null" >
+					to_user_type = #{toUserType},
+                </if>
+                <if test="toUserMobile != null" >
+					to_user_mobile = #{toUserMobile},
+                </if>
+                <if test="needQuestion != null" >
+					need_question = #{needQuestion},
+                </if>
+                <if test="optStatus != null" >
+					opt_status = #{optStatus},
+                </if>
+		</set>
+		where  id = #{id}
+
+    </update>
+    <select id="orderListByTen" resultType="cn.jeefast.vo.RecordRps">
+		SELECT
+		CONCAT(
+		SUBSTR(from_user_mobile, 1, 3),
+		'****',
+		SUBSTR(from_user_mobile, 8, 11)
+		) AS mobile,
+		to_user_name as userName,
+		create_time as createTime,
+		TIMESTAMPDIFF(MINUTE, create_time, NOW()) AS mins,
+		TIMESTAMPDIFF(HOUR, create_time, NOW()) AS hours,
+		TIMESTAMPDIFF(DAY, create_time, NOW()) AS days
+		FROM
+		hj_order
+		WHERE 1 = 1
+		<if test="objectId != null">
+			and to_user_id = #{objectId}
+		</if>
+		<if test="type != null">
+			and to_user_type = #{type}
+		</if>
+		<if test="beforeTime != null">
+			and create_time &gt;= #{beforeTime}
+		</if>
+		ORDER BY create_time desc limit #{size}
+	</select>
+
+</mapper>

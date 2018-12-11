@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jeefast.dao.HjInvitationListDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="cn.jeefast.entity.HjInvitationList">
+	<result column="id" property="id" />
+	<result column="create_time" property="createTime" />
+	<result column="update_time" property="updateTime" />
+	<result column="data_version" property="dataVersion" />
+		<result column="invitation_id" property="invitationId" />
+		<result column="comment_id" property="commentId" />
+		<result column="user_id" property="userId" />
+		<result column="user_header" property="userHeader" />
+		<result column="invitation_images" property="invitationImages" />
+		<result column="invitation_info" property="invitationInfo" />
+		<result column="answer_num_ok" property="answerNumOk" />
+		<result column="user_name" property="userName" />
+		<result column="invitation_status" property="invitationStatus" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+		comment_id as commentId,
+		create_time as createTime,
+        invitation_id AS invitationId,
+        user_id AS userId,
+        user_header AS userHeader,
+        user_name AS userName,
+        invitation_images AS invitationImages,
+        invitation_info AS invitationInfo,
+        answer_num_ok AS answerNumOk
+    </sql>
+
+    <update id="commentIdOk">
+        UPDATE hj_invitation_list set answer_num_ok = answer_num_ok + 1 WHERE  comment_id = #{commentId}
+    </update>
+    <update id="doReadNum">
+		UPDATE hj_invitation set answer_num = answer_num +1 where invitation_id = #{noteId}
+	</update>
+    <select id="findNoteInvitation" resultType="cn.jeefast.entity.HjInvitationList">
+		SELECT <include refid="Base_Column_List"/> from hj_invitation_list where invitation_status = 1 ORDER by create_time,answer_num_ok desc limit #{pageIndex},#{pageSize}
+	</select>
+</mapper>
