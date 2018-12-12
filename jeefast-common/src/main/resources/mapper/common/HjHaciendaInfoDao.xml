@@ -83,5 +83,8 @@
 		</if>
 		 limit #{pageIndex},#{pageSize}
 	</select>
+    <select id="findLandByUserId" resultType="java.util.Map">
+		SELECT <include refid="base_sql"/> from hj_hacienda_info where user_id = #{userId}
+	</select>
 
 </mapper>

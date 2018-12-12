@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
- * 农长主的认证
+ * 添加土地的操作
  */
 public class LandAuthVo extends TokenVo {
 
@@ -22,11 +22,9 @@ public class LandAuthVo extends TokenVo {
     private String haciendaName;
 
     @ApiModelProperty(value="附着物种类", hidden=false,  required=true, dataType="String")
-    @NotNull(message = "附着物种类不能为空")
     private String haciendaScope;
 
     @ApiModelProperty(value="土地面积", hidden=false,  required=true, dataType="String")
-    @NotNull(message = "土地面积不能为空")
     private Double serverMax;
 
     @ApiModelProperty(value="联系电话", hidden=false,  required=true, dataType="String")
@@ -38,11 +36,9 @@ public class LandAuthVo extends TokenVo {
     private String linkName;
 
     @ApiModelProperty(value="土地性质编码", hidden=false,  required=true, dataType="String")
-    @NotNull(message = "土地性质不能为空")
     private String serverCategory;
 
     @ApiModelProperty(value="所需服务编码", hidden=false,  required=true, dataType="String")
-    @NotNull(message = "所需服务编码不能为空")
     private String needServer;
 
     @ApiModelProperty(value="营业执照图片地址", hidden=false,  required=false, dataType="String")

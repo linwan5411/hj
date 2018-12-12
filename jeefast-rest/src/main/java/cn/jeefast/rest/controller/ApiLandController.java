@@ -39,7 +39,7 @@ public class ApiLandController {
     @Resource
     private HjHaciendaInfoService hjHaciendaInfoService;
 
-    @ApiOperation(value = "农场主认证")
+    @ApiOperation(value = "添加土地")
     @PostMapping("/landApprove")
     public BaseResponse landApprove(@Valid @RequestBody LandAuthVo serverAuthVo){
 
@@ -66,6 +66,17 @@ public class ApiLandController {
         return ResultUtils.successV2(serverAuthVo);
     }
 
+    @ApiOperation(value = "查询我的所有土地")
+    @PostMapping("/landApprove")
+    public BaseResponse myLands(@Valid TokenVo tokenVo){
+        //token
+        Long userId = TokenUtil.parseUserId(tokenVo.getToken());
+        if(userId == null){
+            return ResultUtils.successV2();
+        }
+        return ResultUtils.successV2(hjHaciendaInfoService.findLandByUserId(userId));
+    }
+
 
     @ApiOperation(value = "经纬度查询最近3条的农场主")
     @PostMapping("/findLand")
@@ -83,7 +94,7 @@ public class ApiLandController {
         return ResultUtils.successV2(list);
     }
 
-    @ApiOperation(value = "查询农场的详情")
+    @ApiOperation(value = "查询土地的详情")
     @PostMapping("/lndInfo/{haciendaId}")
     public BaseResponse findLandDetail(@PathVariable("haciendaId")Long haciendaId){
         return ResultUtils.successV2(hjHaciendaInfoService.findLandDetail(haciendaId));
