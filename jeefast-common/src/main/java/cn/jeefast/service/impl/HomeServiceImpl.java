@@ -60,7 +60,7 @@ public class HomeServiceImpl implements HomeService {
 
 
         //文章
-        List<Map<String,Object>> ts = hjArticleService.findAdArticle(0,3);
+        List<Map<String,Object>> ts = hjArticleService.findAdArticle(0,3,null);
         map.put("aList",ts);
         //帖子
         List<HjInvitation> noteList = hjInvitationService.findAdNote(0,3);
