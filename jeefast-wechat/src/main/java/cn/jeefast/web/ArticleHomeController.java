@@ -51,10 +51,10 @@ public class ArticleHomeController extends BaseController{
      * 文章列表数据
      * @return
      */
-    @RequestMapping(value = "/articleList")
-    public ModelAndView articleList(){
+    @RequestMapping(value = "/articleList/{categoryCode}")
+    public ModelAndView articleList(@PathVariable(value = "categoryCode",required = false)String categoryCode){
         Map<String,Object> map = new HashMap<>();
-        List<Map<String,Object>> list = hjArticleService.findAdArticle(0,10);
+        List<Map<String,Object>> list = hjArticleService.findAdArticle(0,10,categoryCode);
         map.put("list",list);
         System.out.println(JsonUtils.Bean2Json(map));
         return new ModelAndView("articleList",map);
