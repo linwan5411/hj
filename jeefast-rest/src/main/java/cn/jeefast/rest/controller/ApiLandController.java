@@ -5,10 +5,7 @@ import cn.jeefast.common.utils.ResultUtils;
 import cn.jeefast.common.utils.TokenUtil;
 import cn.jeefast.entity.*;
 import cn.jeefast.rest.entity.vo.*;
-import cn.jeefast.service.HjHaciendaInfoService;
-import cn.jeefast.service.HjHaciendaRemarkService;
-import cn.jeefast.service.HjServerCaseService;
-import cn.jeefast.service.HjServerInfoService;
+import cn.jeefast.service.*;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +35,24 @@ public class ApiLandController {
 
     @Resource
     private HjHaciendaInfoService hjHaciendaInfoService;
+
+    @Resource
+    private HjFarmersInfoService hjFarmersInfoService;
+
+
+    @ApiOperation(value = "农场主认证")
+    @PostMapping("/landApprove")
+    public BaseResponse farmersAuth(@Valid FramerAuthVo framerAuthVo){
+        //token
+        Long userId = TokenUtil.parseUserId(framerAuthVo.getToken());
+        HjFarmersInfo info = new HjFarmersInfo();
+        BeanUtils.copyProperties(framerAuthVo,info);
+        info.setUserId(userId);
+        Long farmersId = hjFarmersInfoService.farmersAuth(info);
+        framerAuthVo.setFarmersId(farmersId);
+        return ResultUtils.successV2(framerAuthVo);
+    }
+
 
     @ApiOperation(value = "添加土地")
     @PostMapping("/landApprove")
@@ -76,7 +91,6 @@ public class ApiLandController {
         }
         return ResultUtils.successV2(hjHaciendaInfoService.findLandByUserId(userId));
     }
-
 
     @ApiOperation(value = "经纬度查询最近3条的农场主")
     @PostMapping("/findLand")

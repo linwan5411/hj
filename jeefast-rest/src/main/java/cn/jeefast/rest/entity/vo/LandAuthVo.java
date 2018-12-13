@@ -13,13 +13,8 @@ public class LandAuthVo extends TokenVo {
 
     private static final long serialVersionUID = -5087852319042682538L;
 
-    @ApiModelProperty(value="农场主ID", hidden=false,  required=true, dataType="String")
+    @ApiModelProperty(value="土地ID", hidden=false,  required=true, dataType="String")
     private Long haciendaId;
-
-    @ApiModelProperty(value="农场主名称", hidden=false,  required=true, dataType="String")
-    @NotNull(message = "农场主名称")
-    @Length(max = 120,message = "农场主名称最大长度120")
-    private String haciendaName;
 
     @ApiModelProperty(value="附着物种类", hidden=false,  required=true, dataType="String")
     private String haciendaScope;
@@ -93,14 +88,6 @@ public class LandAuthVo extends TokenVo {
 
     public void setHaciendaId(Long haciendaId) {
         this.haciendaId = haciendaId;
-    }
-
-    public String getHaciendaName() {
-        return haciendaName;
-    }
-
-    public void setHaciendaName(String haciendaName) {
-        this.haciendaName = haciendaName;
     }
 
     public String getHaciendaScope() {

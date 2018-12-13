@@ -47,6 +47,7 @@
     </sql>
 
 	<sql id="base_sql">
+		user_id as userId,
 		hacienda_id as haciendaId,
 		hacienda_name as haciendaName,
 		hacienda_land as haciendaLand,
@@ -57,27 +58,42 @@
 		hacienda_scope as haciendaScope,
 		auth_status as authStatus
 	</sql>
+	<sql id="new_base_sql">
+		t.hacienda_id as haciendaId,
+		h.farmers_name as haciendaName,
+		t.hacienda_land as haciendaLand,
+		t.server_max as serverMax,
+		t.detail_addr as detailAddr,
+		h.farmers_type as haciendaType,
+		t.hacienda_image as haciendaImage,
+		t.hacienda_scope as haciendaScope,
+		h.auth_status as authStatus
+	</sql>
 	<select id="findLandMore" resultType="java.util.Map">
-		SELECT t.* FROM (
 		SELECT
-		<include refid="base_sql"/>
-		<if test="lng != null and lat != null">
-			,point_map(latitude,longitude,#{lat},#{lng}) as distance
-		</if>
-		from hj_hacienda_info where hacienda_show = 1
-		<if test="authType != null">
-			and auth_status = #{authType}
-		</if>
-		<if test="userType != null">
-			and hacienda_type = #{userType}
-		</if>
-		<if test="areaCode != null">
-			and area_code like '${areaCode}%'
-		</if>
-		<if test="categoryCode != null">
-			and server_category like '%${categoryCode}%'
-		</if>
-		) as t
+			<include refid="new_base_sql"/>
+		FROM (
+			SELECT
+			<include refid="base_sql"/>
+			<if test="lng != null and lat != null">
+				,point_map(latitude,longitude,#{lat},#{lng}) as distance
+			</if>
+			from hj_hacienda_info
+
+			where hacienda_show = 1
+			<if test="authType != null">
+				and auth_status = #{authType}
+			</if>
+			<if test="userType != null">
+				and hacienda_type = #{userType}
+			</if>
+			<if test="areaCode != null">
+				and area_code like '${areaCode}%'
+			</if>
+			<if test="categoryCode != null">
+				and server_category like '%${categoryCode}%'
+			</if>
+		) as t left join hj_farmers_info h on t.user_id = t.user_id
 		<if test="lng != null and lat != null">
 			ORDER BY t.distance desc
 		</if>
