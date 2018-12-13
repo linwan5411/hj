@@ -41,8 +41,8 @@ public class ApiLandController {
 
 
     @ApiOperation(value = "农场主认证")
-    @PostMapping("/landApprove")
-    public BaseResponse farmersAuth(@Valid FramerAuthVo framerAuthVo){
+    @PostMapping("/farmersAuth")
+    public BaseResponse farmersAuth(@Valid @RequestBody FramerAuthVo framerAuthVo){
         //token
         Long userId = TokenUtil.parseUserId(framerAuthVo.getToken());
         HjFarmersInfo info = new HjFarmersInfo();
@@ -82,7 +82,7 @@ public class ApiLandController {
     }
 
     @ApiOperation(value = "查询我的所有土地")
-    @PostMapping("/landApprove")
+    @PostMapping("/myLands")
     public BaseResponse myLands(@Valid TokenVo tokenVo){
         //token
         Long userId = TokenUtil.parseUserId(tokenVo.getToken());
