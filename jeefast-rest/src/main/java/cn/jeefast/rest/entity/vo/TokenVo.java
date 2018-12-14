@@ -12,7 +12,7 @@ public class TokenVo implements Serializable{
 
     private static final long serialVersionUID = 5990133955487602247L;
 
-    @ApiModelProperty(value="登陆令牌", hidden=false,  required=true, dataType="Double")
+    @ApiModelProperty(value="登陆令牌", hidden=false,  required=true, dataType="String")
     @NotNull(message = "token不能为空")
     private String token;
 
