@@ -83,7 +83,7 @@ public class ApiLandController {
 
     @ApiOperation(value = "查询我的所有土地")
     @PostMapping("/myLands")
-    public BaseResponse myLands(@Valid TokenVo tokenVo){
+    public BaseResponse myLands(@Valid @RequestBody TokenVo tokenVo){
         //token
         Long userId = TokenUtil.parseUserId(tokenVo.getToken());
         if(userId == null){
