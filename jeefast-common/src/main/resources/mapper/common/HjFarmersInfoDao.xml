@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jeefast.dao.HjFarmersInfoDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="cn.jeefast.entity.HjFarmersInfo">
+	<result column="id" property="id" />
+	<result column="create_time" property="createTime" />
+	<result column="update_time" property="updateTime" />
+	<result column="data_version" property="dataVersion" />
+		<result column="farmers_id" property="farmersId" />
+		<result column="user_id" property="userId" />
+		<result column="farmers_name" property="farmersName" />
+		<result column="link_phone" property="linkPhone" />
+		<result column="farmers_type" property="farmersType" />
+		<result column="link_name" property="linkName" />
+		<result column="auth_status" property="authStatus" />
+		<result column="farmers_image" property="farmersImage" />
+		<result column="farmers_remark" property="farmersRemark" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+	id,
+	create_time,
+	update_time,
+	data_version,
+        farmers_id AS farmersId, user_id AS userId, farmers_name AS farmersName, link_phone AS linkPhone, farmers_type AS farmersType, link_name AS linkName, auth_status AS authStatus, farmers_image AS farmersImage, farmers_remark AS farmersRemark
+    </sql>
+
+    <update id="updateByHjFarmersInfo"  parameterType="cn.jeefast.entity.HjFarmersInfo">
+		update ${table.tableName}
+		<set>
+                <if test="id != null" >
+					id = #{id},
+                </if>
+                <if test="createTime != null" >
+					create_time = #{createTime},
+                </if>
+                <if test="updateTime != null" >
+					update_time = #{updateTime},
+                </if>
+                <if test="dataVersion != null" >
+					data_version = #{dataVersion},
+                </if>
+                <if test="farmersId != null" >
+					farmers_id = #{farmersId},
+                </if>
+                <if test="userId != null" >
+					user_id = #{userId},
+                </if>
+                <if test="farmersName != null" >
+					farmers_name = #{farmersName},
+                </if>
+                <if test="linkPhone != null" >
+					link_phone = #{linkPhone},
+                </if>
+                <if test="farmersType != null" >
+					farmers_type = #{farmersType},
+                </if>
+                <if test="linkName != null" >
+					link_name = #{linkName},
+                </if>
+                <if test="authStatus != null" >
+					auth_status = #{authStatus},
+                </if>
+                <if test="farmersImage != null" >
+					farmers_image = #{farmersImage},
+                </if>
+                <if test="farmersRemark != null" >
+					farmers_remark = #{farmersRemark},
+                </if>
+		</set>
+		where farmers_id = #{farmersId} and user_id = #{userId}
+
+    </update>
+</mapper>

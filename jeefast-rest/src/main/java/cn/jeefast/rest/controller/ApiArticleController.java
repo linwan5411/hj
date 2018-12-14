@@ -29,9 +29,9 @@ public class ApiArticleController {
 
 
     @ApiOperation(value = "查询文章列表")
-    @PostMapping("/findAdArticle")
-    public BaseResponse findAdArticle(@RequestBody BasePage basePage){
-        return ResultUtils.successV2(hjArticleService.findAdArticle(basePage.getPageIndex(),basePage.getPage()));
+    @PostMapping("/findAdArticle/{categoryCode}")
+    public BaseResponse findAdArticle(@PathVariable(value = "categoryCode",required = false)String categoryCode,@RequestBody BasePage basePage){
+        return ResultUtils.successV2(hjArticleService.findAdArticle(basePage.getPageIndex(),basePage.getPageSize(),categoryCode));
     }
 
     @ApiOperation(value = "推荐首页文章")

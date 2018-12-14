@@ -21,7 +21,9 @@ public interface HjArticleDao extends BaseMapper<HjArticle> {
    */
     int updateByHjArticle(HjArticle entity);
 
-    List<Map<String,Object>> findAdArticle(@Param("pageIndex") Integer pageIndex, @Param("pageSize") Integer pageSize);
+    List<Map<String,Object>> findAdArticle(@Param("pageIndex") Integer pageIndex,
+                                           @Param("pageSize") Integer pageSize,
+                                           @Param("categoryCode") String categoryCode);
 
     List<Map<String,Object>> findLikeArticle(@Param("code")Long code, @Param("pageSize")int pageSize, @Param("articleId")Long  articleId);
 

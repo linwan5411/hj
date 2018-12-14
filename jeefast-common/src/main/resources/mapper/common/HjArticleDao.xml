@@ -61,7 +61,7 @@
 					article_catgory_code = #{articleCatgoryCode},
                 </if>
                 <if test="articleCatgory != null" >
-					article_catgory = #{articleCatgory},
+					article_category = #{articleCatgory},
                 </if>
                 <if test="articleImage != null" >
 					article_image = #{articleImage},
@@ -95,7 +95,11 @@
 		UPDATE hj_article set article_read_num = article_read_num + 1 where article_id = #{articleId}
 	</update>
     <select id="findAdArticle" resultType="java.util.Map">
-		SELECT <include refid="Base_Column_List"/>  from hj_article where article_show = 1 ORDER by article_sort,create_time desc limit #{pageIndex},#{pageSize}
+		SELECT <include refid="Base_Column_List"/>  from hj_article where article_show = 1
+		<if test="categoryCode != null">
+			and article_category = #{categoryCode}
+		</if>
+		ORDER by article_sort,create_time desc limit #{pageIndex},#{pageSize}
 	</select>
 	<select id="findLikeArticle" resultType="java.util.Map">
 		SELECT <include refid="Base_Column_List"/>  from hj_article  WHERE  article_show = 1

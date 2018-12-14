@@ -6,6 +6,7 @@ import cn.jeefast.dao.HjArticleDao;
 import cn.jeefast.service.HjArticleService;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +29,11 @@ public class HjArticleServiceImpl extends ServiceImpl<HjArticleDao, HjArticle> i
     private HjArticleDao hjArticleDao;
 
     @Override
-    public List<Map<String,Object>> findAdArticle(Integer pageIndex, Integer pageSzie) {
-        return hjArticleDao.findAdArticle(pageIndex,pageSzie);
+    public List<Map<String,Object>> findAdArticle(Integer pageIndex, Integer pageSize,String categoryCode) {
+        if(StringUtils.isBlank(categoryCode)){
+            categoryCode = null;
+        }
+        return hjArticleDao.findAdArticle(pageIndex,pageSize,categoryCode);
     }
 
     @Override
@@ -46,7 +50,7 @@ public class HjArticleServiceImpl extends ServiceImpl<HjArticleDao, HjArticle> i
     @Cacheable(key = "homeArticle",fieldKey = "#pageSize")
     @Override
     public List<Map<String, Object>> findHomeArticle(Integer pageSize) {
-        return hjArticleDao.findAdArticle(0,pageSize);
+        return hjArticleDao.findAdArticle(0,pageSize,null);
     }
 
     @Async

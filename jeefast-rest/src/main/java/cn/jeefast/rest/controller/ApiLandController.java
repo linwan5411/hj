@@ -5,10 +5,7 @@ import cn.jeefast.common.utils.ResultUtils;
 import cn.jeefast.common.utils.TokenUtil;
 import cn.jeefast.entity.*;
 import cn.jeefast.rest.entity.vo.*;
-import cn.jeefast.service.HjHaciendaInfoService;
-import cn.jeefast.service.HjHaciendaRemarkService;
-import cn.jeefast.service.HjServerCaseService;
-import cn.jeefast.service.HjServerInfoService;
+import cn.jeefast.service.*;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +36,25 @@ public class ApiLandController {
     @Resource
     private HjHaciendaInfoService hjHaciendaInfoService;
 
+    @Resource
+    private HjFarmersInfoService hjFarmersInfoService;
+
+
     @ApiOperation(value = "农场主认证")
+    @PostMapping("/farmersAuth")
+    public BaseResponse farmersAuth(@Valid @RequestBody FramerAuthVo framerAuthVo){
+        //token
+        Long userId = TokenUtil.parseUserId(framerAuthVo.getToken());
+        HjFarmersInfo info = new HjFarmersInfo();
+        BeanUtils.copyProperties(framerAuthVo,info);
+        info.setUserId(userId);
+        Long farmersId = hjFarmersInfoService.farmersAuth(info);
+        framerAuthVo.setFarmersId(farmersId);
+        return ResultUtils.successV2(framerAuthVo);
+    }
+
+
+    @ApiOperation(value = "添加土地")
     @PostMapping("/landApprove")
     public BaseResponse landApprove(@Valid @RequestBody LandAuthVo serverAuthVo){
 
@@ -66,6 +81,16 @@ public class ApiLandController {
         return ResultUtils.successV2(serverAuthVo);
     }
 
+    @ApiOperation(value = "查询我的所有土地")
+    @PostMapping("/myLands")
+    public BaseResponse myLands(@Valid TokenVo tokenVo){
+        //token
+        Long userId = TokenUtil.parseUserId(tokenVo.getToken());
+        if(userId == null){
+            return ResultUtils.successV2();
+        }
+        return ResultUtils.successV2(hjHaciendaInfoService.findLandByUserId(userId));
+    }
 
     @ApiOperation(value = "经纬度查询最近3条的农场主")
     @PostMapping("/findLand")
@@ -83,7 +108,7 @@ public class ApiLandController {
         return ResultUtils.successV2(list);
     }
 
-    @ApiOperation(value = "查询农场的详情")
+    @ApiOperation(value = "查询土地的详情")
     @PostMapping("/lndInfo/{haciendaId}")
     public BaseResponse findLandDetail(@PathVariable("haciendaId")Long haciendaId){
         return ResultUtils.successV2(hjHaciendaInfoService.findLandDetail(haciendaId));

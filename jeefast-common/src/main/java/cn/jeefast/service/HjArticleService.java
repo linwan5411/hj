@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public interface HjArticleService extends IService<HjArticle> {
 
-    List<Map<String,Object>> findAdArticle(Integer pageIndex, Integer pageSzie);
+    List<Map<String,Object>> findAdArticle(Integer pageIndex, Integer pageSize,String categoryCode);
 
     List<Map<String,Object>> findLikeArticle(Long articleId);
 
