@@ -122,7 +122,7 @@ public class ApiLandController {
     }
 
     @ApiOperation(value = "查询土地的详情")
-    @RequestMapping("/lndInfo/{haciendaId}")
+    @PostMapping("/lndInfo/{haciendaId}")
     public BaseResponse findLandDetail(@PathVariable("haciendaId")Long haciendaId){
         return ResultUtils.successV2(hjHaciendaInfoService.findLandDetail(haciendaId));
     }
