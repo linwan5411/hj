@@ -61,15 +61,19 @@
 		auth_status as authStatus
 	</sql>
 	<sql id="new_base_sql">
-		haciendaId,
-		haciendaName,
-		haciendaLand,
-		serverMax,
-		detailAddr,
+		t.userId,
+		t.haciendaId,
+		t.haciendaName,
+		t.haciendaLand,
+		t.serverMax,
+		t.detailAddr,
 		h.farmers_type as haciendaType,
-		haciendaImage,
-		haciendaScope,
-		authStatus
+		t.haciendaImage,
+		t.haciendaScope,
+		t.authStatus,
+		t.distance,
+		u.user_portrait as headerImage,
+		h.farmers_name as framersNickName
 	</sql>
 	<select id="findLandMore" resultType="java.util.Map">
 		SELECT
@@ -80,9 +84,7 @@
 			<if test="lng != null and lat != null">
 				,point_map(latitude,longitude,#{lat},#{lng}) as distance
 			</if>
-			from hj_hacienda_info
-
-			where hacienda_show = 1
+			from hj_hacienda_info where hacienda_show = 1
 			<if test="authType != null">
 				and auth_status = #{authType}
 			</if>
@@ -96,13 +98,17 @@
 				and server_category like '%${categoryCode}%'
 			</if>
 		) as t left join hj_farmers_info h on t.userId = h.user_id
+			   left join hj_user u on t.userId = u.user_id
 		<if test="lng != null and lat != null">
 			ORDER BY t.distance desc
 		</if>
 		 limit #{pageIndex},#{pageSize}
 	</select>
-    <select id="findLandByUserId" resultType="java.util.Map">
-		SELECT <include refid="base_sql"/> from hj_hacienda_info where user_id = #{userId}
+    <select id="findLandByUserId" resultType="cn.jeefast.entity.HjHaciendaInfo">
+		SELECT
+			<include refid="Base_Column_List"/>
+		from hj_hacienda_info
+		where user_id = #{userId}
 	</select>
 
 </mapper>

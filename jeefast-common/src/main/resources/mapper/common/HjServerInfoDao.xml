@@ -39,6 +39,7 @@
 		<result column="auth_status" property="authStatus" />
 	</resultMap>
 	<sql id="base_sql">
+		user_id as userId,
 		server_id as serverId,
 		company_name as companyName,
 		server_category as serverCategory,

@@ -173,11 +173,13 @@ public class HjHaciendaInfo extends BaseEntity {
 	/**
 	 * 农场主的头像
 	 */
+	@TableField(exist = false)
 	private String headerImage;
 
 	/**
 	 * 农场主的昵称
 	 */
+	@TableField(exist = false)
 	private String framersNickName;
 
 	public Long getFarmersId() {

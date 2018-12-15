@@ -25,5 +25,5 @@ public interface HjHaciendaInfoService extends IService<HjHaciendaInfo> {
 
     HjHaciendaInfo findLandDetail(Long haciendaId);
 
-    List<Map<String,Object>> findLandByUserId(Long userId);
+    List<HjHaciendaInfo> findLandByUserId(Long userId);
 }

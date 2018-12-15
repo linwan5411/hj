@@ -26,5 +26,5 @@ public interface HjHaciendaInfoDao extends BaseMapper<HjHaciendaInfo> {
                                             @Param("pageSize")Integer pageSize,
                                             @Param("categoryCode")String categoryCode);
 
-    List<Map<String,Object>> findLandByUserId(@Param("userId")Long userId);
+    List<HjHaciendaInfo> findLandByUserId(@Param("userId")Long userId);
 }

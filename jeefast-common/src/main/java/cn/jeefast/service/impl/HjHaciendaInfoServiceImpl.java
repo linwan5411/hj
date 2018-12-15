@@ -221,7 +221,8 @@ public class HjHaciendaInfoServiceImpl extends ServiceImpl<HjHaciendaInfoDao, Hj
     }
 
     @Override
-    public List<Map<String, Object>> findLandByUserId(Long userId) {
-        return hjHaciendaInfoDao.findLandByUserId(userId);
+    public List<HjHaciendaInfo> findLandByUserId(Long userId) {
+        List<HjHaciendaInfo> l = hjHaciendaInfoDao.findLandByUserId(userId);
+        return l;
     }
 }

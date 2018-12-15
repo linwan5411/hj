@@ -5,6 +5,7 @@ import cn.jeefast.common.exception.BusinessException;
 import cn.jeefast.common.key.KeyGenerator;
 import cn.jeefast.common.utils.KeyGeneratorUtils;
 import cn.jeefast.config.RedisUtils;
+import cn.jeefast.config.redis.Cacheable;
 import cn.jeefast.dao.HjServerCaseDao;
 import cn.jeefast.dao.HjServerRemakDao;
 import cn.jeefast.entity.HjArea;
@@ -167,6 +168,7 @@ public class HjServerInfoServiceImpl extends ServiceImpl<HjServerInfoDao, HjServ
         }
     }
 
+    @Cacheable(key = "wh_findServerDetail",fieldKey = "#findServerDetail",expireTime = 8600)
     @Override
     public HjServerInfo findServerDetail(Long serverId) {
         HjServerInfo hjServerInfo = new HjServerInfo();hjServerInfo.setServerId(serverId);
