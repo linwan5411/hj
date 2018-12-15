@@ -58,11 +58,6 @@ public class CacheAspect {
             return proceed(pjp);
         }
         String fieldKey = parseKey(cacheable.fieldKey(), method, pjp.getArgs());
-
-        //获取方法的返回类型,让缓存可以返回正确的类型
-        //Class returnType = ((MethodSignature) pjp.getSignature()).getReturnType();
-
-        //使用redis 的hash进行存取，易于管理,获取缓存
         try {
             if(StringUtils.isBlank(fieldKey)){
                 result = redisUtils.getValue(key);

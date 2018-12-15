@@ -1,6 +1,7 @@
 package cn.jeefast.service.impl;
 
 import cn.jeefast.common.utils.KeyGeneratorUtils;
+import cn.jeefast.config.redis.Cacheable;
 import cn.jeefast.entity.HjFarmersInfo;
 import cn.jeefast.dao.HjFarmersInfoDao;
 import cn.jeefast.service.HjFarmersInfoService;
@@ -37,5 +38,12 @@ public class HjFarmersInfoServiceImpl extends ServiceImpl<HjFarmersInfoDao, HjFa
         framerAuthVo.setFarmersId(KeyGeneratorUtils.getLongValue());
         hjFarmersInfoDao.insert(framerAuthVo);
         return framerAuthVo.getFarmersId();
+    }
+
+    @Cacheable(key = "wh_farmersInfo",fieldKey = "#userId")
+    @Override
+    public HjFarmersInfo farmersInfo(Long userId) {
+        HjFarmersInfo hjFarmersInfo = new HjFarmersInfo();hjFarmersInfo.setFarmersId(userId);
+        return hjFarmersInfoDao.selectOne(hjFarmersInfo);
     }
 }

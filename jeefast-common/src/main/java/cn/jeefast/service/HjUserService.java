@@ -31,4 +31,7 @@ public interface HjUserService extends IService<HjUser> {
      */
     Map<String,Object> enroll(String mobile, String pass);
 
+    Map<String,Object> myZoneData(Long userId);
+
+    Map<String,Object> findUserInfo(Long userId);
 }

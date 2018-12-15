@@ -12,22 +12,22 @@ public class CordPageVo extends BasePage implements Serializable{
 
     private static final long serialVersionUID = 5990133955487602247L;
 
-    @ApiModelProperty(value="维度", hidden=false,  required=true, dataType="Double")
+    @ApiModelProperty(value="维度", hidden=false,  required=false, dataType="Double")
     private Double lat;
 
-    @ApiModelProperty(value="经度", hidden=false,  required=true, dataType="Double")
+    @ApiModelProperty(value="经度", hidden=false,  required=false, dataType="Double")
     private Double lng;
 
-    @ApiModelProperty(value="选择的最后一级地区ID", hidden=false,  required=true, dataType="Long")
+    @ApiModelProperty(value="选择的最后一级地区ID", hidden=false,  required=false, dataType="Long")
     private Long areaId;
 
-    @ApiModelProperty(value="类别编码", hidden=false,  required=true, dataType="String")
+    @ApiModelProperty(value="类别编码", hidden=false,  required=false, dataType="String")
     private String categoryCode;
 
-    @ApiModelProperty(value="用户类型", hidden=false,  required=true, dataType="Integer")
+    @ApiModelProperty(value="用户类型", hidden=false,  required=false, dataType="Integer")
     private Integer userType;
 
-    @ApiModelProperty(value="认证类型", hidden=false,  required=true, dataType="Integer")
+    @ApiModelProperty(value="认证类型", hidden=false,  required=false, dataType="Integer")
     private Integer authType;
 
     public Long getAreaId() {

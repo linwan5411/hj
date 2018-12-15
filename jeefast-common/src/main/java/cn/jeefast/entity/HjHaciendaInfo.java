@@ -19,8 +19,14 @@ public class HjHaciendaInfo extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
+	/**
+	 * 农场主ID
+	 */
+	@TableField("farmers_id")
+    private Long farmersId;
+
     /**
-     * 农场主ID
+     * 土地Id
      */
 	@TableField("hacienda_id")
 	private Long haciendaId;
@@ -163,6 +169,40 @@ public class HjHaciendaInfo extends BaseEntity {
 	 */
 	@TableField(exist = false)
 	private List<HjHaciendaRemark> remarks;
+
+	/**
+	 * 农场主的头像
+	 */
+	private String headerImage;
+
+	/**
+	 * 农场主的昵称
+	 */
+	private String framersNickName;
+
+	public Long getFarmersId() {
+		return farmersId;
+	}
+
+	public void setFarmersId(Long farmersId) {
+		this.farmersId = farmersId;
+	}
+
+	public String getHeaderImage() {
+		return headerImage;
+	}
+
+	public void setHeaderImage(String headerImage) {
+		this.headerImage = headerImage;
+	}
+
+	public String getFramersNickName() {
+		return framersNickName;
+	}
+
+	public void setFramersNickName(String framersNickName) {
+		this.framersNickName = framersNickName;
+	}
 
 	public String getNeedServer() {
 		return needServer;

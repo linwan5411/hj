@@ -33,11 +33,11 @@ public class AliyunMessageApi {
     private static final String accessKeySecret = "J942FHGgzbIpyeBdsaVKszCAqKhMbE";
 
     //必填:短信签名-可在短信控制台中找到
-    private static final String signName = "";
+    private static final String signName = "禾农家";
 
 
     ////必填:短信模板-可在短信控制台中找到
-    private static final String templateCode = "";
+    private static final String templateCode = "SMS_152507685";
 
     /**
      * 发送短信
@@ -86,4 +86,9 @@ public class AliyunMessageApi {
         return sendSmsResponse;
     }
 
+
+    public static void main(String[] args) {
+        SendSmsResponse s = sendSms("13368466998","12233");
+        System.out.println(JsonUtils.Bean2Json(s));
+    }
 }

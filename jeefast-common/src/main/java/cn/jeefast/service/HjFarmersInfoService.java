@@ -14,4 +14,6 @@ import com.baomidou.mybatisplus.service.IService;
 public interface HjFarmersInfoService extends IService<HjFarmersInfo> {
 
     Long farmersAuth(HjFarmersInfo framerAuthVo);
+
+    HjFarmersInfo farmersInfo(Long userId);
 }

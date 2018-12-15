@@ -9,6 +9,7 @@ import cn.jeefast.rest.entity.TokenPageVo;
 import cn.jeefast.rest.entity.vo.CollectVo;
 import cn.jeefast.rest.entity.vo.TokenVo;
 import cn.jeefast.service.HjUserCollectService;
+import cn.jeefast.service.HjUserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +26,8 @@ public class ApiMyController {
     @Resource
     private HjUserCollectService hjUserCollectService;
 
+    @Resource
+    private HjUserService hjUserService;
 
     @ApiOperation(value = "我的收藏")
     @PostMapping("/myCollect/{type}")
@@ -64,4 +67,17 @@ public class ApiMyController {
         return ResultUtils.successV2();
     }
 
+    @ApiOperation(value = "我的个人中心信息")
+    @PostMapping("/myZoneData")
+    public BaseResponse myZoneData(@RequestBody TokenVo tokenVo){
+        Long userId = TokenUtil.parseUserId(tokenVo.getToken());
+        return ResultUtils.successV2(hjUserService.myZoneData(userId));
+    }
+
+
+    @ApiOperation(value = "查看用户的个人信息")
+    @PostMapping("/findUserInfo/{userId}")
+    public BaseResponse findUserInfo(@PathVariable("userId")Long userId){
+        return ResultUtils.successV2(hjUserService.findUserInfo(userId));
+    }
 }

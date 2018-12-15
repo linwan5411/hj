@@ -53,6 +53,19 @@ public class ApiLandController {
         return ResultUtils.successV2(framerAuthVo);
     }
 
+    @ApiOperation(value = "农场主详情")
+    @PostMapping("/farmersInfo")
+    public BaseResponse farmersInfo(@Valid @RequestBody TokenVo tokenVo){
+        //token
+        Long userId = TokenUtil.parseUserId(tokenVo.getToken());
+        return ResultUtils.successV2(hjFarmersInfoService.farmersInfo(userId));
+    }
+
+    @ApiOperation(value = "根据农场主ID查询农场主详情")
+    @PostMapping("/farmersInfo/{farmersId}")
+    public BaseResponse farmersInfo(@PathVariable("farmersId")Long farmersId){
+        return ResultUtils.successV2(hjFarmersInfoService.farmersInfo(farmersId));
+    }
 
     @ApiOperation(value = "添加土地")
     @PostMapping("/landApprove")
@@ -99,7 +112,7 @@ public class ApiLandController {
         return ResultUtils.successV2(list);
     }
 
-    @ApiOperation(value = "经纬度分页查询服务商")
+    @ApiOperation(value = "经纬度分页查询土地")
     @PostMapping("/findLandMore")
     public BaseResponse findLandMore(@RequestBody CordPageVo basePage){
         List<Map<String,Object>> list = hjHaciendaInfoService.findLandMore(basePage.getLng(),basePage.getLat(),

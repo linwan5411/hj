@@ -4,6 +4,12 @@ import cn.jeefast.common.enums.CommonEnum;
 import cn.jeefast.common.enums.ResultEnum;
 import cn.jeefast.common.exception.BusinessException;
 import cn.jeefast.common.utils.*;
+import cn.jeefast.config.redis.Cacheable;
+import cn.jeefast.dao.HjFarmersInfoDao;
+import cn.jeefast.dao.HjServerInfoDao;
+import cn.jeefast.entity.HjFarmersInfo;
+import cn.jeefast.entity.HjHaciendaInfo;
+import cn.jeefast.entity.HjServerInfo;
 import cn.jeefast.entity.HjUser;
 import cn.jeefast.dao.HjUserDao;
 import cn.jeefast.service.HjUserService;
@@ -33,6 +39,12 @@ public class HjUserServiceImpl extends ServiceImpl<HjUserDao, HjUser> implements
 
     @Resource
     private HjUserDao hjUserDao;
+
+    @Resource
+    private HjFarmersInfoDao hjFarmersInfoDao;
+
+    @Resource
+    private HjServerInfoDao hjServerInfoDao;
 
     @Transactional(rollbackFor = {RuntimeException.class,Exception.class})
     @Override
@@ -123,6 +135,69 @@ public class HjUserServiceImpl extends ServiceImpl<HjUserDao, HjUser> implements
         map.put("userPortrait",user.getUserPortrait());
         map.put("userType",user.getUserType());
         map.put("authType",user.getAuthType());
+        return map;
+    }
+
+    @Cacheable(key = "wh_myZoneData",fieldKey = "#userId",expireTime = 86000)
+    @Override
+    public Map<String, Object> myZoneData(Long userId) {
+        Map<String,Object> map = new HashMap<>();
+        HjUser user = new HjUser();user.setUserId(userId);
+        user = hjUserDao.selectOne(user);
+        if(user != null){
+            map.put("userName",user.getUserName());
+            map.put("userMobile",user.getUserMobile());
+            map.put("hideUserMobile",MobileUtils.subMobile(user.getUserMobile()));
+            map.put("userPortrait",user.getUserPortrait());
+            map.put("userType",user.getUserType());
+            map.put("authType",user.getAuthType());
+        }
+        //农场主ID
+        HjFarmersInfo  info = new HjFarmersInfo();info.setUserId(userId);
+        info = hjFarmersInfoDao.selectOne(info);
+        if(info != null){
+            map.put("farmersId",info.getFarmersId());
+        }
+
+        //服务商ID
+        HjServerInfo serverInfo = new HjServerInfo();serverInfo.setUserId(userId);
+        serverInfo = hjServerInfoDao.selectOne(serverInfo);
+        if(serverInfo != null){
+            map.put("serverId",serverInfo.getServerId());
+        }
+        return map;
+    }
+    @Cacheable(key = "wh_findUserInfo",fieldKey = "#userId",expireTime = 86000)
+    @Override
+    public Map<String, Object> findUserInfo(Long userId) {
+        Map<String,Object> map = new HashMap<>();
+        HjUser user = new HjUser();user.setUserId(userId);
+        user = hjUserDao.selectOne(user);
+        if(user != null){
+            map.put("userName",user.getUserName());
+            map.put("userMobile",user.getUserMobile());
+            map.put("hideUserMobile",MobileUtils.subMobile(user.getUserMobile()));
+            map.put("userPortrait",user.getUserPortrait());
+            map.put("userType",user.getUserType());
+            map.put("authType",user.getAuthType());
+        }
+
+        //农场主ID
+        HjFarmersInfo  info = new HjFarmersInfo();info.setUserId(userId);
+        info = hjFarmersInfoDao.selectOne(info);
+        if(info != null){
+            map.put("farmersId",info.getFarmersId());
+            map.put("farmersName",info.getFarmersName());
+        }
+
+        //服务商ID
+        HjServerInfo serverInfo = new HjServerInfo();serverInfo.setUserId(userId);
+        serverInfo = hjServerInfoDao.selectOne(serverInfo);
+        if(serverInfo != null){
+            map.put("serverId",serverInfo.getServerId());
+            map.put("companyName",serverInfo.getServerId());
+            map.put("companyImage",serverInfo.getCompanyImage());
+        }
         return map;
     }
 

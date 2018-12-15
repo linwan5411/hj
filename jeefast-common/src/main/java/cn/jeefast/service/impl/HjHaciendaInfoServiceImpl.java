@@ -4,7 +4,10 @@ import cn.jeefast.common.enums.ResultEnum;
 import cn.jeefast.common.exception.BusinessException;
 import cn.jeefast.common.utils.KeyGeneratorUtils;
 import cn.jeefast.config.RedisUtils;
+import cn.jeefast.config.redis.Cacheable;
+import cn.jeefast.dao.HjFarmersInfoDao;
 import cn.jeefast.dao.HjHaciendaRemarkDao;
+import cn.jeefast.dao.HjUserDao;
 import cn.jeefast.entity.*;
 import cn.jeefast.dao.HjHaciendaInfoDao;
 import cn.jeefast.service.HjAreaService;
@@ -45,7 +48,14 @@ public class HjHaciendaInfoServiceImpl extends ServiceImpl<HjHaciendaInfoDao, Hj
     private HjServerCodeService hjServerCodeService;
 
     @Resource
+    private HjUserDao hjUserDao;
+
+    @Resource
+    private HjFarmersInfoDao hjFarmersInfoDao;
+
+    @Resource
     private RedisUtils redisUtils;
+
 
     @Transactional(rollbackFor = {Exception.class,RuntimeException.class})
     @Override
@@ -81,6 +91,12 @@ public class HjHaciendaInfoServiceImpl extends ServiceImpl<HjHaciendaInfoDao, Hj
                 });
                 info.setNeedServerName(buffer.toString().substring(0,buffer.toString().length() - 1));
             }
+        }
+
+        HjFarmersInfo d = new HjFarmersInfo();d.setUserId(userId);
+        d = hjFarmersInfoDao.selectOne(d);
+        if(d != null){
+
         }
 
         if(info.getHaciendaId() != null){
@@ -161,9 +177,19 @@ public class HjHaciendaInfoServiceImpl extends ServiceImpl<HjHaciendaInfoDao, Hj
                 areaCode = area.getRelationCode();
             }
         }
+        if(StringUtils.isBlank(categoryCode)){
+            categoryCode = null;
+        }
+        if(authType == null || authType == 0){
+            authType = null;
+        }
+        if(userType == null || userType == 0){
+            userType = null;
+        }
         return hjHaciendaInfoDao.findLandMore(lng,lat,areaCode,authType,userType,pageIndex,pageSize,categoryCode);
     }
 
+    @Cacheable(key = "wanhe_HjHaciendaInfo",fieldKey = "#haciendaId",expireTime = 86000)
     @Override
     public HjHaciendaInfo findLandDetail(Long haciendaId) {
         HjHaciendaInfo hjServerInfo = new HjHaciendaInfo();hjServerInfo.setHaciendaId(haciendaId);
@@ -178,6 +204,19 @@ public class HjHaciendaInfoServiceImpl extends ServiceImpl<HjHaciendaInfoDao, Hj
         List<HjHaciendaRemark> remaks = hjHaciendaRemarkDao.selectList(entityWrapper);
         hjServerInfo.setRemarks(remaks);
 
+        //查询用户的头像等
+        HjUser user = new HjUser();user.setUserId(hjServerInfo.getUserId());
+        user = hjUserDao.selectOne(user);
+        if(user != null){
+            hjServerInfo.setHeaderImage(user.getUserPortrait());
+        }
+
+        //农场主的名称
+        HjFarmersInfo hjFarmersInfo = new HjFarmersInfo();hjFarmersInfo.setUserId(hjServerInfo.getUserId());
+        hjFarmersInfo = hjFarmersInfoDao.selectOne(hjFarmersInfo);
+        if(hjFarmersInfo != null){
+            hjServerInfo.setFramersNickName(hjFarmersInfo.getFarmersName());
+        }
         return hjServerInfo;
     }
 

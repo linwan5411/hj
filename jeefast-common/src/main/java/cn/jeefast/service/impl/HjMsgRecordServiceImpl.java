@@ -158,7 +158,7 @@ public class HjMsgRecordServiceImpl extends ServiceImpl<HjMsgRecordDao, HjMsgRec
      */
     @Override
     public boolean validateMsgCode(String code, String mobile, String msgType){
-        return validateMsgCode(code,mobile,msgType,null);
+        return validateMsgCode(code,mobile,msgType,10);
     }
 	
 }

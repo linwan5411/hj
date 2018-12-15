@@ -18,14 +18,14 @@ import java.util.Map;
 public interface HjUserCollectDao extends BaseMapper<HjUserCollect> {
 
     List<Map<String,Object>> findServer(@Param("userId") Long userId,
-                                        @Param("userId") Double lat,
-                                        @Param("userId") Double lng,
+                                        @Param("lat") Double lat,
+                                        @Param("lng") Double lng,
                                         @Param("pageIndex")Integer pageIndex,
                                         @Param("pageSize")Integer pageSize);
 
     List<Map<String,Object>> findLand(@Param("userId") Long userId,
-                                      @Param("userId") Double lat,
-                                      @Param("userId") Double lng,
+                                      @Param("lat") Double lat,
+                                      @Param("lng") Double lng,
                                       @Param("pageIndex")Integer pageIndex,
                                       @Param("pageSize")Integer pageSize);
 }

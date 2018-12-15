@@ -35,7 +35,7 @@
 			SELECT
 				h.object_id,h.collect_id
 			FROM
-				hj_user_collect h where h.user_id = #{userId} and y.collect_type = 1 ORDER BY create_time desc LIMIT #{pageIndex},#{pageSize}
+				hj_user_collect h where h.user_id = #{userId} and h.collect_type = 1 ORDER BY create_time desc LIMIT #{pageIndex},#{pageSize}
 		) as t LEFT JOIN hj_server_info y on t.object_id = y.server_id
 	</select>
 
@@ -58,9 +58,10 @@
 		<include refid="base_land_sql"/>
 		FROM(
 		SELECT
-		h.object_id
+		h.object_id,
+		h.collect_id
 		FROM
-		hj_user_collect h where h.user_id = #{userId} and y.collect_type = 2 ORDER BY create_time desc LIMIT #{pageIndex},#{pageSize}
+		hj_user_collect h where h.user_id = #{userId} and h.collect_type = 2 ORDER BY create_time desc LIMIT #{pageIndex},#{pageSize}
 		) as t LEFT JOIN hj_hacienda_info y on t.object_id = y.hacienda_id
 	</select>
 </mapper>
