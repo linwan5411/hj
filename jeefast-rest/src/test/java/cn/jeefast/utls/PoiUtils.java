@@ -67,7 +67,6 @@ public class PoiUtils{
     }
     /**
      * 读取Excel测试，兼容 Excel 2003/2007/2010
-     * @throws Exception
      */
     public static void main(String[] args) throws Exception {
         SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
