@@ -55,9 +55,9 @@ public class HjMsgRecordServiceImpl extends ServiceImpl<HjMsgRecordDao, HjMsgRec
     public String sendMessage(String mobile, String msgType) {
         String msgNum = RandomUtils.randomNumber(6);
         try {
-            if (buMessageSwitch){
+            //if (buMessageSwitch){
                 AliyunMessageApi.sendSms(mobile,msgNum);
-            }
+            //}
             saveMessage(mobile,msgType,msgNum);
         }catch (Exception e){
             LOGGER.error("短信发送失败:{}",e);
