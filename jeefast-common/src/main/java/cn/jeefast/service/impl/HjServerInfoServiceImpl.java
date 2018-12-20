@@ -146,8 +146,10 @@ public class HjServerInfoServiceImpl extends ServiceImpl<HjServerInfoDao, HjServ
     @Override
     public List<Map<String, Object>> findServerAndLand(Long areaId, Double lat, Double lng,int size) {
         String hkey = "server_notify";
-
-        String ser_key = areaId.toString();
+        String ser_key = "server_notify_key";
+        if(areaId != null){
+            ser_key = areaId.toString();
+        }
         Object obj = redisUtils.get(hkey,ser_key);
         if(obj != null){
             return (List<Map<String, Object>>) obj;
