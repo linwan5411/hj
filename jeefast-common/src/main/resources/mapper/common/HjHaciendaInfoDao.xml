@@ -58,6 +58,7 @@
 		hacienda_type as haciendaType,
 		hacienda_image as haciendaImage,
 		hacienda_scope as haciendaScope,
+		need_server_name as needServer,
 		auth_status as authStatus
 	</sql>
 	<sql id="new_base_sql">
@@ -72,6 +73,7 @@
 		t.haciendaScope,
 		t.authStatus,
 		t.distance,
+		t.needServer,
 		u.user_portrait as headerImage,
 		h.farmers_name as framersNickName
 	</sql>

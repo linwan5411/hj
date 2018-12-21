@@ -4,6 +4,7 @@ import cn.jeefast.common.enums.ResultEnum;
 import cn.jeefast.common.exception.BusinessException;
 import cn.jeefast.common.key.KeyGenerator;
 import cn.jeefast.common.utils.KeyGeneratorUtils;
+import cn.jeefast.common.utils.LocationUtils;
 import cn.jeefast.config.RedisUtils;
 import cn.jeefast.config.redis.Cacheable;
 import cn.jeefast.dao.HjServerCaseDao;
@@ -178,6 +179,7 @@ public class HjServerInfoServiceImpl extends ServiceImpl<HjServerInfoDao, HjServ
         if(hjServerInfo == null){
             return null;
         }
+
         if(StringUtils.isNotBlank(hjServerInfo.getServerCategory())){
             hjServerInfo.setCategoryList(Arrays.asList(hjServerInfo.getServerCategory().split(",")));
         }

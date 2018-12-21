@@ -27,6 +27,23 @@ public class RecordRps implements Serializable {
      */
     private String dateTime;
 
+    /**
+     * 联系的类型
+     */
+    private String linkType;
+
+    public String getLinkType() {
+        if("1".equals(linkType)){
+            return "农场主";
+        }else{
+            return "服务商";
+        }
+    }
+
+    public void setLinkType(String linkType) {
+        this.linkType = linkType;
+    }
+
     @JsonIgnore
     private Date createTime;
 

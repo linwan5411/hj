@@ -43,7 +43,7 @@ public class DynamicDataSourceTest {
     @Resource
     private HjFarmersInfoDao hjFarmersInfoDao;
 
-    @Test
+    /*@Test
     public void testJoinServer() {
         List<HjServerInfo> s = PoiUtils.serverList();
         for (HjServerInfo h : s) {
@@ -174,6 +174,6 @@ public class DynamicDataSourceTest {
             xxx++;
         }
 
-    }
+    }*/
 
 }

@@ -35,6 +35,28 @@ public class FramerAuthVo extends TokenVo {
     @ApiModelProperty(value="类型；1：个人，2企业", hidden=false,  required=true, dataType="String")
     private Integer farmersType;
 
+    @ApiModelProperty(value="纬度", hidden=false,  required=true, dataType="String")
+    private Double latitude;
+
+    @ApiModelProperty(value="经度", hidden=false,  required=true, dataType="String")
+    private Double longitude;
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
     public Long getFarmersId() {
         return farmersId;
     }

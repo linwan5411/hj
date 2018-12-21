@@ -14,6 +14,8 @@
 		<result column="link_phone" property="linkPhone" />
 		<result column="farmers_type" property="farmersType" />
 		<result column="link_name" property="linkName" />
+		<result column="latitude" property="latitude" />
+		<result column="longitude" property="longitude" />
 		<result column="auth_status" property="authStatus" />
 		<result column="farmers_image" property="farmersImage" />
 		<result column="farmers_remark" property="farmersRemark" />
@@ -24,6 +26,8 @@
 	id,
 	create_time,
 	update_time,
+	latitude,
+	longitude,
 	data_version,
         farmers_id AS farmersId, user_id AS userId, farmers_name AS farmersName, link_phone AS linkPhone, farmers_type AS farmersType, link_name AS linkName, auth_status AS authStatus, farmers_image AS farmersImage, farmers_remark AS farmersRemark
     </sql>
@@ -63,6 +67,12 @@
                 </if>
                 <if test="authStatus != null" >
 					auth_status = #{authStatus},
+                </if>
+				<if test="longitude != null" >
+					longitude = #{longitude},
+                </if>
+				<if test="latitude != null" >
+					latitude = #{latitude},
                 </if>
                 <if test="farmersImage != null" >
 					farmers_image = #{farmersImage},

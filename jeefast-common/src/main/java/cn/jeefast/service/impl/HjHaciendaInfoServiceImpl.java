@@ -3,6 +3,7 @@ package cn.jeefast.service.impl;
 import cn.jeefast.common.enums.ResultEnum;
 import cn.jeefast.common.exception.BusinessException;
 import cn.jeefast.common.utils.KeyGeneratorUtils;
+import cn.jeefast.common.utils.LocationUtils;
 import cn.jeefast.config.RedisUtils;
 import cn.jeefast.config.redis.Cacheable;
 import cn.jeefast.dao.HjFarmersInfoDao;
