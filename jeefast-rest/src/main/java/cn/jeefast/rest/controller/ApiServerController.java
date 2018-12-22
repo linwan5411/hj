@@ -1,6 +1,7 @@
 package cn.jeefast.rest.controller;
 
 import cn.jeefast.common.utils.BaseResponse;
+import cn.jeefast.common.utils.LocationUtils;
 import cn.jeefast.common.utils.ResultUtils;
 import cn.jeefast.common.utils.TokenUtil;
 import cn.jeefast.config.RedisUtils;
@@ -17,6 +18,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.lang.ref.PhantomReference;
 import java.util.ArrayList;
@@ -46,6 +48,9 @@ public class ApiServerController {
 
     @Resource
     private HjServerCaseService hjServerCaseService;
+
+    @Resource
+    private RedisUtils redisUtils;
 
 
     @ApiOperation(value = "服务商认证")
@@ -120,8 +125,13 @@ public class ApiServerController {
 
     @ApiOperation(value = "查询服务商的详情")
     @PostMapping("/server/{serverId}")
-    public BaseResponse findServerDetail(@PathVariable("serverId")Long serverId){
-        return ResultUtils.successV2(hjServerInfoService.findServerDetail(serverId));
+    public BaseResponse findServerDetail(@PathVariable("serverId")Long serverId,@RequestBody CordOnlyVo cordOnlyVo){
+        HjServerInfo h = hjServerInfoService.findServerDetail(serverId);
+        if(h != null){
+            int m = LocationUtils.getDistanceToM(cordOnlyVo.getLat(),cordOnlyVo.getLng(),h.getLatitude(),h.getLongitude());
+            h.setDistnce(m+"");
+        }
+        return ResultUtils.successV2(h);
     }
 
     @ApiOperation(value = "查询案例详情")

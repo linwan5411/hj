@@ -1,6 +1,7 @@
 package cn.jeefast.rest.controller;
 
 import cn.jeefast.common.utils.BaseResponse;
+import cn.jeefast.common.utils.LocationUtils;
 import cn.jeefast.common.utils.ResultUtils;
 import cn.jeefast.common.utils.TokenUtil;
 import cn.jeefast.entity.*;
@@ -123,7 +124,14 @@ public class ApiLandController {
 
     @ApiOperation(value = "查询土地的详情")
     @PostMapping("/lndInfo/{haciendaId}")
-    public BaseResponse findLandDetail(@PathVariable("haciendaId")Long haciendaId){
-        return ResultUtils.successV2(hjHaciendaInfoService.findLandDetail(haciendaId));
+    public BaseResponse findLandDetail(@PathVariable("haciendaId")Long haciendaId,@RequestBody CordOnlyVo cordOnlyVo){
+        HjHaciendaInfo h = hjHaciendaInfoService.findLandDetail(haciendaId);
+        if(h != null){
+            int m = LocationUtils.getDistanceToM(cordOnlyVo.getLat(),cordOnlyVo.getLng(),h.getLatitude(),h.getLongitude());
+            h.setDistnce(m+"");
+        }
+        return ResultUtils.successV2(h);
+
+
     }
 }
