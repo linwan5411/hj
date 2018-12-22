@@ -87,6 +87,7 @@
 		) AS mobile,
 		to_user_name as userName,
 		create_time as createTime,
+		to_user_type as linkType,
 		TIMESTAMPDIFF(MINUTE, create_time, NOW()) AS mins,
 		TIMESTAMPDIFF(HOUR, create_time, NOW()) AS hours,
 		TIMESTAMPDIFF(DAY, create_time, NOW()) AS days

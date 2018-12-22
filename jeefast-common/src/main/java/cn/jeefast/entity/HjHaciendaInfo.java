@@ -182,6 +182,20 @@ public class HjHaciendaInfo extends BaseEntity {
 	@TableField(exist = false)
 	private String framersNickName;
 
+	/**
+	 * 距离
+	 */
+	@TableField(exist = false)
+	private String distnce;
+
+	public String getDistnce() {
+		return distnce;
+	}
+
+	public void setDistnce(String distnce) {
+		this.distnce = distnce;
+	}
+
 	public Long getFarmersId() {
 		return farmersId;
 	}
