@@ -26,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -147,7 +148,10 @@ public class HjServerInfoServiceImpl extends ServiceImpl<HjServerInfoDao, HjServ
     @Override
     public List<Map<String, Object>> findServerAndLand(Long areaId, Double lat, Double lng,int size) {
         String hkey = "server_notify";
-        String ser_key = "server_notify_key";
+        if(areaId == null){
+            areaId = 2236L;
+        }
+        String ser_key = areaId +"";
         if(areaId != null){
             ser_key = areaId.toString();
         }
@@ -159,19 +163,19 @@ public class HjServerInfoServiceImpl extends ServiceImpl<HjServerInfoDao, HjServ
             List<Map<String,Object>> list = findServerMore(lng,lat,
                     areaId,null,null,0, size,null);
             if(list != null && list.size() > 0){
-                redisUtils.put(hkey,ser_key,list);
+                redisUtils.put(hkey,ser_key,list,3600, TimeUnit.SECONDS);
             }else{
                 list =  findServerMore(lng,lat,
                         null,null,null,0, size,null);
                 if(list != null && list.size() > 0){
-                    redisUtils.put(hkey,ser_key,list);
+                    redisUtils.put(hkey,ser_key,list,3600, TimeUnit.SECONDS);
                 }
             }
             return list;
         }
     }
 
-    @Cacheable(key = "wh_findServerDetail",fieldKey = "#findServerDetail",expireTime = 8600)
+    @Cacheable(key = "wh_findServerDetail",fieldKey = "#serverId",expireTime = 8600)
     @Override
     public HjServerInfo findServerDetail(Long serverId) {
         HjServerInfo hjServerInfo = new HjServerInfo();hjServerInfo.setServerId(serverId);

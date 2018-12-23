@@ -3,8 +3,6 @@ package cn.jeefast;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import cn.jeefast.datasources.DataSourceNames;
-import cn.jeefast.datasources.annotation.DataSource;
 import cn.jeefast.system.entity.SysUser;
 import cn.jeefast.system.service.SysUserService;
 
@@ -23,7 +21,6 @@ public class DataSourceTestService {
         return userService.selectById(userId);
     }
 
-    @DataSource(name = DataSourceNames.SECOND)
     public SysUser queryObject2(Long userId){
         return userService.selectById(userId);
     }

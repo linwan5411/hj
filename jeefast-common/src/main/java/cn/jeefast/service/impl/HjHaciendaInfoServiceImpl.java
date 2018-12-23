@@ -147,7 +147,9 @@ public class HjHaciendaInfoServiceImpl extends ServiceImpl<HjHaciendaInfoDao, Hj
     @Override
     public List<Map<String, Object>> findLand(Long areaId, Double lat, Double lng, int homeSize) {
         String hkey = "land_notify";
-
+        if(areaId == null){
+            areaId = 2236L;
+        }
         String ser_key = areaId.toString();
         Object obj = redisUtils.get(hkey,ser_key);
         if(obj != null){
