@@ -63,13 +63,11 @@ public class HjFarmersInfo extends BaseEntity {
 	/**
      * 经度
      */
-	@TableField("longitude")
 	private double longitude;
 
 	/**
 	 * 纬度
 	 */
-	@TableField("latitude")
 	private double latitude;
 
 	public double getLongitude() {
