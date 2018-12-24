@@ -65,7 +65,7 @@ public class ApiLandController {
     @ApiOperation(value = "根据农场主ID查询农场主详情")
     @PostMapping("/farmersInfo/{farmersId}")
     public BaseResponse farmersInfo(@PathVariable("farmersId")Long farmersId){
-        return ResultUtils.successV2(hjFarmersInfoService.farmersInfo(farmersId));
+        return ResultUtils.successV2(hjFarmersInfoService.farmersInfoById(farmersId));
     }
 
     @ApiOperation(value = "添加土地")

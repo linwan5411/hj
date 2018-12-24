@@ -43,7 +43,14 @@ public class HjFarmersInfoServiceImpl extends ServiceImpl<HjFarmersInfoDao, HjFa
     @Cacheable(key = "wh_farmersInfo",fieldKey = "#userId")
     @Override
     public HjFarmersInfo farmersInfo(Long userId) {
-        HjFarmersInfo hjFarmersInfo = new HjFarmersInfo();hjFarmersInfo.setFarmersId(userId);
+        HjFarmersInfo hjFarmersInfo = new HjFarmersInfo();hjFarmersInfo.setUserId(userId);
+        return hjFarmersInfoDao.selectOne(hjFarmersInfo);
+    }
+
+    @Cacheable(key = "wh_farmersInfo_id",fieldKey = "#framerId")
+    @Override
+    public HjFarmersInfo farmersInfoById(Long framerId) {
+        HjFarmersInfo hjFarmersInfo = new HjFarmersInfo();hjFarmersInfo.setFarmersId(framerId);
         return hjFarmersInfoDao.selectOne(hjFarmersInfo);
     }
 }
