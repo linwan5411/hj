@@ -6,6 +6,7 @@ import cn.jeefast.common.exception.BusinessException;
 import cn.jeefast.common.utils.BaseResponse;
 import cn.jeefast.common.utils.ResultUtils;
 import cn.jeefast.common.utils.TokenUtil;
+import cn.jeefast.config.RedisUtils;
 import cn.jeefast.entity.HjUser;
 import cn.jeefast.rest.entity.vo.*;
 import cn.jeefast.service.HjMsgRecordService;
@@ -37,6 +38,9 @@ public class ApiLoginController {
 
     @Resource
     private HjMsgRecordService hjMsgRecordService;
+
+    @Resource
+    private RedisUtils redisUtils;
 
     @ApiOperation(value = "登陆")
     @ApiImplicitParams({ @ApiImplicitParam(paramType = "body",
@@ -96,6 +100,8 @@ public class ApiLoginController {
         EntityWrapper entityWrapper = new EntityWrapper();
         entityWrapper.where("user_id={0}",userId);
         hjUserService.update(user,entityWrapper);
+        //清理缓存
+        redisUtils.delete("wh_findUserInfo",userId);
         return ResultUtils.successV2();
     }
 }

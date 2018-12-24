@@ -9,7 +9,6 @@ public class MessageVo extends MobileVo {
 
     @ApiModelProperty(value="类型不能为空", hidden=false,  required=true, dataType="String")
     @NotNull(message = "类型不能为空")
-    @Pattern(regexp = "^[1,2,3,4]$", message = "类型只能为1,2",flags = Pattern.Flag.CASE_INSENSITIVE)
     private String type;
 
     public String getType() {

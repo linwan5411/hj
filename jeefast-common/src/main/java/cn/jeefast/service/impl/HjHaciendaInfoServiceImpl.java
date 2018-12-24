@@ -96,10 +96,10 @@ public class HjHaciendaInfoServiceImpl extends ServiceImpl<HjHaciendaInfoDao, Hj
 
         HjFarmersInfo d = new HjFarmersInfo();d.setUserId(userId);
         d = hjFarmersInfoDao.selectOne(d);
-        if(d != null){
-
+        if(d == null || d.getFarmersId() == null){
+            throw new BusinessException("您还不是农场主",ResultEnum.SER_NOT_AUTH_EXP.getCode());
         }
-
+        info.setFarmersId(d.getFarmersId());
         if(info.getHaciendaId() != null){
             //update
             info.setUpdateTime(new Date());

@@ -33,7 +33,7 @@
     </sql>
 
     <update id="updateByHjFarmersInfo"  parameterType="cn.jeefast.entity.HjFarmersInfo">
-		update ${table.tableName}
+		update hj_farmers_info
 		<set>
                 <if test="id != null" >
 					id = #{id},

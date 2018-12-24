@@ -1,14 +1,18 @@
 package cn.jeefast.rest.controller;
 
+import cn.jeefast.common.enums.ResultEnum;
+import cn.jeefast.common.exception.BusinessException;
 import cn.jeefast.common.utils.BaseResponse;
 import cn.jeefast.common.utils.LocationUtils;
 import cn.jeefast.common.utils.ResultUtils;
 import cn.jeefast.common.utils.TokenUtil;
+import cn.jeefast.config.RedisUtils;
 import cn.jeefast.entity.*;
 import cn.jeefast.rest.entity.vo.*;
 import cn.jeefast.service.*;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -40,6 +44,9 @@ public class ApiLandController {
     @Resource
     private HjFarmersInfoService hjFarmersInfoService;
 
+    @Resource
+    private RedisUtils redisUtils;
+
 
     @ApiOperation(value = "农场主认证")
     @PostMapping("/farmersAuth")
@@ -49,8 +56,19 @@ public class ApiLandController {
         HjFarmersInfo info = new HjFarmersInfo();
         BeanUtils.copyProperties(framerAuthVo,info);
         info.setUserId(userId);
-        Long farmersId = hjFarmersInfoService.farmersAuth(info);
+        Long farmersId = null;
+        try {
+            farmersId = hjFarmersInfoService.farmersAuth(info);
+        }catch (Exception e){
+            if(e instanceof DuplicateKeyException){
+                throw new BusinessException("您已是农场主", ResultEnum.SER_AUTH_EXP.getCode());
+            }else{
+                throw e;
+            }
+        }
         framerAuthVo.setFarmersId(farmersId);
+        redisUtils.delete("wh_farmersInfo",userId);
+        redisUtils.delete("wh_farmersInfo_id",farmersId);
         return ResultUtils.successV2(framerAuthVo);
     }
 
@@ -65,7 +83,7 @@ public class ApiLandController {
     @ApiOperation(value = "根据农场主ID查询农场主详情")
     @PostMapping("/farmersInfo/{farmersId}")
     public BaseResponse farmersInfo(@PathVariable("farmersId")Long farmersId){
-        return ResultUtils.successV2(hjFarmersInfoService.farmersInfo(farmersId));
+        return ResultUtils.successV2(hjFarmersInfoService.farmersInfoById(farmersId));
     }
 
     @ApiOperation(value = "添加土地")
@@ -92,6 +110,7 @@ public class ApiLandController {
 
         Long serverId = hjHaciendaInfoService.landApprove(info,list,userId);
         serverAuthVo.setHaciendaId(serverId);
+        redisUtils.delete("wanhe_HjHaciendaInfo",serverId);
         return ResultUtils.successV2(serverAuthVo);
     }
 

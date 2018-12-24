@@ -9,7 +9,7 @@ public class BackPwdVo extends MobileVo {
 
     @ApiModelProperty(value="新密码", hidden=false,  required=true, dataType="String")
     @NotNull(message = "新密码不能为空")
-    @Length(min = 6,max = 6,message = "新密码最小长度为6")
+    @Length(min = 6,message = "新密码最小长度为6")
     private String newPass;
 
 

@@ -16,4 +16,6 @@ public interface HjFarmersInfoService extends IService<HjFarmersInfo> {
     Long farmersAuth(HjFarmersInfo framerAuthVo);
 
     HjFarmersInfo farmersInfo(Long userId);
+
+    HjFarmersInfo farmersInfoById(Long framerId);
 }

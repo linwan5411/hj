@@ -1,5 +1,7 @@
 package cn.jeefast.rest.controller;
 
+import cn.jeefast.common.enums.ResultEnum;
+import cn.jeefast.common.exception.BusinessException;
 import cn.jeefast.common.utils.BaseResponse;
 import cn.jeefast.common.utils.LocationUtils;
 import cn.jeefast.common.utils.ResultUtils;
@@ -15,6 +17,7 @@ import cn.jeefast.service.HjServerInfoService;
 import com.sun.corba.se.spi.ior.ObjectKey;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -74,10 +77,19 @@ public class ApiServerController {
                 list.add(vo);
             });
         }
-
-        Long serverId = hjServerInfoService.userApprove(info,list,userId);
+        Long serverId = null;
+        try {
+            serverId = hjServerInfoService.userApprove(info,list,userId);
+        }catch (Exception e){
+            if(e instanceof DuplicateKeyException){
+                throw new BusinessException("您已是服务商", ResultEnum.SER_AUTH_EXP.getCode());
+            }else{
+                throw e;
+            }
+        }
         serverAuthVo.setServerId(serverId);
         serverAuthVo.setRemarkList(remarkList);
+        redisUtils.delete("wh_findServerDetail",serverId);
         return ResultUtils.successV2(serverAuthVo);
     }
 
