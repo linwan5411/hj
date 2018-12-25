@@ -8,6 +8,7 @@ import cn.jeefast.common.utils.TokenUtil;
 import cn.jeefast.rest.entity.TokenPageVo;
 import cn.jeefast.rest.entity.vo.CollectVo;
 import cn.jeefast.rest.entity.vo.TokenVo;
+import cn.jeefast.service.HjMessageService;
 import cn.jeefast.service.HjUserCollectService;
 import cn.jeefast.service.HjUserService;
 import io.swagger.annotations.ApiOperation;
@@ -28,6 +29,9 @@ public class ApiMyController {
 
     @Resource
     private HjUserService hjUserService;
+
+    @Resource
+    private HjMessageService hjMessageService;
 
     @ApiOperation(value = "我的收藏")
     @PostMapping("/myCollect/{type}")
@@ -79,5 +83,20 @@ public class ApiMyController {
     @PostMapping("/findUserInfo/{userId}")
     public BaseResponse findUserInfo(@PathVariable("userId")Long userId){
         return ResultUtils.successV2(hjUserService.findUserInfo(userId));
+    }
+
+    @ApiOperation(value = "查看我的消息列表")
+    @PostMapping("/myMessageList")
+    public BaseResponse myMessageList(@RequestBody TokenPageVo tokenPageVo){
+        Long userId = TokenUtil.parseUserId(tokenPageVo.getToken());
+        return ResultUtils.successV2(hjMessageService.findMyMessage(userId,tokenPageVo.getPageIndex(),tokenPageVo.getPageSize()));
+    }
+
+    @ApiOperation(value = "查看我的消息")
+    @PostMapping("/viewMessage/{messageId}")
+    public BaseResponse viewMessage(@PathVariable("messageId")Long messageId,@RequestBody TokenVo tokenVo){
+        Long userId = TokenUtil.parseUserId(tokenVo.getToken());
+        hjMessageService.viewMessage(userId,messageId);
+        return ResultUtils.successV2();
     }
 }

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jeefast.dao.HjMessageDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="cn.jeefast.entity.HjMessage">
+	<result column="id" property="id" />
+	<result column="create_time" property="createTime" />
+	<result column="update_time" property="updateTime" />
+	<result column="data_version" property="dataVersion" />
+		<result column="user_id" property="userId" />
+		<result column="message_tpye" property="messageTpye" />
+		<result column="mesage_title" property="mesageTitle" />
+		<result column="message_info" property="messageInfo" />
+		<result column="read_count" property="readCount" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+	id,
+	create_time,
+	update_time,
+	data_version,
+        user_id AS userId, message_tpye AS messageTpye, mesage_title AS mesageTitle, message_info AS messageInfo, read_count AS readCount
+    </sql>
+
+    <update id="updateByHjMessage"  parameterType="cn.jeefast.entity.HjMessage">
+		update hj_message
+		<set>
+                <if test="id != null" >
+					id = #{id},
+                </if>
+                <if test="createTime != null" >
+					create_time = #{createTime},
+                </if>
+                <if test="updateTime != null" >
+					update_time = #{updateTime},
+                </if>
+                <if test="dataVersion != null" >
+					data_version = #{dataVersion},
+                </if>
+                <if test="userId != null" >
+					user_id = #{userId},
+                </if>
+                <if test="messageTpye != null" >
+					message_tpye = #{messageTpye},
+                </if>
+                <if test="mesageTitle != null" >
+					mesage_title = #{mesageTitle},
+                </if>
+                <if test="messageInfo != null" >
+					message_info = #{messageInfo},
+                </if>
+                <if test="readCount != null" >
+					read_count = #{readCount},
+                </if>
+		</set>
+		where  id = #{id}
+
+    </update>
+	<update id="viewMessage">
+		UPDATE hj_message SET read_count = 1 where user_id = #{userId} and id = #{messageId} and read_count = 0
+	</update>
+	<select id="findMyMessage" resultType="java.util.Map">
+		SELECT
+			id as id,
+			mesage_title as mesageTitle,
+			message_info as messageInfo,
+			(CASE
+				WHEN  message_tpye = 1 THEN '系统消息'
+				WHEN  message_tpye = 2 THEN '留言消息'
+				ELSE '其他消息'
+			END) as messageTpye,
+			read_count as readCount,
+			DATE_FORMAT(create_time,'%Y-%m-%d %H:%m') as createTime
+		FROM hj_message where user_id = #{userId} order by create_time,read_count desc limit #{pageIndex},#{pageSize}
+	</select>
+</mapper>
