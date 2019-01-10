@@ -13,6 +13,7 @@
 		<module>jeefast-common</module>
 		<module>jeefast-system</module>
 		<module>jeefast-rest</module>
+		<module>jeefast-online</module>
 		<!--<module>jeefast-wechat</module>-->
 	</modules>
 
