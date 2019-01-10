@@ -101,7 +101,8 @@ public class ApiLoginController {
         entityWrapper.where("user_id={0}",userId);
         hjUserService.update(user,entityWrapper);
         //清理缓存
-        redisUtils.delete("wh_findUserInfo",userId);
+        redisUtils.delete("wh_findUserInfo",userId.toString());
+        redisUtils.delete("wh_myZoneData",userId.toString());
         return ResultUtils.successV2();
     }
 }

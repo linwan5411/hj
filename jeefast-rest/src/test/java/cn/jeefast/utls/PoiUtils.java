@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +77,7 @@ public class PoiUtils{
         SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
         try {
             // 同时支持Excel 2003、2007
-            File excelFile = new File("d:/hjn/l.xlsx"); // 创建文件对象
+            File excelFile = new File("d:/h/l.xlsx"); // 创建文件对象
             FileInputStream in = new FileInputStream(excelFile); // 文件流
             checkExcelVaild(excelFile);
             Workbook workbook = getWorkbok(in,excelFile);
@@ -94,7 +95,7 @@ public class PoiUtils{
             for (Row row : sheet) {
                 try {
                     // 跳过第一
-                    if(count < 1 ) {
+                    if(count < 2 ) {
                         count++;
                         continue;
                     }
@@ -103,73 +104,116 @@ public class PoiUtils{
                     if(row.getCell(0) == null){
                         continue;
                     }
-
-                    //获取总列数(空格的不计算)
-                    int columnTotalNum = row.getPhysicalNumberOfCells();
-                    //System.out.println("总列数：" + columnTotalNum);
-
-                    // System.out.println("最大列数：" + row.getLastCellNum());
-
                     HjHaciendaInfo h = new HjHaciendaInfo();
 
-                    int end = row.getLastCellNum();
-
-                    Object obj0 = getValue(row.getCell(1));
-                    if(obj0 != null && StringUtils.isNotBlank(obj0.toString())){
-                        if("1".equals(obj0.toString())){
-                            h.setHaciendaName(KeyGeneratorUtils.getLongValue()+"");
-                            h.setHaciendaType(1);
-                        }else {
-                            h.setHaciendaName(obj0.toString());
-                            h.setHaciendaType(2);
-                        }
-                    }else{
-                        h.setHaciendaName(KeyGeneratorUtils.getLongValue()+"");
-                        h.setHaciendaType(1);
+                    //最小区域
+                    Object obj0 = getValue(row.getCell(2));
+                    if(obj0 != null){
+                        h.setAreaCode(obj0.toString());
                     }
-
-                    Object obj1 = getValue(row.getCell(2));
+                    //详细地址
+                    Object obj1 = getValue(row.getCell(3));
                     if(obj1 != null){
                         h.setDetailAddr(obj1.toString());
                     }
 
-                    Object obj2 = getValue(row.getCell(3));
+                    // 名臣
+                    Object obj2 = getValue(row.getCell(4));
                     if(obj2 != null){
-                        h.setLinkName(obj2.toString());
+                        h.setHaciendaName(obj2.toString());
                     }
 
-                    Object obj3 = getValue(row.getCell(4));
+                    //联系人
+                    Object obj3 = getValue(row.getCell(5));
                     if(obj3 != null){
-                        String obj = obj3.toString();
-                        obj = obj.replace("\t","");
-                        obj = obj.replace(";",",");
-                        obj = obj.replace("；",",");
-                        obj = obj.trim();
-                        h.setLinkPhone(obj);
+                        h.setLinkName(obj3.toString());
                     }
 
-                    Object obj5 = getValue(row.getCell(5));
+                    //电话
+                    Object obj5 = getValue(row.getCell(6));
                     if(obj5 != null){
-                        h.setServerMax(Double.valueOf(obj5.toString()));
-                        h.setServerUseMax(Double.valueOf(obj5.toString()));
+                      h.setLinkPhone(obj5.toString());
                     }
 
-                    Object obj6 = getValue(row.getCell(6));
+                    //土地面积
+                    Object obj6 = getValue(row.getCell(7));
                     if(obj6 != null){
-                        h.setHaciendaLand(obj6.toString());
+                        h.setServerMax(Double.valueOf(obj6.toString()));
                     }
 
-                    Object obj7 = getValue(row.getCell(7));
+                    //农场类型
+                    Object obj7 = getValue(row.getCell(8));
                     if(obj7 != null){
-                        h.setNeedServerName(obj7.toString());
+                        h.setHaciendaGener(obj7.toString());
                     }
 
-                    Object obj8 = getValue(row.getCell(8));
+                    //土地性质
+                    h.setHaciendaLand("耕地");
+                    h.setServerCategory("21");
+
+                    //附着物
+                    Object obj8 = getValue(row.getCell(10));
                     if(obj8 != null){
                         h.setHaciendaScope(obj8.toString());
                     }
-                    list.add(h);
 
+                    StringBuilder codes = new StringBuilder();
+                    StringBuilder names = new StringBuilder();
+
+
+                    Object obj11 = getValue(row.getCell(11));
+                    if(obj11 != null){
+                        names.append(obj11.toString()).append(",");
+                        codes.append(getServerType(obj11.toString())).append(",");
+                    }
+                    Object obj12 = getValue(row.getCell(12));
+                    if(obj12 != null){
+                        names.append(obj12.toString()).append(",");
+                        codes.append(getServerType(obj12.toString())).append(",");
+                    }
+                    Object obj13 = getValue(row.getCell(13));
+                    if(obj13 != null){
+                        names.append(obj13.toString()).append(",");
+                        codes.append(getServerType(obj13.toString())).append(",");
+                    }
+                    Object obj14 = getValue(row.getCell(14));
+                    if(obj14 != null){
+                        names.append(obj14.toString()).append(",");
+                        codes.append(getServerType(obj14.toString())).append(",");
+                    }
+                    Object obj15 = getValue(row.getCell(15));
+                    if(obj15 != null){
+                        names.append(obj15.toString()).append(",");
+                        codes.append(getServerType(obj15.toString())).append(",");
+                    }
+                    Object obj16 = getValue(row.getCell(16));
+                    if(obj16 != null){
+                        names.append(obj16.toString()).append(",");
+                        codes.append(getServerType(obj16.toString())).append(",");
+                    }
+                    Object obj17 = getValue(row.getCell(17));
+                    if(obj17 != null){
+                        names.append(obj17.toString()).append(",");
+                        codes.append(getServerType(obj17.toString())).append(",");
+                    }
+                    Object obj18 = getValue(row.getCell(18));
+                    if(obj18 != null){
+                        names.append(obj18.toString()).append(",");
+                        codes.append(getServerType(obj18.toString())).append(",");
+                    }
+                    if(codes.length() > 0){
+                        h.setNeedServerName(codes.toString().substring(0,codes.length() -1));
+                    }
+                    if(names.length() > 0){
+                        h.setNeedServer(names.toString().substring(0,names.length() -1));
+                    }
+                    //简介
+                    Object obj19 = getValue(row.getCell(20));
+                    if(obj19 != null) {
+                        h.setHaciendaRemark(obj19.toString());
+                    }
+
+                    list.add(h);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -179,6 +223,18 @@ public class PoiUtils{
         }
         return list;
     }
+
+
+    public static void main(String[] args) {
+
+        List<HjHaciendaInfo> l = landList();
+
+
+        l.forEach(e ->{
+            System.out.println(JsonUtils.Bean2Json(e));
+        });
+    }
+
 
     /**
      * 读取Excel测试，兼容 Excel 2003/2007/2010
@@ -188,7 +244,7 @@ public class PoiUtils{
         SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
         try {
             // 同时支持Excel 2003、2007
-            File excelFile = new File("d:/hjn/s.xlsx"); // 创建文件对象
+            File excelFile = new File("d:/h/s.xlsx"); // 创建文件对象
             FileInputStream in = new FileInputStream(excelFile); // 文件流
             checkExcelVaild(excelFile);
             Workbook workbook = getWorkbok(in,excelFile);
@@ -206,7 +262,7 @@ public class PoiUtils{
             for (Row row : sheet) {
                 try {
                     // 跳过第一
-                    if(count < 1 ) {
+                    if(count < 2 ) {
                         count++;
                         continue;
                     }
@@ -218,68 +274,125 @@ public class PoiUtils{
 
                     //获取总列数(空格的不计算)
                     int columnTotalNum = row.getPhysicalNumberOfCells();
-                    //System.out.println("总列数：" + columnTotalNum);
-
-                   // System.out.println("最大列数：" + row.getLastCellNum());
 
                     HjServerInfo h = new HjServerInfo();
 
                     int end = row.getLastCellNum();
 
-                    Object obj0 = getValue(row.getCell(0));
+                    //区
+                    Object obj0 = getValue(row.getCell(2));
                     if(obj0 != null){
-                        h.setCompanyName(obj0.toString());
+                        h.setAreaCode(obj0.toString());
                     }
-
-                    Object obj1 = getValue(row.getCell(1));
+                    //详细地址
+                    Object obj1 = getValue(row.getCell(3));
                     if(obj1 != null){
-                        h.setLinkName(obj1.toString());
+                        h.setDetailAddr(obj1.toString());
                     }
 
-                    Object obj2 = getValue(row.getCell(2));
+                    //名称
+                    Object obj2 = getValue(row.getCell(4));
                     if(obj2 != null){
-                        h.setServerRegistration(obj2.toString());
+                        h.setCompanyName(obj2.toString());
                     }
 
-                    Object obj3 = getValue(row.getCell(3));
+                    //联系人
+                    Object obj3 = getValue(row.getCell(5));
                     if(obj3 != null){
-                        h.setServerRegTime(obj3.toString());
+                        h.setLinkName(obj3.toString());
                     }
 
-                    Object obj5 = getValue(row.getCell(5));
+                    //电话
+                    Object obj5 = getValue(row.getCell(6));
                     if(obj5 != null){
-                        h.setServerRegistration(obj5.toString());
+                        h.setLinkPhone(obj5.toString());
                     }
 
-                    Object obj6 = getValue(row.getCell(6));
-                    if(obj6 != null){
-                        String obj = obj6.toString();
-                        obj = obj.replace("\t","");
-                        obj = obj.replace(";",",");
-                        obj = obj.replace("；",",");
-                        obj = obj.trim();
-                        h.setLinkPhone(obj);
-                    }
-
+                    //等级
                     Object obj7 = getValue(row.getCell(7));
                     if(obj7 != null){
-                        h.setDetailAddr(obj7.toString());
+                        h.setServerGrade(obj7.toString());
                     }
 
+                    //服务类型
                     Object obj8 = getValue(row.getCell(8));
                     if(obj8 != null){
-                        h.setCompanyWebsite(obj8.toString());
+                        h.setServerGenre(obj8.toString());
                     }
 
+                    //已服务农场（家）
                     Object obj9 = getValue(row.getCell(9));
                     if(obj9 != null){
-                        h.setCompanyEmail(obj9.toString());
+                        h.setClientNum(new BigDecimal(obj9.toString()).intValue());
                     }
 
+                    //已服务面积（亩
                     Object obj10 = getValue(row.getCell(10));
                     if(obj10 != null){
-                        h.setCompanyScope(obj10.toString());
+                        h.setServerMax(Double.valueOf(obj10.toString()));
                     }
+
+                    StringBuilder codes = new StringBuilder();
+                    StringBuilder names = new StringBuilder();
+
+
+                    Object obj11 = getValue(row.getCell(11));
+                    if(obj11 != null){
+                        names.append(obj11.toString()).append(",");
+                        codes.append(getServerType(obj11.toString())).append(",");
+                    }
+                    Object obj12 = getValue(row.getCell(12));
+                    if(obj12 != null){
+                        names.append(obj12.toString()).append(",");
+                        codes.append(getServerType(obj12.toString())).append(",");
+                    }
+                    Object obj13 = getValue(row.getCell(13));
+                    if(obj13 != null){
+                        names.append(obj13.toString()).append(",");
+                        codes.append(getServerType(obj13.toString())).append(",");
+                    }
+                    Object obj14 = getValue(row.getCell(14));
+                    if(obj14 != null){
+                        names.append(obj14.toString()).append(",");
+                        codes.append(getServerType(obj14.toString())).append(",");
+                    }
+                    Object obj15 = getValue(row.getCell(15));
+                    if(obj15 != null){
+                        names.append(obj15.toString()).append(",");
+                        codes.append(getServerType(obj15.toString())).append(",");
+                    }
+                    Object obj16 = getValue(row.getCell(16));
+                    if(obj16 != null){
+                        names.append(obj16.toString()).append(",");
+                        codes.append(getServerType(obj16.toString())).append(",");
+                    }
+                    Object obj17 = getValue(row.getCell(17));
+                    if(obj17 != null){
+                        names.append(obj17.toString()).append(",");
+                        codes.append(getServerType(obj17.toString())).append(",");
+                    }
+                    Object obj18 = getValue(row.getCell(18));
+                    if(obj18 != null){
+                        names.append(obj18.toString()).append(",");
+                        codes.append(getServerType(obj18.toString())).append(",");
+                    }
+                    if(codes.length() > 0){
+                        h.setServerCodes(codes.toString().substring(0,codes.length() -1));
+                    }
+                    if(names.length() > 0){
+                        h.setServerCategory(names.toString().substring(0,names.length() -1));
+                    }
+
+                    Object obj19 = getValue(row.getCell(19));
+                    if(obj19 != null){
+                        h.setTrusteeshipList(obj19.toString());
+                    }
+
+                    Object obj20 = getValue(row.getCell(20));
+                    if(obj20 != null){
+                        h.setCompanyScope(obj20.toString());
+                    }
+
                     list.add(h);
 
                 } catch (Exception e) {
@@ -291,6 +404,28 @@ public class PoiUtils{
         }
         return list;
     }
+
+
+    public static String getServerType(String name){
+        if(name.equals("土地平整")){
+            return "12";
+        }else if(name.equals("测土施肥")){
+            return "13";
+        }else if(name.equals("育苗播种")){
+            return "14";
+        }else if(name.equals("无人机植保")){
+            return "19";
+        }else if(name.equals("农机收割")){
+            return "16";
+        }else if(name.contains("云烘干")){
+            return "126";
+        }else if(name.contains("农资供给")){
+            return "128";
+        }else {
+            return "129";
+        }
+    }
+
 
     private static Object getValue(Cell cell) {
         if(cell == null){

@@ -41,7 +41,7 @@ public class ApiOderController {
         if(orderVo.getUserType() == null || orderVo.getUserType() > 2 || orderVo.getUserType() <= 0){
             throw new BusinessException("联系对象不明确",ResultEnum.ORDER_EXP.getCode());
         }
-        hjMsgRecordService.validateMsgCode(orderVo.getCode(),orderVo.getUserMobile(), MessageTypeEnum.ZHU_CE.getType(),MessageTypeEnum.ZHU_CE.getMaxTime());
+        hjMsgRecordService.validateMsgCode(orderVo.getCode(),orderVo.getUserMobile(), MessageTypeEnum.ORDER.getType(),MessageTypeEnum.ORDER.getMaxTime());
         HjUser userId = TokenUtil.parseUser(orderVo.getToken());
         hjOrderService.createOrder(userId,orderVo.getUserType(),orderVo.getObjectId(),orderVo.getUserMobile(),orderVo.getUserName());
         return ResultUtils.successV2();

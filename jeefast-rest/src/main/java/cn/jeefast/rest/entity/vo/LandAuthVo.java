@@ -22,12 +22,13 @@ public class LandAuthVo extends TokenVo {
     @ApiModelProperty(value="土地面积", hidden=false,  required=true, dataType="String")
     private Double serverMax;
 
+    @ApiModelProperty(value="土地类型", hidden=false,  required=true, dataType="String")
+    private String haciendaGener;
+
     @ApiModelProperty(value="联系电话", hidden=false,  required=true, dataType="String")
-    @NotNull(message = "联系电话不能为空")
     private String linkPhone;
 
     @ApiModelProperty(value="联系人", hidden=false,  required=true, dataType="String")
-    @NotNull(message = "联系人不能为空")
     private String linkName;
 
     @ApiModelProperty(value="土地性质编码", hidden=false,  required=true, dataType="String")
@@ -65,6 +66,14 @@ public class LandAuthVo extends TokenVo {
 
     @ApiModelProperty(value="土地介绍", hidden=false,  required=true, dataType="JSON")
     private List<LandRemakVo> remarkList;
+
+    public String getHaciendaGener() {
+        return haciendaGener;
+    }
+
+    public void setHaciendaGener(String haciendaGener) {
+        this.haciendaGener = haciendaGener;
+    }
 
     public List<LandRemakVo> getRemarkList() {
         return remarkList;

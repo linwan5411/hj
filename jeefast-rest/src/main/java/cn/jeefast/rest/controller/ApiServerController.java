@@ -89,7 +89,7 @@ public class ApiServerController {
         }
         serverAuthVo.setServerId(serverId);
         serverAuthVo.setRemarkList(remarkList);
-        redisUtils.delete("wh_findServerDetail",serverId);
+        redisUtils.delete("wh_findServerDetail",serverId.toString());
         return ResultUtils.successV2(serverAuthVo);
     }
 

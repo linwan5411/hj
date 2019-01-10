@@ -67,8 +67,8 @@ public class ApiLandController {
             }
         }
         framerAuthVo.setFarmersId(farmersId);
-        redisUtils.delete("wh_farmersInfo",userId);
-        redisUtils.delete("wh_farmersInfo_id",farmersId);
+        redisUtils.delete("wh_farmersInfo",userId.toString());
+        redisUtils.delete("wh_farmersInfo_id",farmersId.toString());
         return ResultUtils.successV2(framerAuthVo);
     }
 
@@ -110,7 +110,7 @@ public class ApiLandController {
 
         Long serverId = hjHaciendaInfoService.landApprove(info,list,userId);
         serverAuthVo.setHaciendaId(serverId);
-        redisUtils.delete("wanhe_HjHaciendaInfo",serverId);
+        redisUtils.delete("wanhe_HjHaciendaInfo",serverId.toString());
         return ResultUtils.successV2(serverAuthVo);
     }
 

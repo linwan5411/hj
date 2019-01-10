@@ -1,5 +1,6 @@
 package cn.jeefast.rest.entity.vo;
 
+import com.baomidou.mybatisplus.annotations.TableField;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
 
@@ -17,24 +18,18 @@ public class ServerAuthVo extends TokenVo {
     private Long serverId;
 
     @ApiModelProperty(value="认证类型", hidden=false,  required=true, dataType="String")
-    @NotNull(message = "认证类型不能为空")
     private Integer serverType;
 
     @ApiModelProperty(value="服务商名称", hidden=false,  required=true, dataType="String")
-    @NotNull(message = "服务商名称")
-    @Length(max = 120,message = "服务商名称最大长度120")
     private String companyName;
 
     @ApiModelProperty(value="联系电话", hidden=false,  required=true, dataType="String")
-    @NotNull(message = "联系电话不能为空")
     private String linkPhone;
 
     @ApiModelProperty(value="联系人", hidden=false,  required=true, dataType="String")
-    @NotNull(message = "联系人不能为空")
     private String linkName;
 
     @ApiModelProperty(value="服务的类型，多个用逗号隔开", hidden=false,  required=true, dataType="String")
-    @NotNull(message = "服务的类型，多个用逗号隔开")
     private String serverCodes;
 
     @ApiModelProperty(value="经营范围", hidden=false,  required=false, dataType="String")
@@ -66,6 +61,50 @@ public class ServerAuthVo extends TokenVo {
 
     @ApiModelProperty(value="文字介绍", hidden=false,  required=true, dataType="JSON")
     private List<ServerRemakVo> remarkList;
+
+    @ApiModelProperty(value="服务等级", hidden=false,  required=true, dataType="String")
+    private String serverGrade;
+
+    @ApiModelProperty(value="服务的类型", hidden=false,  required=true, dataType="String")
+    private String serverGenre;
+
+    @ApiModelProperty(value="可以托管的服务区域,用逗号分隔", hidden=false,  required=true, dataType="String")
+    private String trusteeshipList;
+
+    @ApiModelProperty(value="服务的数量", hidden=false,  required=true, dataType="String")
+    private Integer clientNum = 0;
+
+    public Integer getClientNum() {
+        return clientNum;
+    }
+
+    public void setClientNum(Integer clientNum) {
+        this.clientNum = clientNum;
+    }
+
+    public String getServerGrade() {
+        return serverGrade;
+    }
+
+    public void setServerGrade(String serverGrade) {
+        this.serverGrade = serverGrade;
+    }
+
+    public String getServerGenre() {
+        return serverGenre;
+    }
+
+    public void setServerGenre(String serverGenre) {
+        this.serverGenre = serverGenre;
+    }
+
+    public String getTrusteeshipList() {
+        return trusteeshipList;
+    }
+
+    public void setTrusteeshipList(String trusteeshipList) {
+        this.trusteeshipList = trusteeshipList;
+    }
 
     public Long getServerId() {
         return serverId;
