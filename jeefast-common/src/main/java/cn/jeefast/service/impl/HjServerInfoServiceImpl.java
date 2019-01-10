@@ -148,10 +148,14 @@ public class HjServerInfoServiceImpl extends ServiceImpl<HjServerInfoDao, HjServ
     @Override
     public List<Map<String, Object>> findServerAndLand(Long areaId, Double lat, Double lng,int size) {
         String hkey = "server_notify";
+<<<<<<< HEAD
         if(areaId == null){
             areaId = 2236L;
         }
         String ser_key = areaId +"";
+=======
+        String ser_key = "server_notify_key";
+>>>>>>> origin/master
         if(areaId != null){
             ser_key = areaId.toString();
         }

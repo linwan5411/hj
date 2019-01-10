@@ -70,8 +70,11 @@ public class HjFarmersInfo extends BaseEntity {
 	 */
 	private Double latitude;
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> origin/master
 	public Double getLongitude() {
 		return longitude;
 	}
