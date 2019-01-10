@@ -2,51 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.jeefast.dao.HjServerInfoDao">
 
-	<!-- 通用查询映射结果 -->
-	<resultMap id="BaseResultMap" type="cn.jeefast.entity.HjServerInfo">
-	<result column="id" property="id" />
-	<result column="create_time" property="createTime" />
-	<result column="update_time" property="updateTime" />
-	<result column="data_version" property="dataVersion" />
-		<result column="server_id" property="serverId" />
-		<result column="user_id" property="userId" />
-		<result column="company_name" property="companyName" />
-		<result column="link_phone" property="linkPhone" />
-		<result column="link_name" property="linkName" />
-		<result column="company_email" property="companyEmail" />
-		<result column="company_scope" property="companyScope" />
-		<result column="company_image" property="companyImage" />
-		<result column="company_website" property="companyWebsite" />
-		<result column="server_category" property="serverCategory" />
-		<result column="server_reg_time" property="serverRegTime" />
-		<result column="server_reg_image" property="serverRegImage" />
-		<result column="server_registration" property="serverRegistration" />
-		<result column="server_type" property="serverType" />
-		<result column="server_max" property="serverMax" />
-		<result column="server_codes" property="serverCodes" />
-		<result column="regist_capital" property="registCapital" />
-		<result column="detail_addr" property="detailAddr" />
-		<result column="case_num" property="caseNum" />
-		<result column="client_num" property="clientNum" />
-		<result column="provice" property="provice" />
-		<result column="city" property="city" />
-		<result column="district" property="district" />
-		<result column="area_code" property="areaCode" />
-		<result column="latitude" property="latitude" />
-		<result column="longitude" property="longitude" />
-		<result column="server_show" property="serverShow" />
-		<result column="server_sort" property="serverSort" />
-		<result column="auth_status" property="authStatus" />
-	</resultMap>
 	<sql id="base_sql">
 		user_id as userId,
 		server_id as serverId,
 		company_name as companyName,
 		server_category as serverCategory,
 		server_max as serverMax,
+		link_phone as linkPhone,
+		link_name as linkName,
+		case_num as caseNum,
 		detail_addr as detailAddr,
 		company_image as companyImage,
 		server_type as serverType,
+		server_grade as serverGrade,
+		server_genre as serverGenre,
+		trusteeship_list as trusteeshipList,
 		auth_status as authStatus
 	</sql>
     <select id="findServerMore" resultType="java.util.Map">

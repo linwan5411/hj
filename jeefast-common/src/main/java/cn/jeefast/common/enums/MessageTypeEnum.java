@@ -8,20 +8,20 @@ public enum MessageTypeEnum {
     /**
      *  注册
      */
-    ZHU_CE("1",2,10),
+    ZHU_CE("1",100,15),
     /**
      * 修改密码
      */
-    XIU_GAI_PWD("2",2,10),
+    XIU_GAI_PWD("1",100,15),
 
     /**
      * 找回密码
      */
-    BACK_PWD("3",2,10),
+    BACK_PWD("1",100,15),
     /**
      *  联系订单验证码
      */
-    ORDER("3",100,10),
+    ORDER("1",100,15),
     ;
 
     private String type;

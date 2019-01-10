@@ -25,6 +25,26 @@ public class HjServerInfo extends BaseEntity {
      */
 	@TableField("server_id")
 	private Long serverId;
+
+	/**
+	 * 服务等级
+	 */
+	@TableField("server_grade")
+	private String serverGrade;
+
+	/**
+	 * 服务的类型
+	 */
+	@TableField("server_genre")
+	private String serverGenre;
+
+	/**
+	 * 可以托管的服务区域
+	 */
+	@TableField("trusteeship_list")
+	private String trusteeshipList;
+
+
     /**
      * 会员ID
      */
@@ -124,7 +144,6 @@ public class HjServerInfo extends BaseEntity {
     /**
      * 客户数量
      */
-	@JsonIgnore
 	@TableField("client_num")
 	private Integer clientNum;
     /**
@@ -197,6 +216,30 @@ public class HjServerInfo extends BaseEntity {
 	 */
 	@TableField(exist = false)
 	private List<HjServerCase> caseList;
+
+	public String getServerGrade() {
+		return serverGrade;
+	}
+
+	public void setServerGrade(String serverGrade) {
+		this.serverGrade = serverGrade;
+	}
+
+	public String getServerGenre() {
+		return serverGenre;
+	}
+
+	public void setServerGenre(String serverGenre) {
+		this.serverGenre = serverGenre;
+	}
+
+	public String getTrusteeshipList() {
+		return trusteeshipList;
+	}
+
+	public void setTrusteeshipList(String trusteeshipList) {
+		this.trusteeshipList = trusteeshipList;
+	}
 
 	public String getDistnce() {
 		return distnce;

@@ -58,7 +58,7 @@ public class HjMsgRecordServiceImpl extends ServiceImpl<HjMsgRecordDao, HjMsgRec
             //if (buMessageSwitch){
                 AliyunMessageApi.sendSms(mobile,msgNum);
             //}
-            saveMessage(mobile,msgType,msgNum);
+            saveMessage(mobile,"1",msgNum);
         }catch (Exception e){
             LOGGER.error("短信发送失败:{}",e);
             throw new BusinessException("短信发送失败",ResultEnum.MESSAGE_VALIDATE_EXP.getCode());
@@ -77,7 +77,7 @@ public class HjMsgRecordServiceImpl extends ServiceImpl<HjMsgRecordDao, HjMsgRec
     public void saveMessage(String mobile,String msgType,String msgNum){
         HjMsgRecord systemMsgRecord = new HjMsgRecord();
         systemMsgRecord.setMobile(mobile);
-        systemMsgRecord.setMsgType(Integer.parseInt(msgType));
+        systemMsgRecord.setMsgType(Integer.parseInt("1"));
         systemMsgRecord.setMsgNum(msgNum);
         systemMsgRecord.setCreateTime(new Date());
         int count = hjMsgRecordDao.insert(systemMsgRecord);
@@ -94,7 +94,7 @@ public class HjMsgRecordServiceImpl extends ServiceImpl<HjMsgRecordDao, HjMsgRec
      */
     @Override
     public boolean isMsgTimesOver(String mobile, String msgType){
-        int times  = hjMsgRecordDao.isMsgTimesOver(mobile, msgType);
+        int times  = hjMsgRecordDao.isMsgTimesOver(mobile, "1");
         if(times >= msgTimes){
             throw new BusinessException(ResultEnum.MESSAGE_MAX_EXP.getMessage() , ResultEnum.MESSAGE_MAX_EXP.getCode());
         }
@@ -109,7 +109,7 @@ public class HjMsgRecordServiceImpl extends ServiceImpl<HjMsgRecordDao, HjMsgRec
      */
     @Override
     public String selectNewCode(String mobile, String msgType){
-        return hjMsgRecordDao.selectNewCode(mobile, msgType,null);
+        return hjMsgRecordDao.selectNewCode(mobile, "1",15);
     }
 
     /**
@@ -121,7 +121,7 @@ public class HjMsgRecordServiceImpl extends ServiceImpl<HjMsgRecordDao, HjMsgRec
      */
     @Override
     public String selectNewCode(String mobile, String msgType, Integer maxMinute){
-        return hjMsgRecordDao.selectNewCode(mobile, msgType,maxMinute);
+        return hjMsgRecordDao.selectNewCode(mobile, "1",maxMinute);
     }
 
     /**
@@ -136,9 +136,9 @@ public class HjMsgRecordServiceImpl extends ServiceImpl<HjMsgRecordDao, HjMsgRec
     public boolean validateMsgCode(String code, String mobile, String msgType, Integer maxMinute){
         String msg;
         if (maxMinute==null){
-            msg = selectNewCode(mobile,msgType);
+            msg = selectNewCode(mobile,"1");
         }else {
-            msg = selectNewCode(mobile,msgType,maxMinute);
+            msg = selectNewCode(mobile,"1",maxMinute);
         }
         if(StringUtils.isBlank(msg)){
             throw new BusinessException(ResultEnum.MESSAGE_MOBILE_TIMEOUT_EXP.getMessage(),ResultEnum.MESSAGE_MOBILE_TIMEOUT_EXP.getCode());
@@ -158,7 +158,7 @@ public class HjMsgRecordServiceImpl extends ServiceImpl<HjMsgRecordDao, HjMsgRec
      */
     @Override
     public boolean validateMsgCode(String code, String mobile, String msgType){
-        return validateMsgCode(code,mobile,msgType,10);
+        return validateMsgCode(code,mobile,"1",15);
     }
 	
 }

@@ -35,6 +35,13 @@ public class HjHaciendaInfo extends BaseEntity {
      */
 	@TableField("user_id")
 	private Long userId;
+
+	/**
+     * 农场类型
+     */
+	@TableField("hacienda_gener")
+	private String haciendaGener;
+
     /**
      * 介绍
      */
@@ -187,6 +194,14 @@ public class HjHaciendaInfo extends BaseEntity {
 	 */
 	@TableField(exist = false)
 	private String distnce;
+
+	public String getHaciendaGener() {
+		return haciendaGener;
+	}
+
+	public void setHaciendaGener(String haciendaGener) {
+		this.haciendaGener = haciendaGener;
+	}
 
 	public String getDistnce() {
 		return distnce;

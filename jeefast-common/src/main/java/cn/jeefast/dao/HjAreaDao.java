@@ -22,4 +22,5 @@ public interface HjAreaDao extends BaseMapper<HjArea> {
 
     List<AreaVo> findAreaByParentId(@Param("areaId") Long areaId);
 
+    HjArea selectByName(@Param("areaCode")String areaCode);
 }

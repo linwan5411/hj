@@ -59,6 +59,7 @@
 		hacienda_image as haciendaImage,
 		hacienda_scope as haciendaScope,
 		need_server_name as needServer,
+		hacienda_gener as haciendaGener,
 		auth_status as authStatus
 	</sql>
 	<sql id="new_base_sql">
@@ -97,7 +98,7 @@
 				and area_code like '${areaCode}%'
 			</if>
 			<if test="categoryCode != null">
-				and server_category like '%${categoryCode}%'
+				and need_server like '%${categoryCode}%'
 			</if>
 		) as t left join hj_farmers_info h on t.userId = h.user_id
 			   left join hj_user u on t.userId = u.user_id

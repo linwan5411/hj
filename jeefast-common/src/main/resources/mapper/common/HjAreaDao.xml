@@ -29,5 +29,13 @@
 		</if>
 		ORDER by id
 	</select>
+    <select id="selectByName" resultType="cn.jeefast.entity.HjArea">
+		SELECT
+area_id as area_id,
+area_code as areaCode,
+relation_code as relationCode,
+center as center
+		from hj_area where area_name = #{areaCode}
+	</select>
 
 </mapper>
