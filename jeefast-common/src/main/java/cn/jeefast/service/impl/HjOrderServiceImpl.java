@@ -14,6 +14,7 @@ import cn.jeefast.service.HjOrderService;
 import cn.jeefast.vo.RecordRps;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.apache.catalina.User;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,6 +49,9 @@ public class HjOrderServiceImpl extends ServiceImpl<HjOrderDao, HjOrder> impleme
     @Transactional(rollbackFor = {Exception.class,RuntimeException.class})
     @Override
     public void createOrder(HjUser user, Integer userType, Long objectId, String userMobile, String userName) {
+        if(StringUtils.isBlank(user.getUserName())){
+            user.setUserName(userName);
+        }
         HjOrder t = new HjOrder();
         t.setFromUserId(user.getUserId());
         t.setFromUserMobile(userMobile);
@@ -85,8 +89,8 @@ public class HjOrderServiceImpl extends ServiceImpl<HjOrderDao, HjOrder> impleme
         hj.setCreateTime(new Date());
         hj.setId(KeyGeneratorUtils.getLongValue());
         hj.setMessageTpye(2);
-        hj.setMesageTitle(user.getUserName()+":对您提供的服务非常感兴趣!");
-        StringBuilder builder = new StringBuilder(user.getUserName()).append(",联系电话:").append(user.getUserMobile()).append("对您提供的服务非常感兴趣");
+        hj.setMesageTitle(userName+":对您提供的服务非常感兴趣!");
+        StringBuilder builder = new StringBuilder(StringUtils.isBlank(userName) ? "新农人" : userName).append(",联系电话:").append(user.getUserMobile()).append("对您提供的服务非常感兴趣");
         hj.setMessageInfo(builder.toString());
         hjMessageService.sendMessage(hj);
 
