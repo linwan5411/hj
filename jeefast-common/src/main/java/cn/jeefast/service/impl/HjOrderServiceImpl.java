@@ -83,16 +83,27 @@ public class HjOrderServiceImpl extends ServiceImpl<HjOrderDao, HjOrder> impleme
             t.setToUserName(info.getCompanyName());
         }
 
-        HjMessage hj = new HjMessage();
-        hj.setUserId(megId);
-        hj.setReadCount(0);
-        hj.setCreateTime(new Date());
-        hj.setId(KeyGeneratorUtils.getLongValue());
-        hj.setMessageTpye(2);
-        hj.setMesageTitle(userName+":对您提供的服务非常感兴趣!");
-        StringBuilder builder = new StringBuilder(StringUtils.isBlank(userName) ? "新农人" : userName).append(",联系电话:").append(user.getUserMobile()).append("对您提供的服务非常感兴趣");
-        hj.setMessageInfo(builder.toString());
-        hjMessageService.sendMessage(hj);
+        try {
+            if(megId != null){
+                HjMessage hj = new HjMessage();
+                hj.setUserId(megId);
+                hj.setReadCount(0);
+                hj.setCreateTime(new Date());
+                hj.setId(KeyGeneratorUtils.getLongValue());
+                hj.setMessageTpye(2);
+                if(StringUtils.isNotBlank(userName)) {
+                    hj.setMesageTitle(userName + ":对您提供的服务非常感兴趣!");
+                }else{
+                    hj.setMesageTitle("对您提供的服务非常感兴趣!");
+                }
+                StringBuilder builder = new StringBuilder(StringUtils.isBlank(userName) ? "新农人" : userName).append(",联系电话:")
+                        .append(StringUtils.isNotBlank(user.getUserMobile()) ? user.getUserMobile() : "").append("对您提供的服务非常感兴趣");
+                hj.setMessageInfo(builder.toString());
+                hjMessageService.sendMessage(hj);
+            }
+        }catch (Exception e){
+
+        }
 
         hjOrderDao.insert(t);
     }
