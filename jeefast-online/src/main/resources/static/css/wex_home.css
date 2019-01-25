@@ -1,0 +1,25 @@
+.gradient{
+    background: #14BC4D;
+    background: -moz-linear-gradient(top,  #14BC4D 0%, #1BC1A4 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#14BC4D), color-stop(100%,#1BC1A4));
+    background: -webkit-linear-gradient(top,  #14BC4D 0%,#1BC1A4 100%);
+    background: -o-linear-gradient(top,  #14BC4D 0%,#1BC1A4 100%);
+    background: -ms-linear-gradient(top,  #14BC4D 0%,#1BC1A4 100%);
+    background: linear-gradient(to bottom,  #14BC4D 0%,#1BC1A4 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#14BC4D', endColorstr='#1BC1A4',GradientType=0 );
+}
+.white_color{
+    color: white;
+}
+.pad-r-10{
+    padding-right: 0.5rem;
+}
+.image-h40{
+    width: 45px;height: 45px;
+}
+.font-12{
+    font-size: 12px;
+}
+.center{
+    text-align: center;
+}

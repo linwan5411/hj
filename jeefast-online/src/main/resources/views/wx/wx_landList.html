@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>农场主列表</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="../../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/css/wex_home.css">
+    <style>
+        .p0{
+            padding: 0;
+        }
+        .label-green{
+            font-size: 10px;
+            color: #14BC4D;
+            padding-left: 0.2rem;
+            padding-right: 0.2rem;
+            background: #E1F9E3;
+            border: 1px solid #14BC4D;
+        }
+        .label-blue{
+            font-size: 10px;
+            color: #2B85E1;
+            padding-left: 0.2rem;
+            padding-right: 0.2rem;
+            background: #E8F3FF;
+            border: 1px solid #2B85E1;
+        }
+        .label-red{
+            font-size: 10px;
+            color: #FD4F4A;
+            padding-left: 0.2rem;
+            padding-right: 0.2rem;
+            background: #FFEBEB;
+            border: 1px solid #FD4F4A;
+        }
+        .label-yellow{
+            font-size: 10px;
+            color: #EEA70E;
+            padding-left: 0.2rem;
+            padding-right: 0.2rem;
+            background: #FCF5E3;
+            border: 1px solid #EEA70E;
+        }
+        label{
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body style="overflow-y: auto">
+<div class="container-fluid">
+    <div class="row gradient" style="height: 50px;line-height: 50px;text-align: center">
+        <font style="font-size: 18px;font-weight: 300;color: white;">农场主</font>
+    </div>
+</div>
+
+<!--收缩框-->
+<div class="container-fluid" style="height: 30px;line-height: 30px;text-align: center;padding: 5px;font-size: 14px;font-weight: 400">
+    <div class="col-xs-3" style="border-right: 2px solid #efeff4">
+        <input class="weui-input" id="provice" type="text" value="重庆" data-values="">
+    </div>
+    <div class="col-xs-3" style="border-right: 2px solid #efeff4">
+        <input class="weui-input" id="chkType" type="text" value="类型" data-values="">
+    </div>
+    <div class="col-xs-3" style="border-right: 2px solid #efeff4">
+        <input class="weui-input" id="authType" type="text" value="认证" data-values="">
+    </div>
+    <div class="col-xs-3">
+        <input class="weui-input" id="userType" type="text" value="类型" data-values="">
+    </div>
+</div>
+
+<!--分隔线-->
+<div class="col-xs-12" style="padding: 0;background: #F0F0F0;height: 8px;margin-top: 5px"></div>
+
+<!--农场主-->
+<div class="container-fluid">
+    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;height: 120px;">
+        <div class="col-xs-3 p0" style="text-align: center">
+            <img  src="../../static/img/lands.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
+        </div>
+        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
+            <div style="font-weight: 700;">
+                新农人9527（个人）
+            </div>
+            <div style="margin-top: 0.5rem;">
+                <label class="label-yellow">土地平整</label>
+                <label>水域 <font style="font-weight: 600;color: #17BE74">500亩</font></label>
+            </div>
+            <div class="col-xs-12 p0" style="font-size: 14px;margin-top: 0.5rem">
+                <img src="../../static/img/addr.png" height="11" width="9"/>
+                重庆市距您1500公里
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;height: 120px;">
+        <div class="col-xs-3 p0" style="text-align: center">
+            <img  src="../../static/img/lands.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
+        </div>
+        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
+            <div style="font-weight: 700;">
+                新农人9527（个人）
+            </div>
+            <div style="margin-top: 0.5rem;">
+                <label class="label-yellow">土地平整</label>
+                <label class="label-blue">农机收割</label>
+                <label class="label-red">烘干收藏</label>
+                <label class="label-blue">农机收割</label>
+                <label class="label-red">烘干收藏</label>
+                <label>水域 <font style="font-weight: 600;color: #17BE74">500亩</font></label>
+            </div>
+            <div class="col-xs-12 p0" style="font-size: 14px;margin-top: 0.5rem">
+                <img src="../../static/img/addr.png" height="11" width="9"/>
+                重庆市距您1500公里
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;height: 120px;">
+        <div class="col-xs-3 p0" style="text-align: center">
+            <img  src="../../static/img/lands.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
+        </div>
+        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
+            <div style="font-weight: 700;">
+                新农人9527（个人）
+            </div>
+            <div style="margin-top: 0.5rem;">
+                <label class="label-yellow">土地平整</label>
+                <label>水域 <font style="font-weight: 600;color: #17BE74">500亩</font></label>
+            </div>
+            <div class="col-xs-12 p0" style="font-size: 14px;margin-top: 0.5rem">
+                <img src="../../static/img/addr.png" height="11" width="9"/>
+                重庆市距您1500公里
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;height: 120px;">
+        <div class="col-xs-3 p0" style="text-align: center">
+            <img  src="../../static/img/lands.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
+        </div>
+        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
+            <div style="font-weight: 700;">
+                新农人9527（个人）
+            </div>
+            <div style="margin-top: 0.5rem;">
+                <label class="label-yellow">土地平整</label>
+                <label>水域 <font style="font-weight: 600;color: #17BE74">500亩</font></label>
+            </div>
+            <div class="col-xs-12 p0" style="font-size: 14px;margin-top: 0.5rem">
+                <img src="../../static/img/addr.png" height="11" width="9"/>
+                重庆市距您1500公里
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;height: 120px;">
+        <div class="col-xs-3 p0" style="text-align: center">
+            <img  src="../../static/img/lands.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
+        </div>
+        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
+            <div style="font-weight: 700;">
+                新农人9527（个人）
+            </div>
+            <div style="margin-top: 0.5rem;">
+                <label class="label-yellow">土地平整</label>
+                <label>水域 <font style="font-weight: 600;color: #17BE74">500亩</font></label>
+            </div>
+            <div class="col-xs-12 p0" style="font-size: 14px;margin-top: 0.5rem">
+                <img src="../../static/img/addr.png" height="11" width="9"/>
+                重庆市距您1500公里
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;height: 120px;">
+        <div class="col-xs-3 p0" style="text-align: center">
+            <img  src="../../static/img/lands.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
+        </div>
+        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
+            <div style="font-weight: 700;">
+                新农人9527（个人）
+            </div>
+            <div style="margin-top: 0.5rem;">
+                <label class="label-yellow">土地平整</label>
+                <label>水域 <font style="font-weight: 600;color: #17BE74">500亩</font></label>
+            </div>
+            <div class="col-xs-12 p0" style="font-size: 14px;margin-top: 0.5rem">
+                <img src="../../static/img/addr.png" height="11" width="9"/>
+                重庆市距您1500公里
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;height: 120px;">
+        <div class="col-xs-3 p0" style="text-align: center">
+            <img  src="../../static/img/lands.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
+        </div>
+        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
+            <div style="font-weight: 700;">
+                新农人9527（个人）
+            </div>
+            <div style="margin-top: 0.5rem;">
+                <label class="label-yellow">土地平整</label>
+                <label>水域 <font style="font-weight: 600;color: #17BE74">500亩</font></label>
+            </div>
+            <div class="col-xs-12 p0" style="font-size: 14px;margin-top: 0.5rem">
+                <img src="../../static/img/addr.png" height="11" width="9"/>
+                重庆市距您1500公里
+            </div>
+        </div>
+    </div>
+    <div id="list">
+
+    </div>
+</div>
+
+<!--分隔线-->
+<div class="weui-loadmore" id="loadingcls">
+    <i class="weui-loading"></i>
+    <span class="weui-loadmore__tips">正在加载</span>
+</div>
+
+</body>
+<!-- body 最后 -->
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+<!-- 如果使用了某些拓展插件还需要额外的JS -->
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
+<script>
+    $("#provice").select({
+        title: "选择城市",
+        items: [
+            {
+                title: "重庆",
+                value: "500000",
+            },
+            {
+                title: "北京市",
+                value: "110000",
+            },
+            {
+                title: "天津市",
+                value: "120000",
+            },
+            {
+                title: "河北省",
+                value: "130000",
+            },
+            {
+                title: "山西省",
+                value: "140000",
+            },
+            {
+                title: "内蒙古",
+                value: "150000",
+            },
+            {
+                title: "吉林省",
+                value: "220000",
+            },
+            {
+                title: "上海市",
+                value: "310000",
+            },
+            {
+                title: "江苏省",
+                value: "320000"
+            },
+            {
+                title: "浙江省",
+                value: "330000"
+            },
+            {
+                title: "安徽省",
+                value: "340000"
+            },
+            {
+                title: "福建省",
+                value: "350000"
+            },
+            {
+                title: "江西省",
+                value: "360000"
+            },
+            {
+                title: "山东省",
+                value: "370000"
+            },
+            {
+                title: "河南省",
+                value: "410000"
+            },
+            {
+                title: "湖北省",
+                value: "420000"
+            },
+            {
+                title: "湖南省",
+                value: "430000"
+            },
+            {
+                title: "湖南省",
+                value: "430000"
+            },
+            {
+                title: "广西",
+                value: "450000"
+            },
+            {
+                title: "海南省",
+                value: "460000"
+            }, {
+                title: "四川省",
+                value: "510000"
+            }, {
+                title: "云南省",
+                value: "530000"
+            }, {
+                title: "西藏",
+                value: "540000"
+            }, {
+                title: "陕西省",
+                value: "610000"
+            },
+            {
+                title: "甘肃省",
+                value: "620000"
+            },
+            {
+                title: "青海省",
+                value: "630000"
+            },
+            {
+                title: "宁夏",
+                value: "640000"
+            },
+            {
+                title: "新疆",
+                value: "650000"
+            }
+        ]
+    });
+
+    $("#chkType").select({
+        title: "选择类型",
+        items: [
+            {
+                title: "所有类型",
+                value: "",
+            },
+            {
+                title: "土地平整",
+                value: "12",
+            },
+            {
+                title: "测土施肥",
+                value: "13",
+            },
+            {
+                title: "育苗播种",
+                value: "14",
+            },
+            {
+                title: "科技植保",
+                value: "15",
+            },
+            {
+                title: "农机收割",
+                value: "16",
+            },
+            {
+                title: "烘干储存",
+                value: "17",
+            },
+            {
+                title: "订单收购",
+                value: "18",
+            },
+            {
+                title: "无人机质保",
+                value: "19",
+            },
+            {
+                title: "云烘干/冷藏",
+                value: "126"
+            },
+            {
+                title: "农资供给",
+                value: "128",
+            },
+            {
+                title: "订单/销售",
+                value: "129",
+            },
+        ]
+    });
+
+    $("#authType").select({
+        title: "筛选",
+        items: [
+            {
+                title: "所有",
+                value: "",
+            },
+            {
+                title: "已认证",
+                value: "1",
+            },
+            {
+                title: "未认证",
+                value: "0",
+            }
+        ]
+    });
+
+    $("#userType").select({
+        title: "认证类型",
+        items: [
+            {
+                title: "所有",
+                value: "",
+            },
+            {
+                title: "个人",
+                value: "1",
+            },
+            {
+                title: "企业",
+                value: "2",
+            }
+        ]
+    });
+
+    //滚动插件
+    $(document.body).infinite();
+
+    var loading = false;  //状态标记
+    var i = 0;
+    $(document.body).infinite().on("infinite", function() {
+        i++;
+        if(loading){
+            //表示结束标记。底线
+            return;
+        }
+        $("#loadingcls").show();
+
+        //处理ajax的请求
+
+        //$("#list").append("<p> 我是新加载的内容 </p>");
+
+        setTimeout(function() {
+            $("#list").append("<p> 我是新加载的内容 </p>");
+            //loading = true;
+        }, 10);   //模拟延迟
+
+        console.info(i)
+
+        //完了隐藏按钮
+        if(i == 10) {
+            loading = true;
+            $(document.body).destroyInfinite();
+            $("#loadingcls").hide();
+        }
+    });
+</script>
+</html>

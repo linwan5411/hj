@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>主页</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- head 中 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="../../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/css/wex_home.css">
+    <style>
+        .label-green{
+            font-size: 12px;
+            color: #14BC4D;
+            padding-left: 0.2rem;
+            padding-right: 0.2rem;
+            background: #E1F9E3;
+            border: 1px solid #14BC4D;
+        }
+        .label-blue{
+            font-size: 12px;
+            color: #2B85E1;
+            padding-left: 0.2rem;
+            padding-right: 0.2rem;
+            background: #E8F3FF;
+            border: 1px solid #2B85E1;
+        }
+        .label-red{
+            font-size: 12px;
+            color: #FD4F4A;
+            padding-left: 0.2rem;
+            padding-right: 0.2rem;
+            background: #FFEBEB;
+            border: 1px solid #FD4F4A;
+        }
+        .label-yellow{
+            font-size: 12px;
+            color: #EEA70E;
+            padding-left: 0.2rem;
+            padding-right: 0.2rem;
+            background: #FCF5E3;
+            border: 1px solid #EEA70E;
+        }
+        label{
+            font-weight: normal;
+        }
+        .p0{
+            padding: 0;
+        }
+    </style>
+</head>
+<body style="overflow-y: auto">
+
+<!--搜索框-->
+<div class="weui-search-bar gradient" id="searchBar">
+    <div class="white_color pad-r-10" style="width: 3.5rem;text-align: center">
+        <input class="weui-input" id="provice" type="text" value="重庆" data-values="500000">
+    </div>
+    <form class="weui-search-bar__form">
+        <div class="weui-search-bar__box">
+            <i class="weui-icon-search"></i>
+            <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
+            <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+        </div>
+        <label class="weui-search-bar__label" id="searchText">
+            <i class="weui-icon-search"></i>
+            <span>搜索</span>
+        </label>
+    </form>
+    <a href="javascript:" class="weui-search-bar__cancel-btn white_color" id="searchCancel">取消</a>
+</div>
+
+<!--轮播图-->
+<div class="swiper-container" data-space-between='10' data-pagination='.swiper-pagination' data-autoplay="1000">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><img style="width: 100%;height: 8rem"  src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1n3rZHFXXXXX9XFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""></div>
+        <div class="swiper-slide"><img style="width: 100%;height: 8rem" src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i4/TB10rkPGVXXXXXGapXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""></div>
+        <div class="swiper-slide"><img style="width: 100%;height: 8rem" src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1kQI3HpXXXXbSXFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""></div>
+    </div>
+</div>
+
+<!--分类-->
+<div class="container-fluid" style="margin-top: 0.5rem">
+    <div class="weui-grids">
+        <a href="" class="weui-grid js_grid">
+            <div class="weui-grid__icon image-h40" style="width: 40px;height: 40px">
+                <img src="../../static/img/home_c.png" alt="">
+            </div>
+            <p class="weui-grid__label">
+                土地平整
+            </p>
+            <p class="weui-grid__label" style="font-size: 12px">耕种科学规划</p>
+        </a>
+        <a href="" class="weui-grid js_grid">
+            <div class="weui-grid__icon" style="width: 40px;height: 40px">
+                <img src="../../static/img/home_c.png" alt="">
+            </div>
+            <p class="weui-grid__label">
+                土地平整
+            </p>
+            <p class="weui-grid__label" style="font-size: 12px">耕种科学规划</p>
+        </a>
+        <a href="" class="weui-grid js_grid">
+            <div class="weui-grid__icon" style="width: 40px;height: 40px">
+                <img src="../../static/img/home_c.png" alt="">
+            </div>
+            <p class="weui-grid__label">
+                土地平整
+            </p>
+            <p class="weui-grid__label" style="font-size: 12px">耕种科学规划</p>
+        </a>
+        <a href="" class="weui-grid js_grid">
+            <div class="weui-grid__icon" style="width: 40px;height: 40px">
+                <img src="../../static/img/home_c.png" alt="">
+            </div>
+            <p class="weui-grid__label">
+                土地平整
+            </p>
+            <p class="weui-grid__label" style="font-size: 12px">耕种科学规划</p>
+        </a>
+        <a href="" class="weui-grid js_grid">
+            <div class="weui-grid__icon" style="width: 40px;height: 40px">
+                <img src="../../static/img/home_c.png" alt="">
+            </div>
+            <p class="weui-grid__label">
+                土地平整
+            </p>
+            <p class="weui-grid__label" style="font-size: 12px">耕种科学规划</p>
+        </a>
+        <a href="" class="weui-grid js_grid">
+            <div class="weui-grid__icon" style="width: 40px;height: 40px">
+                <img src="../../static/img/home_c.png" alt="">
+            </div>
+            <p class="weui-grid__label">
+                土地平整
+            </p>
+            <p class="weui-grid__label" style="font-size: 12px">耕种科学规划</p>
+        </a>
+    </div>
+</div>
+
+<!--服务面积-->
+<div class="container-fluid" style="margin-top: 0.5rem">
+    <div class="weui-flex gradient" style="padding-bottom: 0.5rem;padding-top: 0.5rem">
+        <div class="weui-flex__item center white_color">
+            <p style="font-weight: 700">2000+</p>
+            <p>农业订单</p>
+        </div>
+        <div class="weui-flex__item center white_color">
+            <p style="font-weight: 700">5000+</p>
+            <p>农场主</p>
+        </div>
+        <div class="weui-flex__item center white_color">
+            <p style="font-weight: 700">9000+</p>
+            <p>服务面积</p>
+        </div>
+    </div>
+</div>
+
+<!--消息通知-->
+<div class="notice" style="padding: 0;text-align: left;line-height: 25px;height: 20px;overflow-y: hidden">
+    <ul>
+        <li>
+            <div class="weui-flex">
+                <div class="weui-flex__item center">
+                    3分钟前
+                </div>
+                <div class="weui-flex__item center">
+                    新农人536
+                </div>
+                <div class="weui-flex__item center">
+                    联系了土地平整
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="weui-flex">
+                <div class="weui-flex__item center">
+                    5小时前
+                </div>
+                <div class="weui-flex__item center">
+                    新农人102
+                </div>
+                <div class="weui-flex__item center">
+                    联系了订单销售
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="weui-flex">
+                <div class="weui-flex__item center">
+                    2天前
+                </div>
+                <div class="weui-flex__item center">
+                    新农人5689
+                </div>
+                <div class="weui-flex__item center">
+                    联系了烘干储存
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="weui-flex">
+                <div class="weui-flex__item center">
+                    3分钟前
+                </div>
+                <div class="weui-flex__item center">
+                    新农人1213
+                </div>
+                <div class="weui-flex__item center">
+                    联系了农资供给
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="weui-flex">
+                <div class="weui-flex__item center">
+                    5分钟前
+                </div>
+                <div class="weui-flex__item center">
+                    新农人763
+                </div>
+                <div class="weui-flex__item center">
+                    联系了订单/销售
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<!--服务分类-->
+<div class="container-fluid">
+    <div class="col-xs-12" style="padding: 0;height: 52px;margin-top: 10px;">
+        <div class="col-xs-6" style="padding: 0;background: #F5F5F5;padding: 10px;border-right: 5px solid white">
+            <div class="col-xs-4" style="padding: 0;">
+                <img src="../../static/img/point1.png" height="36" width="31"/>
+            </div>
+            <div class="col-xs-6" style="padding: 0;">
+                <div style="font-size: 13px">
+                    农产品订单
+                </div>
+                <div style="font-size: 10px;">
+                    让种植后顾无忧
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6" style="padding: 0;background: #F5F5F5;padding: 10px;border-left: 5px solid white">
+            <div class="col-xs-4" style="padding: 0;">
+                <img src="../../static/img/point3.png" height="36" width="31"/>
+            </div>
+            <div class="col-xs-6" style="padding: 0;">
+                <div style="font-size: 13px">
+                    供应链金融
+                </div>
+                <div style="font-size: 10px;">
+                    种植补给有保障
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--分隔线-->
+<div class="col-xs-12" style="padding: 0;background: #F0F0F0;height: 10px;margin-top: 10px;"></div>
+
+<!--服务商-->
+<div class="container-fluid">
+    <div class="col-xs-12 p0" style="text-align: left;padding-top: 0.8rem">
+        <div class="col-xs-5 p0" style="font-weight: 700;">
+            <img src="../../static/img/server.png" height="22" width="22"/>
+            农业服务提供商
+        </div>
+        <div class="col-xs-3">
+        </div>
+        <div class="col-xs-4" style="font-size: 12px;padding: 0;text-align: right" onclick="toServerList()">
+            查看全部>>
+        </div>
+    </div>
+    <div class="col-xs-12 p0" style="margin-top: 1rem;">
+        <div class="col-xs-3 p0" style="height: 120px;border-bottom: 1px solid #efeff4;">
+            <img src="../../static/img/ser1.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
+        </div>
+        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
+            <div style="font-weight: 600;">
+                重庆北碚土地整合服务中心
+            </div>
+            <div style="margin-top: 0.1rem">
+                <label class="label-green">育苗播种</label>
+                <label class="label-blue">农机收割</label>
+                <label class="label-red">烘干收藏</label>
+                <label class="label-green">育苗播种</label>
+                <label class="label-blue">农机收割</label>
+                <label class="label-red">烘干收藏</label>
+            </div>
+            <div style="margin-top: 0.1rem">
+                服务<font style="color:#14BC4D;font-weight: 700;">1500</font>亩+
+            </div>
+            <div style="margin-top: 0.1rem;font-size: 12px">
+                <img src="../../static/img/addr.png" height="11" width="9"/>
+                重庆市距您1500公里
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;">
+        <div class="col-xs-3 p0" style="height: 120px;">
+            <img src="../../static/img/ser1.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
+        </div>
+        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
+            <div style="font-weight: 600;">
+                重庆北碚土地整合服务中心
+            </div>
+            <div style="margin-top: 0.1rem">
+                <label class="label-green">育苗播种</label>
+                <label class="label-blue">农机收割</label>
+                <label class="label-red">烘干收藏</label>
+                <label class="label-green">育苗播种</label>
+                <label class="label-blue">农机收割</label>
+                <label class="label-red">烘干收藏</label>
+            </div>
+            <div style="margin-top: 0.1rem">
+                服务<font style="color:#14BC4D;font-weight: 700;">1500</font>亩+
+            </div>
+            <div style="margin-top: 0.1rem;font-size: 12px">
+                <img src="../../static/img/addr.png" height="11" width="9"/>
+                重庆市距您1500公里
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;">
+        <div class="col-xs-3 p0" style="height: 120px;">
+            <img src="../../static/img/ser1.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
+        </div>
+        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
+            <div style="font-weight: 600;">
+                重庆北碚土地整合服务中心
+            </div>
+            <div style="margin-top: 0.1rem">
+                <label class="label-green">育苗播种</label>
+                <label class="label-blue">农机收割</label>
+                <label class="label-red">烘干收藏</label>
+                <label class="label-green">育苗播种</label>
+                <label class="label-blue">农机收割</label>
+                <label class="label-red">烘干收藏</label>
+            </div>
+            <div style="margin-top: 0.1rem">
+                服务<font style="color:#14BC4D;font-weight: 700;">1500</font>亩+
+            </div>
+            <div style="margin-top: 0.1rem;font-size: 12px">
+                <img src="../../static/img/addr.png" height="11" width="9"/>
+                重庆市距您1500公里
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--分隔线-->
+<div class="col-xs-12" style="padding: 0;background: #F0F0F0;height: 10px;margin-top: 30px;"></div>
+
+<!--农场主-->
+<div class="container-fluid">
+    <div class="col-xs-12 p0" style="text-align: left;padding-top: 0.8rem">
+        <div class="col-xs-5 p0" style="font-size: 14px;font-weight: 700;">
+            <img src="../../static/img/lan.png" height="22" width="22"/>
+            农场主需求
+        </div>
+        <div class="col-xs-3">
+        </div>
+        <div class="col-xs-4" style="font-size: 12px;padding: 0;text-align: right" onclick="toLandList()">
+            查看全部>>
+        </div>
+    </div>
+    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;height: 120px;">
+        <div class="col-xs-3 p0">
+            <img  src="../../static/img/lands.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
+        </div>
+        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
+            <div style="font-weight: 400;">
+                新农人9527（个人）
+            </div>
+            <div style="margin-top: 0.5rem;font-size: 12px">
+                <label class="label-yellow">土地平整</label>
+                <label>水域 <font style="font-weight: 600;color: #17BE74">500亩</font></label>
+            </div>
+            <div class="col-xs-12 p0" style="font-size: 12px;margin-top: 0.5rem">
+                <img src="../../static/img/addr.png" height="11" width="9"/>
+                重庆市距您1500公里
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;height: 120px;">
+        <div class="col-xs-3 p0">
+            <img  src="../../static/img/lands.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
+        </div>
+        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
+            <div style="font-weight: 400;">
+                新农人9527（个人）
+            </div>
+            <div style="margin-top: 0.5rem;font-size: 12px">
+                <label class="label-yellow">土地平整</label>
+                <label class="label-blue">农机收割</label>
+                <label class="label-red">烘干收藏</label>
+                <label class="label-blue">农机收割</label>
+                <label class="label-red">烘干收藏</label>
+                <label>水域 <font style="font-weight: 600;color: #17BE74">500亩</font></label>
+            </div>
+            <div class="col-xs-12 p0" style="font-size: 12px;margin-top: 0.5rem">
+                <img src="../../static/img/addr.png" height="11" width="9"/>
+                重庆市距您1500公里
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;height: 120px;">
+        <div class="col-xs-3 p0">
+            <img  src="../../static/img/lands.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
+        </div>
+        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
+            <div style="font-weight: 400;">
+                新农人9527（个人）
+            </div>
+            <div style="margin-top: 0.5rem;font-size: 12px">
+                <label class="label-yellow">土地平整</label>
+                <label>水域 <font style="font-weight: 600;color: #17BE74">500亩</font></label>
+            </div>
+            <div class="col-xs-12 p0" style="font-size: 12px;margin-top: 0.5rem">
+                <img src="../../static/img/addr.png" height="11" width="9"/>
+                重庆市距您1500公里
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<!-- body 最后 -->
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+<!-- 如果使用了某些拓展插件还需要额外的JS -->
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
+<!--轮播图-->
+<script src="../../static/js/swiper.js"></script>
+<script>
+    $("#provice").select({
+        title: "选择城市",
+        items: [
+            {
+                title: "重庆",
+                value: "500000",
+            },
+            {
+                title: "北京市",
+                value: "110000",
+            },
+            {
+                title: "天津市",
+                value: "120000",
+            },
+            {
+                title: "河北省",
+                value: "130000",
+            },
+            {
+                title: "山西省",
+                value: "140000",
+            },
+            {
+                title: "内蒙古",
+                value: "150000",
+            },
+            {
+                title: "吉林省",
+                value: "220000",
+            },
+            {
+                title: "上海市",
+                value: "310000",
+            },
+            {
+                title: "江苏省",
+                value: "320000"
+            },
+            {
+                title: "浙江省",
+                value: "330000"
+            },
+            {
+                title: "安徽省",
+                value: "340000"
+            },
+            {
+                title: "福建省",
+                value: "350000"
+            },
+            {
+                title: "江西省",
+                value: "360000"
+            },
+            {
+                title: "山东省",
+                value: "370000"
+            },
+            {
+                title: "河南省",
+                value: "410000"
+            },
+            {
+                title: "湖北省",
+                value: "420000"
+            },
+            {
+                title: "湖南省",
+                value: "430000"
+            },
+            {
+                title: "湖南省",
+                value: "430000"
+            },
+            {
+                title: "广西",
+                value: "450000"
+            },
+            {
+                title: "海南省",
+                value: "460000"
+            }, {
+                title: "四川省",
+                value: "510000"
+            }, {
+                title: "云南省",
+                value: "530000"
+            }, {
+                title: "西藏",
+                value: "540000"
+            }, {
+                title: "陕西省",
+                value: "610000"
+            },
+            {
+                title: "甘肃省",
+                value: "620000"
+            },
+            {
+                title: "青海省",
+                value: "630000"
+            },
+            {
+                title: "宁夏",
+                value: "640000"
+            },
+            {
+                title: "新疆",
+                value: "650000"
+            }
+        ]
+    });
+
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        paginationClickable: true,
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: 3000,
+        autoplayDisableOnInteraction: false
+    });
+    /*
+   * 参数说明
+   * obj : 动画的节点，本例中是ul
+   * top : 动画的高度，本例中是-35px;注意向上滚动是负数
+   * time : 动画的速度，即完成动画所用时间，本例中是500毫秒，即marginTop从0到-35px耗时500毫秒
+   * function : 回调函数，每次动画完成，marginTop归零，并把此时第一条信息添加到列表最后;
+   *
+   */
+    function noticeUp(obj,top,time) {
+        $(obj).animate({
+            marginTop: top
+        }, time, function () {
+            $(this).css({marginTop:"0"}).find(":first").appendTo(this);
+        })
+    }
+
+    $(function () {
+        // 调用 公告滚动函数
+        setInterval("noticeUp('.notice ul','-35px',500)", 2000);
+    });
+
+    function toServerList() {
+        window.location.href = '/wx/serverList';
+    }
+
+    function toLandList() {
+        window.location.href = '/wx/landList';
+    }
+
+</script>
+</html>
