@@ -14,6 +14,12 @@
     <link rel="stylesheet" href="../../static/css/bootstrap.css">
     <link rel="stylesheet" href="../../static/css/wex_home.css">
     <style>
+        a{
+            color: black;text-decoration: none;
+        }
+        a:visited{
+            color: black;
+        }
         .label-green{
             font-size: 12px;
             color: #14BC4D;
@@ -63,16 +69,16 @@
 <!--收缩框-->
 <div class="container-fluid" style="height: 30px;line-height: 30px;text-align: center;padding: 5px;font-size: 14px;font-weight: 400">
     <div class="col-xs-3" style="border-right: 2px solid #efeff4">
-        <input class="weui-input" id="provice" type="text" value="重庆" data-values="">
+        <input class="weui-input" id="provice" onchange="loadAjax()" type="text" value="重庆" data-values="">
     </div>
     <div class="col-xs-3" style="border-right: 2px solid #efeff4">
-        <input class="weui-input" id="chkType" type="text" value="类型" data-values="">
+        <input class="weui-input" id="chkType" onchange="loadAjax()" type="text" value="类型" data-values="">
     </div>
     <div class="col-xs-3" style="border-right: 2px solid #efeff4">
-        <input class="weui-input" id="authType" type="text" value="认证" data-values="">
+        <input class="weui-input" id="authType" onchange="loadAjax()" type="text" value="认证" data-values="">
     </div>
     <div class="col-xs-3">
-        <input class="weui-input" id="userType" type="text" value="类型" data-values="">
+        <input class="weui-input" id="userType" onchange="loadAjax()" type="text" value="类型" data-values="">
     </div>
 </div>
 
@@ -80,260 +86,72 @@
 <div class="col-xs-12" style="padding: 0;background: #F0F0F0;height: 8px;margin-top: 5px"></div>
 
 <!--服务商-->
-<div class="container-fluid">
-    <div class="col-xs-12 p0" style="margin-top: 1rem;">
-        <div class="col-xs-3 p0" style="height: 120px;border-bottom: 1px solid #efeff4;">
-            <img src="../../static/img/ser1.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
-        </div>
-        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
-            <div style="font-weight: 600;">
-                重庆北碚土地整合服务中心
+<div class="container-fluid" id="all_data">
+    <#if list?exists>
+        <#list list as item>
+        <a href="/wx/severInfo/${item.serverId?c}">
+        <div class="col-xs-12 p0 xxx" style="margin-top: 1rem;padding-bottom: 0.2rem;border-bottom: 1px solid #efeff4;">
+            <div class="col-xs-3 p0" style="height: 120px;">
+                <#if item.companyImage?exists>
+                    <img src="${item.companyImage}" class="img-responsive" style="display: inline-block; vertical-align: middle; max-height: 120px"/>
+                <#else>
+                    <img src="../../static/img/ser1.png" class="img-responsive" style="display: inline-block; vertical-align: middle; max-height: 120px"/>
+                </#if>
             </div>
-            <div style="margin-top: 0.1rem">
-                <label class="label-green">育苗播种</label>
-                <label class="label-blue">农机收割</label>
-                <label class="label-red">烘干收藏</label>
-                <label class="label-green">育苗播种</label>
-                <label class="label-blue">农机收割</label>
-                <label class="label-red">烘干收藏</label>
-            </div>
-            <div style="margin-top: 0.1rem">
-                服务<font style="color:#14BC4D;font-weight: 700;">1500</font>亩+
-            </div>
-            <div style="margin-top: 0.1rem;font-size: 12px">
-                <img src="../../static/img/addr.png" height="11" width="9"/>
-                重庆市距您1500公里
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;">
-        <div class="col-xs-3 p0" style="height: 120px;">
-            <img src="../../static/img/ser1.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
-        </div>
-        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
-            <div style="font-weight: 600;">
-                重庆北碚土地整合服务中心
-            </div>
-            <div style="margin-top: 0.1rem">
-                <label class="label-green">育苗播种</label>
-                <label class="label-blue">农机收割</label>
-                <label class="label-red">烘干收藏</label>
-                <label class="label-green">育苗播种</label>
-                <label class="label-blue">农机收割</label>
-                <label class="label-red">烘干收藏</label>
-            </div>
-            <div style="margin-top: 0.1rem">
-                服务<font style="color:#14BC4D;font-weight: 700;">1500</font>亩+
-            </div>
-            <div style="margin-top: 0.1rem;font-size: 12px">
-                <img src="../../static/img/addr.png" height="11" width="9"/>
-                重庆市距您1500公里
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;">
-        <div class="col-xs-3 p0" style="height: 120px;">
-            <img src="../../static/img/ser1.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
-        </div>
-        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
-            <div style="font-weight: 600;">
-                重庆北碚土地整合服务中心
-            </div>
-            <div style="margin-top: 0.1rem">
-                <label class="label-green">育苗播种</label>
-                <label class="label-blue">农机收割</label>
-                <label class="label-red">烘干收藏</label>
-                <label class="label-green">育苗播种</label>
-                <label class="label-blue">农机收割</label>
-                <label class="label-red">烘干收藏</label>
-            </div>
-            <div style="margin-top: 0.1rem">
-                服务<font style="color:#14BC4D;font-weight: 700;">1500</font>亩+
-            </div>
-            <div style="margin-top: 0.1rem;font-size: 12px">
-                <img src="../../static/img/addr.png" height="11" width="9"/>
-                重庆市距您1500公里
+            <div class="col-xs-9 p0" style="padding-left: 0.2rem">
+                <div style="font-weight: 600;">
+                    <#if item.companyName? length gt 15>
+                        ${item.companyName?substring(0,12)}...
+                    <#else>
+                        ${item.companyName}
+                    </#if>
+                </div>
+                <div style="margin-top: 0.1rem">
+                    <#if item.serverCategory?exists>
+                        <#list item.serverCategory?split(",") as name>
+                            <#if name_index % 4 == 0>
+                                <label class="label-green">${name}</label>
+                            </#if>
+                            <#if name_index  % 4 == 1>
+                                <label class="label-blue">${name}</label>
+                            </#if>
+                            <#if name_index  % 4 == 2>
+                                <label class="label-red">${name}</label>
+                            </#if>
+                            <#if name_index  % 4 == 3>
+                                <label class="label-yellow">${name}</label>
+                            </#if>
+                            <#if name_index  % 4 == 4>
+                                <label class="label-red">${name}</label>
+                            </#if>
+                        </#list>
+                    <#else>
+                        <label class="label-green">育苗播种</label>
+                        <label class="label-blue">农机收割</label>
+                        <label class="label-red">烘干收藏</label>
+                    </#if>
+                </div>
+                <div style="margin-top: 0.1rem">
+                    服务<font style="color:#14BC4D;font-weight: 700;">${item.serverMax}</font>亩+
+                </div>
+                <div style="margin-top: 0.1rem;font-size: 12px">
+                    <img src="../../static/img/addr.png" height="11" width="9"/>
+                    <#if item.detailAddr? length gt 10>
+                        ${item.detailAddr?substring(0,10)}...
+                    <#else>
+                        ${item.detailAddr}
+                    </#if>
+                    距您${(item.distance/1000)?int?c}公里
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;">
-        <div class="col-xs-3 p0" style="height: 120px;">
-            <img src="../../static/img/ser1.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
+        </a>
+        </#list>
+    <#else>
+        <div class="col-xs-12 p0" style="margin-top: 1rem;">
+            暂无数据
         </div>
-        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
-            <div style="font-weight: 600;">
-                重庆北碚土地整合服务中心
-            </div>
-            <div style="margin-top: 0.1rem">
-                <label class="label-green">育苗播种</label>
-                <label class="label-blue">农机收割</label>
-                <label class="label-red">烘干收藏</label>
-                <label class="label-green">育苗播种</label>
-                <label class="label-blue">农机收割</label>
-                <label class="label-red">烘干收藏</label>
-            </div>
-            <div style="margin-top: 0.1rem">
-                服务<font style="color:#14BC4D;font-weight: 700;">1500</font>亩+
-            </div>
-            <div style="margin-top: 0.1rem;font-size: 12px">
-                <img src="../../static/img/addr.png" height="11" width="9"/>
-                重庆市距您1500公里
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;">
-        <div class="col-xs-3 p0" style="height: 120px;">
-            <img src="../../static/img/ser1.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
-        </div>
-        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
-            <div style="font-weight: 600;">
-                重庆北碚土地整合服务中心
-            </div>
-            <div style="margin-top: 0.1rem">
-                <label class="label-green">育苗播种</label>
-                <label class="label-blue">农机收割</label>
-                <label class="label-red">烘干收藏</label>
-                <label class="label-green">育苗播种</label>
-                <label class="label-blue">农机收割</label>
-                <label class="label-red">烘干收藏</label>
-            </div>
-            <div style="margin-top: 0.1rem">
-                服务<font style="color:#14BC4D;font-weight: 700;">1500</font>亩+
-            </div>
-            <div style="margin-top: 0.1rem;font-size: 12px">
-                <img src="../../static/img/addr.png" height="11" width="9"/>
-                重庆市距您1500公里
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;">
-        <div class="col-xs-3 p0" style="height: 120px;">
-            <img src="../../static/img/ser1.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
-        </div>
-        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
-            <div style="font-weight: 600;">
-                重庆北碚土地整合服务中心
-            </div>
-            <div style="margin-top: 0.1rem">
-                <label class="label-green">育苗播种</label>
-                <label class="label-blue">农机收割</label>
-                <label class="label-red">烘干收藏</label>
-                <label class="label-green">育苗播种</label>
-                <label class="label-blue">农机收割</label>
-                <label class="label-red">烘干收藏</label>
-            </div>
-            <div style="margin-top: 0.1rem">
-                服务<font style="color:#14BC4D;font-weight: 700;">1500</font>亩+
-            </div>
-            <div style="margin-top: 0.1rem;font-size: 12px">
-                <img src="../../static/img/addr.png" height="11" width="9"/>
-                重庆市距您1500公里
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;">
-        <div class="col-xs-3 p0" style="height: 120px;">
-            <img src="../../static/img/ser1.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
-        </div>
-        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
-            <div style="font-weight: 600;">
-                重庆北碚土地整合服务中心
-            </div>
-            <div style="margin-top: 0.1rem">
-                <label class="label-green">育苗播种</label>
-                <label class="label-blue">农机收割</label>
-                <label class="label-red">烘干收藏</label>
-                <label class="label-green">育苗播种</label>
-                <label class="label-blue">农机收割</label>
-                <label class="label-red">烘干收藏</label>
-            </div>
-            <div style="margin-top: 0.1rem">
-                服务<font style="color:#14BC4D;font-weight: 700;">1500</font>亩+
-            </div>
-            <div style="margin-top: 0.1rem;font-size: 12px">
-                <img src="../../static/img/addr.png" height="11" width="9"/>
-                重庆市距您1500公里
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;">
-        <div class="col-xs-3 p0" style="height: 120px;">
-            <img src="../../static/img/ser1.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
-        </div>
-        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
-            <div style="font-weight: 600;">
-                重庆北碚土地整合服务中心
-            </div>
-            <div style="margin-top: 0.1rem">
-                <label class="label-green">育苗播种</label>
-                <label class="label-blue">农机收割</label>
-                <label class="label-red">烘干收藏</label>
-                <label class="label-green">育苗播种</label>
-                <label class="label-blue">农机收割</label>
-                <label class="label-red">烘干收藏</label>
-            </div>
-            <div style="margin-top: 0.1rem">
-                服务<font style="color:#14BC4D;font-weight: 700;">1500</font>亩+
-            </div>
-            <div style="margin-top: 0.1rem;font-size: 12px">
-                <img src="../../static/img/addr.png" height="11" width="9"/>
-                重庆市距您1500公里
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;">
-        <div class="col-xs-3 p0" style="height: 120px;">
-            <img src="../../static/img/ser1.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
-        </div>
-        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
-            <div style="font-weight: 600;">
-                重庆北碚土地整合服务中心
-            </div>
-            <div style="margin-top: 0.1rem">
-                <label class="label-green">育苗播种</label>
-                <label class="label-blue">农机收割</label>
-                <label class="label-red">烘干收藏</label>
-                <label class="label-green">育苗播种</label>
-                <label class="label-blue">农机收割</label>
-                <label class="label-red">烘干收藏</label>
-            </div>
-            <div style="margin-top: 0.1rem">
-                服务<font style="color:#14BC4D;font-weight: 700;">1500</font>亩+
-            </div>
-            <div style="margin-top: 0.1rem;font-size: 12px">
-                <img src="../../static/img/addr.png" height="11" width="9"/>
-                重庆市距您1500公里
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;">
-        <div class="col-xs-3 p0" style="height: 120px;">
-            <img src="../../static/img/ser1.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
-        </div>
-        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
-            <div style="font-weight: 600;">
-                重庆北碚土地整合服务中心
-            </div>
-            <div style="margin-top: 0.1rem">
-                <label class="label-green">育苗播种</label>
-                <label class="label-blue">农机收割</label>
-                <label class="label-red">烘干收藏</label>
-                <label class="label-green">育苗播种</label>
-                <label class="label-blue">农机收割</label>
-                <label class="label-red">烘干收藏</label>
-            </div>
-            <div style="margin-top: 0.1rem">
-                服务<font style="color:#14BC4D;font-weight: 700;">1500</font>亩+
-            </div>
-            <div style="margin-top: 0.1rem;font-size: 12px">
-                <img src="../../static/img/addr.png" height="11" width="9"/>
-                重庆市距您1500公里
-            </div>
-        </div>
-    </div>
-    <div id="list">
-
-    </div>
+    </#if>
 </div>
 
 <!--分隔线-->
@@ -348,6 +166,8 @@
 <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
 <!-- 如果使用了某些拓展插件还需要额外的JS -->
 <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
+<!--模板-->
+<script src="../../static/js/template.js"></script>
 <script>
     $("#provice").select({
         title: "选择城市",
@@ -556,10 +376,10 @@
     //滚动插件
     $(document.body).infinite();
 
+    var pages = 2;
     var loading = false;  //状态标记
-    var i = 0;
-    $(document.body).infinite().on("infinite", function() {
-        i++;
+
+   $(document.body).infinite().on("infinite", function() {
         if(loading){
             //表示结束标记。底线
             return;
@@ -568,21 +388,147 @@
 
         //处理ajax的请求
 
-        //$("#list").append("<p> 我是新加载的内容 </p>");
-
-        setTimeout(function() {
-            $("#list").append("<p> 我是新加载的内容 </p>");
-            //loading = true;
-        }, 10);   //模拟延迟
-
-        console.info(i)
+        ajaxLoadJson();
 
         //完了隐藏按钮
-        if(i == 10) {
-            loading = true;
-            $(document.body).destroyInfinite();
-            $("#loadingcls").hide();
-        }
+        $("#loadingcls").hide();
     });
+
+    //获取参数
+    function getParam() {
+        var obj = {};
+        var areaCode = $("#provice").attr("data-values");
+        if(areaCode){
+            obj.areaCode = areaCode;
+        }
+        var categoryCode = $("#chkType").attr("data-values");
+        if(categoryCode){
+            obj.categoryCode = categoryCode;
+        }
+        var authType = $("#authType").attr("data-values");
+        if(authType){
+            obj.authType = authType;
+        }
+        var userType = $("#userType").attr("data-values");
+        if(userType){
+            obj.userType = userType;
+        }
+        return obj;
+    }
+
+
+    function ajaxLoadJson() {
+        if(loading){
+            return;
+        }
+        var obj = getParam();obj.page = pages;
+        $.ajax({
+            type:'post',
+            data: obj,
+            url : '/wx/ajaxListMore',
+            success:function (data) {
+                console.info("------------------------");
+                console.info(data);
+                console.info("------------------------");
+                if(data && data.length > 0){
+                    var htm = loadData(data);
+                    //console.info(htm)
+                    $("#all_data").append(htm);
+                    pages++;
+                }else{
+                    //表示已经加载完成
+                    loading = true;
+                }
+            },
+            error:function () {
+                $.alert("请求数据超时");
+            }
+        })
+
+
+    }
+
+    //刷新页面
+    function loadAjax() {
+        $("#all_data").empty();
+        loading = false;
+        pages = 1;
+        ajaxLoadJson();
+    }
+
+
+    /**
+     * 拼接
+     * @param data
+     */
+    function loadData(data) {
+        var htm = "";
+        if(data){
+             for(var i in data){
+                 htm += ' <a href="/wx/severInfo/'+data[i].serverId+'">';
+                 htm += ' <div class="col-xs-12 p0" style="margin-top: 1rem;padding-bottom: 0.2rem;border-bottom: 1px solid #efeff4;">';
+                     htm += ' <div class="col-xs-3 p0" style="height: 120px;">';
+                     if(data[i].companyImage){
+                         htm += ' <img src="'+data[i].companyImage+'" class="img-responsive" style="display: inline-block; vertical-align: middle; max-height: 120px"/>';
+                     }else{
+                         htm += ' <img src="../../static/img/ser1.png" class="img-responsive" style="display: inline-block; vertical-align: middle; max-height: 120px"/>';
+                     }
+                     htm += ' </div>';
+                     htm += ' <div class="col-xs-9 p0" style="padding-left: 0.2rem">';
+                         htm += ' <div style="font-weight: 600;">';
+                         if(data[i].companyName && data[i].companyName.length > 15){
+                             htm += data[i].companyName.substring(0,12)+'...';
+                         }else{
+                             htm += data[i].companyName;
+                         }
+                         htm += ' </div>';
+                         htm += ' <div style="margin-top: 0.1rem">';
+                                 if(data[i].serverCategory){
+                                     var li = data[i].serverCategory.split(",");
+                                     for(var j = 0;j<li.length;j++){
+                                         if(j % 4 == 0){
+                                             htm += ' <label class="label-green">'+li[j]+'</label>';
+                                         }
+                                         if(j % 4 == 1){
+                                             htm += ' <label class="label-blue">'+li[j]+'</label>';
+                                         }
+                                         if(j % 4 == 2){
+                                             htm += ' <label class="label-red">'+li[j]+'</label>';
+                                         }
+                                         if(j % 4 == 3){
+                                             htm += ' <label class="label-yellow">'+li[j]+'</label>';
+                                         }
+                                         if(j % 4 == 4){
+                                             htm += ' <label class="label-red">'+li[j]+'</label>';
+                                         }
+                                     }
+                                 }else{
+                                     htm += ' <label class="label-green">育苗播种</label>';
+                                     htm += ' <label class="label-blue">农机收割</label>';
+                                     htm += ' <label class="label-red">烘干收藏</label>';
+                                 }
+                         htm += ' </div>';
+                         htm += ' <div style="margin-top: 0.1rem">';
+                            htm += ' 服务<font style="color:#14BC4D;font-weight: 700;">'+data[i].serverMax+'</font>亩+';
+                         htm += ' </div>';
+                         htm += ' <div style="margin-top: 0.1rem;font-size: 12px">';
+                             htm += ' <img src="../../static/img/addr.png" height="11" width="9"/>';
+                                     if(data[i].detailAddr && data[i].detailAddr.length > 10){
+                                         htm += data[i].detailAddr.substring(0,10);
+                                     }else{
+                                         htm += data[i].detailAddr;
+                                     }
+                                     var dis = data[i].distance / 1000;
+                                     htm += ' 距您'+dis.toFixed(2)+'公里';
+                             htm += ' </div>';
+                    htm += ' </div>';
+                 htm += ' </div>';
+                 htm += ' </a>';
+             }
+        }
+        return htm;
+    }
+
+
 </script>
 </html>

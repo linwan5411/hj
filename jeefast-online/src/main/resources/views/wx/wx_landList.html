@@ -52,6 +52,12 @@
         label{
             font-weight: normal;
         }
+        a{
+            color: black;text-decoration: none;
+        }
+        a:visited{
+            color: black;
+        }
     </style>
 </head>
 <body style="overflow-y: auto">
@@ -64,16 +70,16 @@
 <!--收缩框-->
 <div class="container-fluid" style="height: 30px;line-height: 30px;text-align: center;padding: 5px;font-size: 14px;font-weight: 400">
     <div class="col-xs-3" style="border-right: 2px solid #efeff4">
-        <input class="weui-input" id="provice" type="text" value="重庆" data-values="">
+        <input class="weui-input" id="provice" onchange="loadAjax()" type="text" value="重庆" data-values="">
     </div>
     <div class="col-xs-3" style="border-right: 2px solid #efeff4">
-        <input class="weui-input" id="chkType" type="text" value="类型" data-values="">
+        <input class="weui-input" id="chkType" onchange="loadAjax()" type="text" value="类型" data-values="">
     </div>
     <div class="col-xs-3" style="border-right: 2px solid #efeff4">
-        <input class="weui-input" id="authType" type="text" value="认证" data-values="">
+        <input class="weui-input" id="authType" onchange="loadAjax()" type="text" value="认证" data-values="">
     </div>
     <div class="col-xs-3">
-        <input class="weui-input" id="userType" type="text" value="类型" data-values="">
+        <input class="weui-input" id="userType" onchange="loadAjax()" type="text" value="类型" data-values="">
     </div>
 </div>
 
@@ -81,140 +87,71 @@
 <div class="col-xs-12" style="padding: 0;background: #F0F0F0;height: 8px;margin-top: 5px"></div>
 
 <!--农场主-->
-<div class="container-fluid">
-    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;height: 120px;">
-        <div class="col-xs-3 p0" style="text-align: center">
-            <img  src="../../static/img/lands.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
-        </div>
-        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
-            <div style="font-weight: 700;">
-                新农人9527（个人）
+<div class="container-fluid" id="all_data">
+    <#if list?exists>
+        <#list list as item>
+        <a href="/wx/landInfo/${item.haciendaId?c}">
+        <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;padding-bottom: 0.2rem">
+            <div class="col-xs-3 p0">
+                <#if item.haciendaImage?exists>
+                    <img  src="${item.haciendaImage}" class="img-responsive" style="display: inline-block; vertical-align: middle;max-height: 80px"/>
+                <#else>
+                    <img  src="../../static/img/lands.png" class="img-responsive" style="display: inline-block; vertical-align: middle;max-height: 80px"/>
+                </#if>
             </div>
-            <div style="margin-top: 0.5rem;">
-                <label class="label-yellow">土地平整</label>
-                <label>水域 <font style="font-weight: 600;color: #17BE74">500亩</font></label>
-            </div>
-            <div class="col-xs-12 p0" style="font-size: 14px;margin-top: 0.5rem">
-                <img src="../../static/img/addr.png" height="11" width="9"/>
-                重庆市距您1500公里
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;height: 120px;">
-        <div class="col-xs-3 p0" style="text-align: center">
-            <img  src="../../static/img/lands.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
-        </div>
-        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
-            <div style="font-weight: 700;">
-                新农人9527（个人）
-            </div>
-            <div style="margin-top: 0.5rem;">
-                <label class="label-yellow">土地平整</label>
-                <label class="label-blue">农机收割</label>
-                <label class="label-red">烘干收藏</label>
-                <label class="label-blue">农机收割</label>
-                <label class="label-red">烘干收藏</label>
-                <label>水域 <font style="font-weight: 600;color: #17BE74">500亩</font></label>
-            </div>
-            <div class="col-xs-12 p0" style="font-size: 14px;margin-top: 0.5rem">
-                <img src="../../static/img/addr.png" height="11" width="9"/>
-                重庆市距您1500公里
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;height: 120px;">
-        <div class="col-xs-3 p0" style="text-align: center">
-            <img  src="../../static/img/lands.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
-        </div>
-        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
-            <div style="font-weight: 700;">
-                新农人9527（个人）
-            </div>
-            <div style="margin-top: 0.5rem;">
-                <label class="label-yellow">土地平整</label>
-                <label>水域 <font style="font-weight: 600;color: #17BE74">500亩</font></label>
-            </div>
-            <div class="col-xs-12 p0" style="font-size: 14px;margin-top: 0.5rem">
-                <img src="../../static/img/addr.png" height="11" width="9"/>
-                重庆市距您1500公里
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;height: 120px;">
-        <div class="col-xs-3 p0" style="text-align: center">
-            <img  src="../../static/img/lands.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
-        </div>
-        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
-            <div style="font-weight: 700;">
-                新农人9527（个人）
-            </div>
-            <div style="margin-top: 0.5rem;">
-                <label class="label-yellow">土地平整</label>
-                <label>水域 <font style="font-weight: 600;color: #17BE74">500亩</font></label>
-            </div>
-            <div class="col-xs-12 p0" style="font-size: 14px;margin-top: 0.5rem">
-                <img src="../../static/img/addr.png" height="11" width="9"/>
-                重庆市距您1500公里
+            <div class="col-xs-9 p0" style="padding-left: 0.2rem">
+                <div style="font-weight: 400;">
+                    ${item.framersNickName}
+                    <#if item.haciendaType == 1>
+                        (个人)
+                    <#else>
+                        (其他)
+                    </#if>
+                </div>
+                <div style="margin-top: 0.5rem;font-size: 12px">
+                    <#if item.serverCategory?exists>
+                        <#list item.serverCategory?split(",") as name>
+                            <#if name_index % 4 == 0>
+                                <label class="label-green">${name}</label>
+                            </#if>
+                            <#if name_index  % 4 == 1>
+                                <label class="label-blue">${name}</label>
+                            </#if>
+                            <#if name_index  % 4 == 2>
+                                <label class="label-red">${name}</label>
+                            </#if>
+                            <#if name_index  % 4 == 3>
+                                <label class="label-yellow">${name}</label>
+                            </#if>
+                            <#if name_index  % 4 == 4>
+                                <label class="label-red">${name}</label>
+                            </#if>
+                        </#list>
+                    <#else>
+                            <label class="label-green">育苗播种</label>
+                            <label class="label-blue">农机收割</label>
+                            <label class="label-red">烘干收藏</label>
+                    </#if>
+                    <label style="display: block">${item.haciendaLand} <font style="font-weight: 600;color: #17BE74">${item.serverMax}亩</font></label>
+                </div>
+                <div class="col-xs-12 p0" style="font-size: 12px;margin-top: 0.1rem">
+                    <img src="../../static/img/addr.png" height="11" width="9"/>
+                    <#if item.detailAddr? length gt 10>
+                        ${item.detailAddr?substring(0,10)}...
+                    <#else>
+                        ${item.detailAddr}
+                    </#if>
+                    距您${(item.distance/1000)?int?c}公里
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;height: 120px;">
-        <div class="col-xs-3 p0" style="text-align: center">
-            <img  src="../../static/img/lands.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
+        </a>
+        </#list>
+    <#else>
+        <div class="col-xs-12 p0" style="margin-top: 1rem;">
+            暂无数据
         </div>
-        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
-            <div style="font-weight: 700;">
-                新农人9527（个人）
-            </div>
-            <div style="margin-top: 0.5rem;">
-                <label class="label-yellow">土地平整</label>
-                <label>水域 <font style="font-weight: 600;color: #17BE74">500亩</font></label>
-            </div>
-            <div class="col-xs-12 p0" style="font-size: 14px;margin-top: 0.5rem">
-                <img src="../../static/img/addr.png" height="11" width="9"/>
-                重庆市距您1500公里
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;height: 120px;">
-        <div class="col-xs-3 p0" style="text-align: center">
-            <img  src="../../static/img/lands.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
-        </div>
-        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
-            <div style="font-weight: 700;">
-                新农人9527（个人）
-            </div>
-            <div style="margin-top: 0.5rem;">
-                <label class="label-yellow">土地平整</label>
-                <label>水域 <font style="font-weight: 600;color: #17BE74">500亩</font></label>
-            </div>
-            <div class="col-xs-12 p0" style="font-size: 14px;margin-top: 0.5rem">
-                <img src="../../static/img/addr.png" height="11" width="9"/>
-                重庆市距您1500公里
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;height: 120px;">
-        <div class="col-xs-3 p0" style="text-align: center">
-            <img  src="../../static/img/lands.png" class="img-responsive" style="display: inline-block; vertical-align: middle;"/>
-        </div>
-        <div class="col-xs-9 p0" style="padding-left: 0.2rem">
-            <div style="font-weight: 700;">
-                新农人9527（个人）
-            </div>
-            <div style="margin-top: 0.5rem;">
-                <label class="label-yellow">土地平整</label>
-                <label>水域 <font style="font-weight: 600;color: #17BE74">500亩</font></label>
-            </div>
-            <div class="col-xs-12 p0" style="font-size: 14px;margin-top: 0.5rem">
-                <img src="../../static/img/addr.png" height="11" width="9"/>
-                重庆市距您1500公里
-            </div>
-        </div>
-    </div>
-    <div id="list">
-
-    </div>
+    </#if>
 </div>
 
 <!--分隔线-->
@@ -437,10 +374,9 @@
     //滚动插件
     $(document.body).infinite();
 
+    var pages = 2;
     var loading = false;  //状态标记
-    var i = 0;
     $(document.body).infinite().on("infinite", function() {
-        i++;
         if(loading){
             //表示结束标记。底线
             return;
@@ -449,21 +385,144 @@
 
         //处理ajax的请求
 
-        //$("#list").append("<p> 我是新加载的内容 </p>");
-
-        setTimeout(function() {
-            $("#list").append("<p> 我是新加载的内容 </p>");
-            //loading = true;
-        }, 10);   //模拟延迟
-
-        console.info(i)
+        ajaxLoadJson();
 
         //完了隐藏按钮
-        if(i == 10) {
-            loading = true;
-            $(document.body).destroyInfinite();
-            $("#loadingcls").hide();
-        }
+        $("#loadingcls").hide();
     });
+
+    //获取参数
+    function getParam() {
+        var obj = {};
+        var areaCode = $("#provice").attr("data-values");
+        if(areaCode){
+            obj.areaCode = areaCode;
+        }
+        var categoryCode = $("#chkType").attr("data-values");
+        if(categoryCode){
+            obj.categoryCode = categoryCode;
+        }
+        var authType = $("#authType").attr("data-values");
+        if(authType){
+            obj.authType = authType;
+        }
+        var userType = $("#userType").attr("data-values");
+        if(userType){
+            obj.userType = userType;
+        }
+        return obj;
+    }
+
+    function ajaxLoadJson() {
+        if(loading){
+            return;
+        }
+        var obj = getParam();obj.page = pages;
+        $.ajax({
+            type:'post',
+            data: obj,
+            url : '/wx/ajaxLandListMore',
+            success:function (data) {
+                console.info("------------------------");
+                console.info(data);
+                console.info("------------------------");
+                if(data && data.length > 0){
+                    var htm = loadData(data);
+                    //console.info(htm)
+                    $("#all_data").append(htm);
+                    pages++;
+                }else{
+                    //表示已经加载完成
+                    loading = true;
+                }
+            },
+            error:function () {
+                $.alert("请求数据超时");
+            }
+        })
+
+
+    }
+
+    //刷新页面
+    function loadAjax() {
+        $("#all_data").empty();
+        loading = false;
+        pages = 1;
+        ajaxLoadJson();
+    }
+
+
+    /**
+     * 拼接
+     * @param data
+     */
+    function loadData(data) {
+        var htm = "";
+        if(data){
+            for(var i in data){
+                htm += ' <a href="/wx/landInfo/'+data[i].haciendaId+'">';
+                htm += ' <div class="col-xs-12 p0" style="margin-top: 1rem;border-bottom: 1px solid #efeff4;padding-bottom: 0.2rem">';
+                htm += ' <div class="col-xs-3 p0" style="height: 120px;">';
+                if(data[i].haciendaImage){
+                    htm += ' <img src="'+data[i].haciendaImage+'" class="img-responsive" class="img-responsive" style="display: inline-block; vertical-align: middle;max-height: 80px"/>';
+                }else{
+                    htm += ' <img  src="../../static/img/lands.png" class="img-responsive" style="display: inline-block; vertical-align: middle;max-height: 80px"/>';
+                }
+                htm += ' </div>';
+                htm += ' <div class="col-xs-9 p0" style="padding-left: 0.2rem">';
+                htm += ' <div style="font-weight: 600;">';
+                htm += data[i].framersNickName;
+                if(data[i].haciendaType && data[i].haciendaType == 1){
+                    htm += '(个人)';
+                }else{
+                    htm += '(其他)';
+                }
+                htm += ' </div>';
+                htm += ' <div style="margin-top: 0.5rem;font-size: 12px">';
+                if(data[i].serverCategory){
+                    var li = data[i].serverCategory.split(",");
+                    for(var j = 0;j<li.length;j++){
+                        if(j % 4 == 0){
+                            htm += ' <label class="label-green">'+li[j]+'</label>';
+                        }
+                        if(j % 4 == 1){
+                            htm += ' <label class="label-blue">'+li[j]+'</label>';
+                        }
+                        if(j % 4 == 2){
+                            htm += ' <label class="label-red">'+li[j]+'</label>';
+                        }
+                        if(j % 4 == 3){
+                            htm += ' <label class="label-yellow">'+li[j]+'</label>';
+                        }
+                        if(j % 4 == 4){
+                            htm += ' <label class="label-red">'+li[j]+'</label>';
+                        }
+                    }
+                }else{
+                    htm += ' <label class="label-green">育苗播种</label>';
+                    htm += ' <label class="label-blue">农机收割</label>';
+                    htm += ' <label class="label-red">烘干收藏</label>';
+                }
+                htm += '  <label style="display: block">'+data[i].haciendaLand+'<font style="font-weight: 600;color: #17BE74">'+data[i].serverMax+'亩</font></label>';
+                htm += ' </div>';
+                htm += ' <div class="col-xs-12 p0" style="font-size: 12px;margin-top: 0.1rem">';
+                htm += ' <img src="../../static/img/addr.png" height="11" width="9"/>';
+                if(data[i].detailAddr && data[i].detailAddr.length > 10){
+                    htm += data[i].detailAddr.substring(0,10);
+                }else{
+                    htm += data[i].detailAddr;
+                }
+                var dis = data[i].distance / 1000;
+                htm += ' 距您'+dis.toFixed(2)+'公里';
+                htm += ' </div>';
+                htm += ' </div>';
+                htm += ' </div>';
+                htm += ' </a>';
+            }
+        }
+        return htm;
+    }
+
 </script>
 </html>

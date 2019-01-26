@@ -8,6 +8,7 @@ import cn.jeefast.service.HjAreaService;
 import cn.jeefast.service.HjServerCaseService;
 import cn.jeefast.service.HjServerInfoService;
 import cn.jeefast.vo.AreaLntGntVo;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -90,19 +91,21 @@ public class WxServerListController extends BaseController{
      */
     @ResponseBody
     @RequestMapping(value = "/ajaxListMore")
-    public List<Map<String,Object>> listMore(HttpServletRequest request){
-        Integer authTyppe = null;
-        Integer userTyppe = null;
-        String categoryCode = null;
-        Long areaId = null;
-        Integer page = 2;
+    public List<Map<String,Object>> listMore(Integer authType,Integer userType,String categoryCode,String areaCode,Integer page,HttpServletRequest request){
+        if(StringUtils.isBlank(categoryCode)){
+            categoryCode = null;
+        }
+        if(page == null){
+            page = 2;
+        }
+        if(!StringUtils.isNotBlank(areaCode)){
+            areaCode =  BaseController.getPriviceCode(request);
+        }
+        setAreaCode(areaCode,request);
 
-        String code = BaseController.getPriviceCode(request);
-        setAreaCode(code,request);
-
-        AreaLntGntVo area = hjAreaService.findByCodeVo(code);
-        List<Map<String,Object>> list = hjServerInfoService.findServerMore(area.getLat(),area.getLng(),areaId,
-                null,null,page,10,null);
+        AreaLntGntVo area = hjAreaService.findByCodeVo(areaCode);
+        List<Map<String,Object>> list = hjServerInfoService.findServerMore(area.getLat(),area.getLng(),area.getAreaId(),
+                authType,userType,(page - 1) * 10,10,categoryCode);
         return list;
     }
 

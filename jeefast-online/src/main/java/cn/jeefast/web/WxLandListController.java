@@ -6,6 +6,7 @@ import cn.jeefast.entity.HjHaciendaInfo;
 import cn.jeefast.service.HjAreaService;
 import cn.jeefast.service.HjHaciendaInfoService;
 import cn.jeefast.vo.AreaLntGntVo;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,16 +71,20 @@ public class WxLandListController extends BaseController{
      */
     @ResponseBody
     @RequestMapping(value = "/ajaxLandListMore")
-    public List<Map<String,Object>> ajaxLandListMore(HttpServletRequest request){
-        String code = BaseController.getPriviceCode(request);
-        setAreaCode(code,request);
-        AreaLntGntVo vo = hjAreaService.findByCodeVo(code);
-        Long areaId = null;
-        Integer authType = null;
-        Integer userType = null;
-        Integer pageIndex = null;
-        String categoryCode = null;
-        List<Map<String,Object>> list = hjHaciendaInfoService.findLandMore(vo.getLng(), vo.getLat(), areaId, authType, userType, pageIndex, 10, categoryCode);
+    public List<Map<String,Object>> ajaxLandListMore(Integer authType,Integer userType,String categoryCode,String areaCode,Integer page,HttpServletRequest request){
+        if(StringUtils.isBlank(categoryCode)){
+            categoryCode = null;
+        }
+        if(page == null){
+            page = 2;
+        }
+        if(!StringUtils.isNotBlank(areaCode)){
+            areaCode =  BaseController.getPriviceCode(request);
+        }
+        setAreaCode(areaCode,request);
+        AreaLntGntVo vo = hjAreaService.findByCodeVo(areaCode);
+        List<Map<String,Object>> list = hjHaciendaInfoService.findLandMore(vo.getLng(), vo.getLat(), vo.getAreaId(), authType, userType,
+                (page - 1) * 10, 10, categoryCode);
         return list;
     }
 
