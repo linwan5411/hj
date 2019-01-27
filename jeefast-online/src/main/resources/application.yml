@@ -86,3 +86,7 @@ devtools:
   restart:
     enabled: true
     additional-exclude: views/**
+
+hnj:
+  wx:
+    token: 1224241241412
