@@ -23,7 +23,7 @@ import java.util.Arrays;
 public class WeiXinController extends BaseController{
 
     private  static String MSG_KEY = "MSG_KEY";
-    private  static String msg = "欢迎您关注禾农家!您的信赖就是最大的动力\n邮箱:bang_newfarmer@126.com\n联系电话:15213211515";
+    private  static String msg = "欢迎您关注禾农家!您的信赖就是最大的动力\r\n邮箱:bang_newfarmer@126.com\r\n联系电话:15213211515";
 
     @Value("${hnj.wx.token}")
     private String token;
@@ -46,7 +46,7 @@ public class WeiXinController extends BaseController{
         String nonce = request.getParameter("nonce");
         // 随机字符串
         String echostr = request.getParameter("echostr");
-
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = null;
         try {
             out = response.getWriter();
