@@ -14,7 +14,7 @@
 		<module>jeefast-system</module>
 		<module>jeefast-rest</module>
 		<module>jeefast-online</module>
-		<!--<module>jeefast-wechat</module>-->
+		<module>jeefast-wechat</module>
 	</modules>
 
 	<parent>
@@ -68,11 +68,6 @@
 				<artifactId>spring-boot-starter-jdbc</artifactId>
 				<version>1.5.6.RELEASE</version>
 			</dependency>
-			<!-- <dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-context-support</artifactId>
-				<version>1.5.6.RELEASE</version>
-			</dependency> -->
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-data-redis</artifactId>

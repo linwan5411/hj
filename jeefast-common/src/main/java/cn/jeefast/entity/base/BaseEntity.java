@@ -28,7 +28,7 @@ import java.util.Date;
 public class BaseEntity implements Serializable{
 
     @JsonIgnore
-    @TableId(value="id", type= IdType.AUTO)
+    @TableId(value="id", type= IdType.INPUT)
     private Long id;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone = "GMT+8")

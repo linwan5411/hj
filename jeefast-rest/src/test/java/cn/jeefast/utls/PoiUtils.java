@@ -1,11 +1,8 @@
 package cn.jeefast.utls;
 
-import cn.jeefast.common.utils.HttpClientUtils;
 import cn.jeefast.common.utils.JsonUtils;
-import cn.jeefast.common.utils.KeyGeneratorUtils;
 import cn.jeefast.entity.HjHaciendaInfo;
 import cn.jeefast.entity.HjServerInfo;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -21,7 +18,6 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 
 /**
  * <pre>
@@ -225,15 +221,7 @@ public class PoiUtils{
     }
 
 
-    public static void main(String[] args) {
 
-        List<HjHaciendaInfo> l = landList();
-
-
-        l.forEach(e ->{
-            System.out.println(JsonUtils.Bean2Json(e));
-        });
-    }
 
 
     /**

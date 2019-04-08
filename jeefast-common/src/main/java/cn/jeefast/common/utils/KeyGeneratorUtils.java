@@ -42,7 +42,7 @@ public class KeyGeneratorUtils {
     public static Long getLongValue(String mobile) {
         if (StringUtils.isNumeric(mobile) && StringUtils.isNotBlank(mobile)) {
             try {
-                String text = 2 + String.format("%011d",mobile);
+                String text = 8 + String.format("%011d",mobile);
                 return Long.valueOf(text);
             } catch (Exception e) {
 

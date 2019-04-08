@@ -49,8 +49,11 @@ public class DynamicDataSourceTest {
     @Resource
     private HjHaciendaRemarkDao hjHaciendaRemarkDao;
 
+
     @Resource
     private RedisUtils redisUtils;
+
+
 
     @Test
     public void redisTest(){

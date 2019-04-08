@@ -4,9 +4,13 @@ server:
         uri-encoding: UTF-8
         max-threads: 1000
         min-spare-threads: 30
-    port: 8080
+    port: 8443
     context-path: /
-
+    ssl:
+        key-store: tomcat.key
+        key-store-type: JKS
+        key-alias: tomcat
+        key-store-password: 123456
 # mysql
 spring:
     # 环境 dev|test|pro

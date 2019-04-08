@@ -63,7 +63,7 @@ public class MyBatisPlusGenerator {
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        strategy.setInclude(new String[] { "hj_message" }); // 需要生成的表
+        strategy.setInclude(new String[] { "assert_bu_flow" }); // 需要生成的表
         // 自定义实体父类
      	strategy.setSuperEntityClass("cn.jeefast.entity.base.BaseEntity");
      	// 自定义实体，公共字段
